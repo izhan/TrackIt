@@ -5,6 +5,9 @@ TrackIt::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
+  devise_scope :user do
+    get "signup", to: 'devise/registrations#new'
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
