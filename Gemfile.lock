@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.16)
+    bcrypt (3.1.7)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
     capybara (2.1.0)
@@ -47,6 +48,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    devise (3.2.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -97,6 +104,7 @@ GEM
     multi_json (1.9.2)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    orm_adapter (0.5.0)
     pg (0.15.1)
     polyglot (0.3.4)
     pry (0.9.12.4)
@@ -189,6 +197,8 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     websocket (1.0.7)
     will_paginate (3.0.4)
     xpath (2.0.0)
@@ -202,6 +212,7 @@ DEPENDENCIES
   capybara (= 2.1.0)
   childprocess (= 0.3.6)
   coffee-rails (~> 4.0.0)
+  devise
   factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
   growl
