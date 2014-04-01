@@ -1,0 +1,6 @@
+<% if signed_in? %>
+  <%= current_user.name %>
+  <%= current_user.email %>
+<% else %>
+  Please sign in!
+<% end %>
