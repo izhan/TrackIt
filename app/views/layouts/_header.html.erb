@@ -1,9 +1,7 @@
-<%= nav_bar  %>
-
 <%= link_to "TRACKIT", root_path %>
 <% if signed_in? %>
   Welcome, <%= current_user.name %>.
   <%= link_to "Log Out", destroy_user_session_path, method: "delete" %>
 <% else %>
-  Please <%= link_to "Sign Up", new_user_registration_path %> or  <%= link_to "Sign in", new_user_session_path %>!
+  Please <%= link_to "Sign Up", signup_path %> or  <%= link_to "Sign in", signin_path %>!
 <% end %>
