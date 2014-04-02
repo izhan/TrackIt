@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-TrackIt::Application.config.secret_key_base = 'b35c10545dae46ab920fc1a6e9b7c4da6d031c254c35d5d9ea2e0e81388049fb106471cefd9afb685e846f4a1e7c8cdb288dae66fef9096ef67e973bb39d223e'
+TrackIt::Application.config.secret_token = if Rails.env.development? or Rails.env.test?
+  ('x' * 30) # meets minimum requirement of 30 chars long
+else
+  ENV['SECRET_TOKEN']
+end

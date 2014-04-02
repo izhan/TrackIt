@@ -11,6 +11,7 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    amazon = JSON.parse(open("https://graph.facebook.com/me/friends?access_token=XXX").read)
+    @bestbuy = JSON.parse(open("http://api.remix.bestbuy.com/v1/products(sku=5430505)?apiKey=xwfq3c3bekh3u2mnz3yu532f&format=json").read)
+    puts @bestbuy
   end
 end
