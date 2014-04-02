@@ -5,6 +5,7 @@
                 <ul class="nav navbar-right">
                     <% if signed_in? %>
                         <p class = "navbar-text"> Welcome back, <%= current_user.name %>.</p>
+                        <button type = "button" class ="btn btn-default navbar-btn"><%=link_to "Log out", destroy_user_session_path, method: "delete" %></button>
                     <% else %>
                         <li><%= link_to "Sign in", signin_path %></li>
                         <li><%= link_to "Sign up", signup_path %></li>
