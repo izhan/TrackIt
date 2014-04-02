@@ -1,7 +1,23 @@
-<%= link_to "TRACKIT", root_path %>
-<% if signed_in? %>
-  Welcome, <%= current_user.name %>.
-  <%= link_to "Log Out", destroy_user_session_path, method: "delete" %>
-<% else %>
-  Please <%= link_to "Sign Up", signup_path %> or  <%= link_to "Sign in", signin_path %>!
-<% end %>
+<header class="navbar navbar-fixed-top navbar-default">
+  <div class="navbar-inner">
+    <div class="container">
+      <h2><%= link_to "TrackIt", root_path %></h2>
+      <% if signed_in? %>
+        <nav>
+          <ul class = "nav pull-right">
+            <p class - Welcome, <%= current_user.name %>.
+            <button type = "button" class ="btn btn-default navbar-btn"><%=link_to "Log out", destroy_user_session_path, method: "delete" %></button>
+          </ul>
+        </nav>
+      <% else %>
+        <nav>
+          <ul class = "nav pull-right">
+            <button type = "button" class ="btn btn-default navbar-btn"><%= link_to "Sign in", signin_path %></button>
+            <button type = "button" class ="btn btn-default navbar-btn"><%= link_to "Sign up", signup_path %></button>
+          </ul>
+        </nav>
+      <% end %>
+    </div>
+  </div>
+</header>
+
