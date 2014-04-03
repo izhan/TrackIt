@@ -1,6 +1,16 @@
 
+<h1>Search Best Buy Product Prices by SKU Number</h1>
+
+<% if @bestbuy %>
 
 Name: <%= @bestbuy["products"][0]["name"]%>
 <br>
 Price: <%= @bestbuy["products"][0]["regularPrice"]%>
-dashboard.html.erb
+
+<% end %>
+
+<%= form_tag("/dashboard", method: "get") do %>
+  <%= label_tag(:sku_number, "Search for:") %>
+  <%= text_field_tag(:sku_number) %>
+  <%= submit_tag("Search") %>
+<% end %>

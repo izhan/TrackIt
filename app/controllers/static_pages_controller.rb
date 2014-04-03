@@ -11,7 +11,15 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    @bestbuy = JSON.parse(open("http://api.remix.bestbuy.com/v1/products(sku=5430505)?apiKey=xwfq3c3bekh3u2mnz3yu532f&format=json").read)
-    puts @bestbuy
+    if params[:sku_number]
+      begin
+        @bestbuy = JSON.parse(open("http://api.remix.bestbuy.com/v1/products(sku=#{params[:sku_number]})?apiKey=xwfq3c3bekh3u2mnz3yu532f&format=json").read)
+      rescue
+        @bestbuy = {}
+        @bestbuy["products"] = [{}]
+        @bestbuy["products"][0]["name"] = "SKU Number Invalid"
+        @bestbuy["products"][0]["regularPrice"] = "Please Try Again"
+      end
+    end
   end
 end
