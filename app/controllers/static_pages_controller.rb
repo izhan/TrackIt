@@ -35,7 +35,7 @@ class StaticPagesController < ApplicationController
         @bestbuy = nil
         flash[:danger] = "SKU Number Invalid.  Please try again."
       end
-    else
+    elsif params[:sku_number]
       flash[:danger] = "Please try again."
     end
   end

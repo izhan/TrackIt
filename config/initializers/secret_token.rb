@@ -14,3 +14,4 @@ TrackIt::Application.config.secret_token = if Rails.env.development? or Rails.en
 else
   ENV['SECRET_TOKEN']
 end
+TrackIt::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
