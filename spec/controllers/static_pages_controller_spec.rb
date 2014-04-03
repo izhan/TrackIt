@@ -40,8 +40,15 @@ describe "StaticPagesController" do
           click_button "Search"
         end
         it do
+          should have_selector('div.alert.alert-danger')
           should_not have_content "Name: "
           should_not have_content "Price: "
+        end
+        describe "after visiting home page" do
+          before do
+            visit root_path
+          end
+          it {should_not have_selector('div.alert.alert-danger')}
         end
       end
       describe "for invalid url" do
@@ -51,6 +58,7 @@ describe "StaticPagesController" do
           click_button "Search"
         end
         it do
+          should have_selector('div.alert.alert-danger')
           should_not have_content "Name: "
           should_not have_content "Price: "
         end
