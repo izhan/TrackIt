@@ -54,6 +54,7 @@ end
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", :github => 'izhan/twitter-bootstrap-rails', :branch => 'bootstrap3'
+gem 'bootstrap_form'
 
 gem "figaro"
 

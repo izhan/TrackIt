@@ -5,7 +5,10 @@
 		<p class="text-muted">
 			Let us TrackIt for you.
 		</p>
-
-		<%= link_to "Get Started", signup_path, class: "btn btn-lg btn-primary" %>
+    <% if signed_in? %>
+      <%= link_to "Go to Dashboard", dashboard_path, class: "btn btn-lg btn-primary" %>
+    <% else %>
+		  <%= link_to "Get Started", signup_path, class: "btn btn-lg btn-primary" %>
+    <% end %>
 	</div>
 </div>
