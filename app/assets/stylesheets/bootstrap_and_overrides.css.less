@@ -1,22 +1,4 @@
 @import "twitter/bootstrap/bootstrap";
-@import "twitter/bootstrap/responsive";
-@import "twitter/bootstrap/reset.less";
-@import "twitter/bootstrap/variables.less";
-@import "twitter/bootstrap/mixins.less";
-@import "twitter/bootstrap/scaffolding.less";
-@import "twitter/bootstrap/grid.less";
-@import "twitter/bootstrap/layouts.less";
-@import "twitter/bootstrap/type.less";
-@import "twitter/bootstrap/forms.less";
-@import "twitter/bootstrap/wells.less";
-@import "twitter/bootstrap/component-animations.less";
-@import "twitter/bootstrap/buttons.less";
-@import "twitter/bootstrap/close.less";
-@import "twitter/bootstrap/navs.less";
-@import "twitter/bootstrap/navbar.less";
-@import "twitter/bootstrap/labels-badges.less";
-@import "twitter/bootstrap/hero-unit.less";
-@import "twitter/bootstrap/utilities.less";
 
 // Set the correct sprite paths
 @iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
@@ -44,60 +26,4 @@
 // See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
 //
 // Example:
-//@linkColor: #428bca;
-//@link-color-hover: darken(@link-color, 15%);
-
-@bgDefault      : #fbfafc;
-@bgHighlight    : #f1f1f1;
-@colDefault     : #939393;
-@colHighlight   : #6a98cc;
-.navbar-default {
-	background-color: @bgDefault;
-	border-color: @bgHighlight;
-	.navbar-brand {
-		color: @colDefault;
-		&:hover, &:focus { 
-			color: @colHighlight; }}
-	.navbar-text {
-		color: @colDefault; }
-	.navbar-nav {
-		> li {
-			> a {
-				line-height: 150px;
-				height: 150px;
-				padding-top: 0;
-				color: @colDefault;
-				&:hover,  &:focus {
-					color: @colHighlight; }}}
-		> .active {
-			> a, > a:hover, > a:focus {
-				color: @colHighlight;
-				background-color: @bgHighlight; }}
-		> .open {
-			> a, > a:hover, > a:focus {
-				color: @colHighlight;
-				background-color: @bgHighlight; }}}
-	.navbar-toggle {
-		border-color: @bgHighlight;
-		&:hover, &:focus {
-			background-color: @bgHighlight; }
-		.icon-bar {
-			background-color: @colDefault; }}
-	.navbar-collapse,
-	.navbar-form {
-		border-color: @colDefault; }
-	.navbar-link {
-		color: @colDefault;
-		&:hover {
-			color: @colHighlight; }}}
-@media (max-width: 767px) {
-	.navbar-default .navbar-nav .open .dropdown-menu {
-		> li > a {
-			color: @colDefault;
-			&:hover, &:focus {
-				color: @colHighlight; }}
-		> .active {
-			> a, > a:hover, > a:focus, {
-				color: @colHighlight;
-				background-color: @bgHighlight; }}}
-}
+// @linkColor: #ff0000;
