@@ -5,6 +5,9 @@ class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
 
   def home
+    if signed_in?
+      redirect_to dashboard_path
+    end
   end
 
   def contact
