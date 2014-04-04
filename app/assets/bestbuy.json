@@ -1,0 +1,9 @@
+{
+  "products":
+  [
+    {
+      "name": "Best Buy Test Name",
+      "regularPrice": "12.34"
+    }
+  ]
+}
