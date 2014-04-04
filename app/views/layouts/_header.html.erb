@@ -17,7 +17,7 @@
           <ul class="dropdown-menu">
             <li><%= link_to "My Account", edit_user_registration_path %></li>
             <li class="divider"></li>
-            <li><%= link_to "Log out", destroy_user_session_path, method: "delete" %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: "delete" %></li>
           </ul>
         </li>
         <% end %> 
@@ -25,7 +25,7 @@
       </ul>
       <div class="pull-right">
       <% unless signed_in? %>
-        <%= link_to "Sign in", signin_path, class: "btn btn-primary navbar-btn" %>
+        <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn" %>
         <%= link_to "Sign up", signup_path, class: "btn btn-default navbar-btn" %>
       <% end %>
     </div>

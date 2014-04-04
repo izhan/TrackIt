@@ -1,14 +1,17 @@
 TrackIt::Application.routes.draw do
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
 
+  devise_for :users, :skip => [:sessions]
+
   devise_scope :user do
-    get "signup", to: 'devise/registrations#new'
-    get "signin", to: 'devise/sessions#new'
+    get 'signin' => 'devise/sessions#new', as: :new_user_session
+    post 'signin' => 'devise/sessions#create', as: :user_session
+    delete 'signout' => 'devise/sessions#destroy', as: :destroy_user_session
+    get 'signup', to: 'devise/registrations#new'
   end
 
   get 'contact', to: 'static_pages#contact'
