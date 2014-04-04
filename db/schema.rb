@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404004142) do
+ActiveRecord::Schema.define(version: 20140404025016) do
+
+  create_table "products", force: true do |t|
+    t.string   "url"
+    t.string   "api"
+    t.integer  "current_price"
+    t.string   "name"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trackers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "original_price"
+    t.integer  "alert_price"
+    t.integer  "product_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "trackers", ["product_id"], name: "index_trackers_on_product_id"
+  add_index "trackers", ["user_id"], name: "index_trackers_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
