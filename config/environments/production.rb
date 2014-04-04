@@ -78,7 +78,7 @@ TrackIt::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-    
+
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
@@ -90,5 +90,6 @@ TrackIt::Application.configure do
   }
 
   ActionMailer::Base.delivery_method = :smtp
+  Rails.application.routes.default_url_options[:host] = "fathomless-stream-5982.herokuapp.com/"
 
 end
