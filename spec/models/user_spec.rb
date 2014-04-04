@@ -3,13 +3,14 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com",
+    @user = User.new(first_name: "Example", last_name: "User", email: "user@example.com",
                      password: "foobar123", password_confirmation: "foobar123")
   end
 
   subject { @user }
 
-  it { should respond_to(:name) }
+  it { should respond_to(:first_name) }
+  it { should respond_to(:last_name) }
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
@@ -58,7 +59,8 @@ describe User do
 
     describe "with valid information" do
       before do
-        fill_in "Name",         with: "Example User"
+        fill_in "First Name",         with: "Example"
+        fill_in "Last Name",         with: "User"
         fill_in "Email",        with: "user@example.com"
         fill_in "Password",     with: "foobar123"
         fill_in "Password Confirmation", with: "foobar123"

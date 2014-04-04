@@ -7,11 +7,11 @@ describe "All Pages" do
     describe "Header bar" do
       before do
         @user1 = FactoryGirl.create(:user)
-        sign_in @user1
+        sign_in @user1 
         visit root_path
       end
       it do
-        should have_content(@user1.name)
+        should have_content(@user1.first_name)
       end
     end
   end
