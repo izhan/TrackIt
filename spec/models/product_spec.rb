@@ -28,7 +28,7 @@ describe Product do
     end
 
     it "should parse the url and gather right info about product" do
-      @product.url.should ==  "www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p"
+      @product.url.should ==  "bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p"
       @product.api.should ==  "bestbuy"
       @product.current_price.should ==  "3999"
       @product.name.should ==  "Just Dance 2014 - Nintendo Wii"
@@ -36,10 +36,11 @@ describe Product do
 
     describe "when similar urls are passed in" do
       before do
-        @product2 = Product.new(url: "http://bestBUY.com/site/just-dance-2014-nintendo-wii/9638372.p?id=123")
+        @product2 = Product.new(url: "bestBUY.com/site/JUST-dance-2014-nintendo-wii/9638372.p?id=123")
       end
 
       it "should not create a new product" do
+        expect( @product2 ).to_not be_valid
         expect { @product2.save }.to_not change(Product, :count).by(1)
       end
     end

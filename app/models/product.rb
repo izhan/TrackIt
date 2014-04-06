@@ -3,19 +3,18 @@ require 'uri'
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
 
-  validates :url, presence: true, uniqueness: { case_sensitive: false }
-  validates_format_of :url, :with => /\A#{URI::regexp}\z/
+  validates :url, presence: true
+  validates :url, uniqueness: { case_sensitive: false }, on: :create
+  validates_format_of :url, :with => VALID_URL_REGEX
 
   has_many :trackers
   has_many :users, through: :trackers
 
   # only needs url as input and generates everything else on the fly
-  before_create :parse_url
+  before_validation :parse_url
 
   private
     def parse_url
-      puts "TEST 1: "
-      puts self.url
       self.url = clean_url(self.url)
 
       host = get_host(self.url)
@@ -35,8 +34,6 @@ class Product < ActiveRecord::Base
         self.thumbnail = "http://i.imgur.com/0y3uACw.jpg"
       end
 
-
-
     end
 
     def get_api(api)
@@ -48,5 +45,5 @@ class Product < ActiveRecord::Base
       else
         return "scrape"
       end
-    end
+    end 
 end
