@@ -9,7 +9,6 @@ Price: <%= @bestbuy["products"][0]["regularPrice"]%>
 <% end %>
 
 <%= bootstrap_form_for(@tracker) do |f| %>
-  <%= f.text_field :url, label: "First Name" %>
-  <%= f.text_field :name, autofocus: true, label: "First Name" %>
+  <%= f.text_field :url, autofocus: true, label: "URL" %>
   <%= f.submit "Add Tracker" %>
 <% end %>
