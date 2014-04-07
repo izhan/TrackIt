@@ -7,6 +7,8 @@ class TrackersController < ApplicationController
       flash[:success] = "Tracker added!"
       redirect_to root_url
     else
+      puts @tracker.errors.inspect
+      puts "poop me"
       render 'static_pages/dashboard'
     end
   end

@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
 
   validates :url, presence: true
   validates :url, uniqueness: { case_sensitive: false }, on: :create
-  validates_format_of :url, :with => VALID_URL_REGEX
+  validates_format_of :url, :with => VALID_URL_REGEX, message: "Invalid Product URL"
 
   has_many :trackers
   has_many :users, through: :trackers
