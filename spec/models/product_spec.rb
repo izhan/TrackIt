@@ -38,6 +38,20 @@ describe Product do
       end
     end
 
+    describe "for input with whitespaces" do
+      before do
+        @product = Product.new(url: "http://www.bestbuy.com/site/in-search-of-history-potions-or-poisons-dvd/18542268.p?id=2103562&skuId=18542278&st=Search%20by%20Keyword,%20SKU%20# or Item #&lp=1&cp=1")
+        @product.save
+        sleep(1)
+      end
+      it "should ignore them" do
+        @product.url.should ==  "bestbuy.com/site/in-search-of-history-potions-or-poisons-dvd/18542268.p"
+        @product.api.should ==  "bestbuy"
+        @product.current_price.should ==  1999
+        @product.name.should ==  "In Search of History: Potions or Poisons? (DVD)"
+      end
+    end
+
     describe "for invalid url" do
       describe "invalid SKUID number" do
         before do

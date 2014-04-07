@@ -6,8 +6,10 @@ module ProductTrackerHelper
   ## TODO should clean this up to get rid of the begin/rescue pattern
 
   # returns url without params
+  # gets rid of whitespaces first
   def clean_url(url)
     begin
+      url = URI.escape(url)
       url = "http://#{url}" if URI.parse(url).scheme.nil?
       uri = URI(url)
       host = uri.host.downcase
