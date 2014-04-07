@@ -18,7 +18,7 @@ describe Tracker do
 
     describe "should create a new one with valid input" do
       before do
-        fill_in "url", with: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1"
+        fill_in "url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
       end
 
       it "should create a new product" do
@@ -31,15 +31,15 @@ describe Tracker do
           click_button "Add Tracker" 
         end
         it do
-          should have_content "Just Dance 2014 - Nintendo Wii"
-          should have_content "39.99"
+          should have_content "Cuisinart - Custom Classic Toaster Oven Broiler - Stainless Steel"
+          should have_content "79.99"
         end
       end
 
       it "should not create new products or trackers for same url" do
         before do
           click_button "Add Tracker"
-          fill_in "url", with: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1"
+          fill_in "url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
         end
         expect { click_button "Add Tracker" }.not_to change(Product, :count)
         expect { click_button "Add Tracker" }.not_to change(Tracker, :count)

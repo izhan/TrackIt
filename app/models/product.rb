@@ -60,7 +60,7 @@ class Product < ActiveRecord::Base
           end
         rescue
           # for debugging
-          # puts $!, $@
+          puts $!, $@
           errors.add(:base, "Best Buy URL Invalid.  Please try again.")
         end
       else
