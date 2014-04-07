@@ -1,6 +1,4 @@
 <li>
-  HELLO
-  <%= tracker.original_price %>
-  <%= tracker.id %>
-  <%= tracker.name %>
+  <%= tracker.name %> -
+  $<%= to_dollars(tracker.original_price) %>
 </li>

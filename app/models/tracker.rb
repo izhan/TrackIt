@@ -14,6 +14,7 @@ class Tracker < ActiveRecord::Base
   before_create :add_params
 
   private
+    # we get initial parameters from the product
     def add_params
       product = self.product
 
