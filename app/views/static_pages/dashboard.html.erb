@@ -8,8 +8,15 @@ Price: <%= @bestbuy["products"][0]["regularPrice"]%>
 
 <% end %>
 
-<%= form_for(@tracker) do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
+<%= bootstrap_form_for(@tracker) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_field :url, autofocus: true, label: "URL" %>
   <%= f.submit "Add Tracker" %>
+<% end %>
+<% if @tracker_list.any? %>
+  <ol class="trackers">
+    <!-- should be smart enough to automatically render the correct template -->
+    <%= render @tracker_list %>
+  </ol>
+  <%= will_paginate @tracker_list %>
 <% end %>

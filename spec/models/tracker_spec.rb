@@ -18,6 +18,7 @@ describe Tracker do
 
     describe "should create a new one with valid input" do
       before do
+        puts page.html
         fill_in "URL", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
       end
 

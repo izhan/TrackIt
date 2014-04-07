@@ -14,7 +14,8 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    @tracker = current_user.trackers.build
+    @tracker = Tracker.new
+    @tracker_list = current_user.trackers.paginate(page: params[:page])
   end
 
   private

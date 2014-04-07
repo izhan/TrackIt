@@ -3,13 +3,20 @@ class TrackersController < ApplicationController
 
   def create
     @tracker = current_user.trackers.build(tracker_params)
+    if Product.where(url: @tracker.url).blank?
+      @product = Product.create(url: @tracker.url)
+    else
+      @product = Product.where(url: @tracker.url).first
+      @product.save
+    end
+    @tracker.product = @product
     if @tracker.save
       flash[:success] = "Tracker added!"
       redirect_to root_url
     else
-      puts @tracker.errors.inspect
-      puts "poop me"
-      render 'static_pages/dashboard'
+      # could be more customizable messages
+      flash[:danger] = "Invalid URL"
+      redirect_to root_url
     end
   end
 
