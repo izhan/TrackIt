@@ -56,7 +56,8 @@ class Product < ActiveRecord::Base
             errors.add(:base, "Best Buy URL Invalid.  Please try again.")
           else
             self.name = bestbuy_json["products"][0]["name"]
-            self.current_price = ((bestbuy_json["products"][0]["regularPrice"].to_f)*100).to_int
+            # TODO should get rid of this in favor of decimal column
+            self.current_price = Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
         rescue
           # for debugging
