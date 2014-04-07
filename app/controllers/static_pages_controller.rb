@@ -14,9 +14,6 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-
-    
-
     if params[:sku_number] && url = params[:sku_number].match(/(?<sku_number>[[:digit:]]{7}).p/)
       begin
         @bestbuy = JSON.parse(open("http://api.remix.bestbuy.com/v1/products(sku=#{url[:sku_number]})?apiKey=xwfq3c3bekh3u2mnz3yu532f&format=json").read)
