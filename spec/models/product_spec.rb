@@ -27,6 +27,7 @@ describe Product do
       before do
         @product = Product.new(url: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1")
         @product.save
+        sleep(1)
       end
 
       it "should parse the url and gather right info about product" do
@@ -73,6 +74,7 @@ describe Product do
     before do
       @product = Product.new(url: "http://www.bestbuy.com/site/masticating-juicer/1614687.p?id=1219057246863&skuId=1614687&st=categoryid$pcmcat194000050019&cp=1&lp=8")
       @product.save
+      sleep(1)
     end
 
     it "should parse the url and gather right info about product" do
@@ -88,6 +90,7 @@ describe Product do
       end
 
       it "should not create a new product" do
+        @product.valid?.should == true
         expect { @product2.save }.to_not change(Product, :count).by(1)
       end
     end

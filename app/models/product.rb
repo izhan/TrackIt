@@ -59,6 +59,8 @@ class Product < ActiveRecord::Base
             self.current_price = ((bestbuy_json["products"][0]["regularPrice"].to_f)*100).to_int
           end
         rescue
+          # for debugging
+          # puts $!, $@
           errors.add(:base, "Best Buy URL Invalid.  Please try again.")
         end
       else
