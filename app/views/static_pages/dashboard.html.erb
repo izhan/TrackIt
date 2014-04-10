@@ -1,22 +1,24 @@
-<h1>Search Best Buy Product Prices by SKU Number</h1>
+<h1>Search Products by URL</h1>
 
-<% if @bestbuy %>
+<div class="row">
+  <div class="dashboard-form col-md-8 col-md-offset-2">
+    <h2 class="form-header">Enter your URL</h2>
+    <%= bootstrap_form_for(@tracker) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_field :url, autofocus: true, hide_label: true %>
+      <div class="form-submit">
+        <%= f.submit "Add Tracker", class: "btn btn-outline-default btn-outline-inverted center" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-Name: <%= @bestbuy["products"][0]["name"]%>
-<br>
-Price: <%= @bestbuy["products"][0]["regularPrice"]%>
-
-<% end %>
-
-<%= bootstrap_form_for(@tracker) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.text_field :url, autofocus: true, label: "URL" %>
-  <%= f.submit "Add Tracker" %>
-<% end %>
-<% if @tracker_list.any? %>
-  <ul class="trackers">
-    <% # should be smart enough to automatically render the correct template --> _tracker.html.erb %>
-    <%= render @tracker_list %>
-  </ul>
-  <%= will_paginate @tracker_list %>
-<% end %>
+<div class="dashboard-results">
+  <% if @tracker_list.any? %>
+    <ul class="trackers">
+      <% # should be smart enough to automatically render the correct template --> _tracker.html.erb %>
+      <%= render @tracker_list %>
+    </ul>
+    <%= will_paginate @tracker_list %>
+  <% end %>
+</div>

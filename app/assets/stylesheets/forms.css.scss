@@ -1,3 +1,5 @@
+@import "variables";
+
 $input-font-size: 18px;
 $input-padding: 12px 16px;
 $input-border-radius: 8px;
@@ -33,3 +35,16 @@ $input-border-radius: 8px;
   }
 }
 
+.dashboard-form {
+  padding: 30px 60px;
+  background: $primary-blue;
+  .form-header {
+    color: white;
+  }
+  .form-group input {
+    border: none;
+  }
+  .form-submit {
+    text-align: center;
+  }
+}

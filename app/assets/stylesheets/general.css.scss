@@ -5,6 +5,7 @@
   color: #999;
 }
 
+/* begin outline buttons */
 .btn-outline, .btn-outline-default, .btn-outline-primary {
   background-color: transparent;
   border-radius: 0;
@@ -33,9 +34,13 @@
   &.btn-outline-default {
     color: $primary-blue;
     background-color: $white;
+    border-color: $white;
   }
   &.btn-outline-primary {
     color: $white;
     background-color: $primary-blue;
+    border-color: $primary-blue;
   }
 }
+
+/* end outline buttons */
