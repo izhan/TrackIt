@@ -1,0 +1,41 @@
+@import "variables";
+
+/* useful tools for text */
+.muted {
+  color: #999;
+}
+
+.btn-outline, .btn-outline-default, .btn-outline-primary {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid;
+}
+
+.btn-outline, .btn-outline-default {
+  color: $white;
+  border-color: $white;
+  &:hover {
+    color: darken($white, 5%);
+    border-color: darken($white, 5%);
+  }
+}
+
+.btn-outline-primary {
+  color: $primary-blue;
+  border-color: $primary-blue;
+  &:hover {
+    color: darken($primary-blue, 5%);
+    border-color: darken($primary-blue, 5%);
+  }
+}
+
+.btn-outline-inverted:hover {
+  &.btn-outline-default {
+    color: $primary-blue;
+    background-color: $white;
+  }
+  &.btn-outline-primary {
+    color: $white;
+    background-color: $primary-blue;
+  }
+}
