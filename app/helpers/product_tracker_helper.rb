@@ -35,4 +35,20 @@ module ProductTrackerHelper
       url
     end
   end
+
+  def price_rise?(tracker)
+    tracker.product.current_price > tracker.original_price
+  end
+
+  def price_drop?(tracker)
+    tracker.product.current_price < tracker.original_price
+  end
+
+  def price_class(tracker)
+    if price_rise?(tracker)
+      'price-rise'
+    elsif price_drop?(tracker)
+      'price-drop'
+    end
+  end
 end

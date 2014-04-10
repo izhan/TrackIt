@@ -12,16 +12,21 @@ class Product < ActiveRecord::Base
   has_many :users, through: :trackers
 
   # only needs url as input and generates everything else on the fly
-  before_validation :parse_url
+  before_validation :process_url
+
+  # only called once on create.  manually called afterwards
+  before_create :parse_url
 
   private
     # finds sku number
     BEST_BUY_REGEX = /(\d)+.p$/
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
-    def parse_url
+    def process_url
       self.url = clean_url(self.url)
+    end
 
+    def parse_url
       host = get_host(self.url)
 
       self.api = categorize_api(host)

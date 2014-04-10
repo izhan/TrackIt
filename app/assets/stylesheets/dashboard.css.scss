@@ -10,6 +10,14 @@
       .media-heading {
         font-size: 18px;
       }
+      .media-price {
+        .price-rise {
+          color: red;
+        }
+        .price-drop {
+          color: green;
+        }
+      }
     }
   }
 }

@@ -59,7 +59,7 @@ describe Product do
         end
 
         it "should not be created and display error" do
-          @product.valid?.should == false
+          expect { @product.save }.to_not change(Product, :count).by(1)
         end
       end
       describe "no skuid number" do
@@ -68,7 +68,7 @@ describe Product do
         end
 
         it "should not be created and display error" do
-          @product.valid?.should == false
+          expect { @product.save }.to_not change(Product, :count).by(1)
         end
       end
       describe "improperly formatted skuid" do
@@ -77,7 +77,7 @@ describe Product do
         end
 
         it "should not be created and display error" do
-          @product.valid?.should == false
+          expect { @product.save }.to_not change(Product, :count).by(1)
         end
       end
     end

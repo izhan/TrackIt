@@ -18,7 +18,7 @@ describe Tracker do
 
     describe "should create a new one with valid input" do
       before do
-        fill_in "URL", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
+        fill_in "Url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
       end
 
       it "should create a new product" do
@@ -39,7 +39,7 @@ describe Tracker do
       describe "for same url" do
         before do
           click_button "Add Tracker"
-          fill_in "URL", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
+          fill_in "Url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
         end
         it "should not create new products or trackers" do
           expect { click_button "Add Tracker" }.not_to change(Product, :count)
