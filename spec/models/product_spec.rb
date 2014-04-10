@@ -26,12 +26,14 @@ describe Product do
   #   describe "for Best Buy API" do
   #     before do
   #       @product_list = []
-  #       7.times do |i|
-  #         puts i
+  #       25.times do |i|
   #         @product = Product.new(url: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1")
   #         @product.save
   #         @product_list << @product
   #       end
+  #     end
+  #     it "should work" do
+  #       1.should == 1
   #     end
   #   end
   # end

@@ -15,6 +15,8 @@ class Tracker < ActiveRecord::Base
 
   before_validation :get_product
 
+  after_destroy :destroy_single_product
+
   private
     # we get initial parameters from the product
     def add_params
@@ -27,10 +29,17 @@ class Tracker < ActiveRecord::Base
 
     def get_product
       if Product.where(url: clean_url(self.url)).blank?
-        @product = Product.create(url: self.url)
+        some_product = Product.create(url: self.url)
       else
-        @product = Product.where(url: clean_url(self.url)).first
+        some_product = Product.where(url: clean_url(self.url)).first
       end
-      self.product = @product
+      self.product = some_product
+    end
+
+    # destroy product if that was the last tracker that used it
+    def destroy_single_product
+      if self.product.trackers.length == 0
+        self.product.destroy
+      end
     end
 end

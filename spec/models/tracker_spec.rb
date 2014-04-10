@@ -86,15 +86,27 @@ describe Tracker do
     end
   end
 
+  # NO capybara here
   describe "when deleting a tracker" do
-    before do
-      @user1 = FactoryGirl.create(:user)
-      sign_in @user1
-      visit dashboard_path
+
+    describe "if there is only one tracker with that product" do
+      before do
+        @tracker = Tracker.create(url: "http://www.bestbuy.com/site/rocketfish-6-in-wall-hdmi-cable/2634897.p?id=1218343205770&skuId=2634897")
+      end
+
+      it "should also delete product when tracker is deleted" do
+        expect { @tracker.destroy }.to change(Product, :count).by(-1)
+      end
     end
 
-    describe "if there is only one product left" do
+    describe "if there is two or more trackers with that product" do
       before do
+        @tracker = Tracker.create(url: "http://www.bestbuy.com/site/rocketfish-6-in-wall-hdmi-cable/2634897.p?id=1218343205770&skuId=2634897")
+        @tracker2 = Tracker.create(url: "http://www.bestbuy.com/site/rocketfish-6-in-wall-hdmi-cable/2634897.p?id=1218343205770&skuId=2634897")
+      end
+
+      it "should also delete product when tracker is deleted" do
+        expect { @tracker.destroy }.to_not change(Product, :count)
       end
     end
   end
