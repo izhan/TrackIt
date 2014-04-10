@@ -7,6 +7,9 @@
         Original: $<%= to_dollars(tracker.original_price) %>, 
         <span class="<%= price_class(tracker) %>">Current: $<%= to_dollars(tracker.product.current_price) %></span>
       </div>
+      <div class="media-delete">
+        <%= link_to "x", tracker, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+      </div>
     </div>
   </div>
 </li>

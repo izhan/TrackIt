@@ -21,9 +21,11 @@ class TrackersController < ApplicationController
     end
   end
 
-  def destory
+  def destroy
+    @tracker = Tracker.find(params[:id])
     @tracker.destroy
     redirect_to dashboard_url
+    flash[:success] = "Tracker deleted!"
   end
 
   private
