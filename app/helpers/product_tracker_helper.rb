@@ -20,7 +20,7 @@ module ProductTrackerHelper
 
       host + uri.path.downcase
     rescue
-      puts "Error: Bad URL"
+      logger.debug "Bad URL encountered in clean_url"
       url
     end
   end
@@ -31,7 +31,7 @@ module ProductTrackerHelper
       host = Addressable::URI.parse(url).host.downcase
       host.start_with?('www.') ? host[4..-1] : host
     rescue
-      puts "Error: Bad URL"
+      logger.debug "Bad URL encountered in get_host"
       url
     end
   end
