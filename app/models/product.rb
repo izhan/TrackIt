@@ -4,6 +4,10 @@ require 'json'
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
 
+  validates :thumbnail, presence: true # not sure if we need to validate thumbnail
+  validates :api, presence: true
+  validates :name, presence: true
+  validates :current_price, presence: true
   validates :url, presence: true
   validates :url, uniqueness: { case_sensitive: false }, on: :create
   validates_format_of :url, :with => VALID_URL_REGEX, message: "Invalid Product URL"
@@ -14,9 +18,6 @@ class Product < ActiveRecord::Base
   # only needs url as input and generates everything else on the fly
   before_validation :process_url
 
-  # only called once on create.  manually called afterwards
-  before_create :parse_url
-
   private
     # finds sku number
     BEST_BUY_REGEX = /(\d)+.p$/
@@ -24,9 +25,6 @@ class Product < ActiveRecord::Base
 
     def process_url
       self.url = clean_url(self.url)
-    end
-
-    def parse_url
       host = get_host(self.url)
 
       self.api = categorize_api(host)
@@ -39,6 +37,8 @@ class Product < ActiveRecord::Base
       # should handle best buy here
       elsif self.api == "bestbuy"
         handle_bestbuy()
+      elsif self.api == "example"
+        handle_example()
       else
         # shouldn't get here
         puts "ERROR UH OH"
@@ -75,8 +75,17 @@ class Product < ActiveRecord::Base
       end
     end
 
+    def handle_example
+      if !self.name
+        self.name = "Testing API Item 1"
+        self.current_price = 100
+        self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
+      end
+    end
+
     def categorize_api(api)
       known_apis = {
+        "example.com" => "example",
         "bestbuy.com" => "bestbuy"
       }
       if known_apis.include?(api)

@@ -21,8 +21,48 @@ describe Product do
     end
   end
 
+  # Testing API
+  describe "for testing api" do
+    describe "for any example url" do
+      before do
+        @product = Product.create(url: "www.example.com/asdf123")
+        @product.save
+      end
+
+      it "should have right params" do
+        @product.valid?.should == true
+        @product.api.should == "example"
+        @product.current_price.should == 100
+        @product.name.should ==  "Testing API Item 1"
+      end
+
+      describe "when modified" do
+        before do
+          @product.name = "Something Else"
+          @product.current_price = 1
+          @product.save
+        end
+        it "should be abled to be saved" do
+          @product.valid?.should == true
+          @product.name.should == "Something Else"
+          @product.current_price.should == 1
+        end
+      end
+    end
+  end
+
   # BEST BUY
   describe "for best buy api" do
+    describe "for invalid url" do
+      before do
+        @product = Product.new(url: "http://www.bestbuy.com/asdf123")
+      end
+
+      it "should not save" do
+        expect { @product.save }.to_not change(Product, :count).by(1)
+      end
+    end
+
     describe "for valid url" do
       before do
         @product = Product.new(url: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1")
@@ -35,6 +75,16 @@ describe Product do
         @product.api.should ==  "bestbuy"
         @product.current_price.should ==  3999
         @product.name.should ==  "Just Dance 2014 - Nintendo Wii"
+      end
+
+      describe "when modified" do
+        before do
+          @product.name = "Potato"
+          @product.save
+        end
+        it "should not be able to be modified (consistency among users)" do
+          @product.name.should ==  "Just Dance 2014 - Nintendo Wii"
+        end
       end
     end
 
