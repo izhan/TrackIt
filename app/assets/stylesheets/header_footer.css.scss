@@ -1,5 +1,7 @@
+@import "variables";
+
 #footer {
-  background-color: #E4EDF2;
+  background-color: $gray-blue;
   height: 60px;
   .credits {
     margin: 15px 0 0 0;

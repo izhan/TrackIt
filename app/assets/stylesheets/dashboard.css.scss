@@ -1,14 +1,21 @@
+@import "variables";
+
 .trackers {
   li {
     margin-top: 20px;
     margin-bottom: 20px;
     list-style-type: none;
     .media {
+      padding: 25px;
+      background: $gray-blue;
+      margin-bottom: 40px;
+      border-radius: 8px; 
       .media-body {
         padding: 10px;
       }
       .media-heading {
         font-size: 18px;
+        font-weight: bold;
       }
       .media-price {
         .price-rise {
