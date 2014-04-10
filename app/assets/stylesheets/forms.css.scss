@@ -1,0 +1,36 @@
+$input-font-size: 18px;
+$input-padding: 12px 16px;
+$input-border-radius: 8px;
+
+.full-page-form {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  .form-header {
+    margin-top: 0;
+  }
+  .form-group {
+    input {
+      height: auto;
+      font-size: $input-font-size;
+      padding: $input-padding;
+      border-radius: $input-border-radius;
+    }
+  }
+  .btn {
+    font-size: $input-font-size;
+    padding: $input-padding;
+    border-radius: $input-border-radius;
+    width: 100%;
+  }
+  .form-footer {
+    font-size: $input-font-size - 4px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .checkbox label {
+    color: #666;
+    font-size: 18px;
+    margin-left: 4px;
+  }
+}
+

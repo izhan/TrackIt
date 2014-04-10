@@ -1,17 +1,20 @@
-<h2>Sign up</h2>
+<div class="full-page-form col-md-offset-4 col-md-4">
+  <h1 class="form-header">Sign Up</h1>
+  <div class="form">
+    <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
+      <%= f.text_field :first_name, autofocus: true,  placeholder: "First Name", hide_label: true %>
+      <%= f.text_field :last_name, placeholder: "Last Name", hide_label: true %>
+      <%= f.email_field :email, hide_label: true, placeholder: "Email" %>
+      <%= f.password_field :password, autocomplete: "off", hide_label: true, placeholder: "Password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", hide_label: true, placeholder: "Password Confirmation" %>
 
-<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+      <%= f.submit "Sign Up", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="form-footer">
+    Or <%= render "devise/shared/links" %>
+  </div>
+</div>
 
-  <%= f.text_field :first_name, autofocus: true, label: "First Name" %>
-  <%= f.text_field :last_name, label: "Last Name" %>
-  <%= f.email_field :email %>
-  <%= f.password_field :password, autocomplete: "off" %>
-  <%= f.password_field :password_confirmation, autocomplete: "off", label: "Password Confirmation" %>
-
-  <%= f.submit "Sign Up" %>
-<% end %>
-
-<br>
-Or <%= render "devise/shared/links" %>
