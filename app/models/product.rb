@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   validates :url, uniqueness: { case_sensitive: false }, on: :create
   validates_format_of :url, :with => VALID_URL_REGEX, message: "Invalid Product URL"
 
-  has_many :trackers
+  has_many :trackers, dependent: :destroy
   has_many :users, through: :trackers
 
   # only needs url as input and generates everything else on the fly
@@ -25,7 +25,7 @@ class Product < ActiveRecord::Base
 
       host = get_host(self.url)
 
-      self.api = get_api(host)
+      self.api = categorize_api(host)
 
       if self.api == "scrape"
         # only temp.  should scrape the website
@@ -44,6 +44,7 @@ class Product < ActiveRecord::Base
       end
     end
 
+    # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
       sku_number = self.url[BEST_BUY_REGEX]
 
@@ -55,10 +56,12 @@ class Product < ActiveRecord::Base
           if bestbuy_json["total"] == 0
             errors.add(:base, "Best Buy URL Invalid.  Please try again.")
           else
+            self.thumbnail = bestbuy_json["products"][0]["thumbnailImage"]
             self.name = bestbuy_json["products"][0]["name"]
             # TODO should get rid of this in favor of decimal column
             self.current_price = Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
+          puts bestbuy_json
         rescue
           # for debugging
           puts $!, $@
@@ -69,7 +72,7 @@ class Product < ActiveRecord::Base
       end
     end
 
-    def get_api(api)
+    def categorize_api(api)
       known_apis = {
         "bestbuy.com" => "bestbuy"
       }
