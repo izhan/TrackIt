@@ -13,6 +13,8 @@ class Tracker < ActiveRecord::Base
 
   before_create :add_params
 
+  before_validation :get_product
+
   private
     # we get initial parameters from the product
     def add_params
@@ -21,5 +23,14 @@ class Tracker < ActiveRecord::Base
       self.name = product.name
       self.original_price = product.current_price
       self.alert_price = product.current_price
+    end
+
+    def get_product
+      if Product.where(url: clean_url(self.url)).blank?
+        @product = Product.create(url: self.url)
+      else
+        @product = Product.where(url: clean_url(self.url)).first
+      end
+      self.product = @product
     end
 end
