@@ -1,5 +1,10 @@
 @import "variables";
 
+.color-bar {
+  width: 100%;
+  height: 5px;
+  background: $light-blue;
+}
 #footer {
   background-color: $gray-blue;
   height: 60px;
