@@ -58,6 +58,8 @@ gem 'bootstrap_form'
 
 gem "figaro"
 
+# parsing url
+gem "addressable"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

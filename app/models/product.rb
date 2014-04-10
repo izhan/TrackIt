@@ -1,4 +1,3 @@
-require 'uri'
 require 'open-uri'
 require 'json'
 
@@ -31,7 +30,7 @@ class Product < ActiveRecord::Base
         # only temp.  should scrape the website
         self.current_price = 100000
         self.name = "Temporary Scraping Holder"
-        self.thumbnail = "http://i.imgur.com/0y3uACw.jpg"
+        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
       # should handle best buy here
       elsif self.api == "bestbuy"
         handle_bestbuy()
@@ -39,8 +38,8 @@ class Product < ActiveRecord::Base
         # shouldn't get here
         puts "ERROR UH OH"
         self.current_price = 100000
-        self.name = "Temporary Scraping Holder"
-        self.thumbnail = "http://i.imgur.com/0y3uACw.jpg"
+        self.name = "Temporary Error Scraping Holder"
+        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
       end
     end
 
@@ -61,7 +60,6 @@ class Product < ActiveRecord::Base
             # TODO should get rid of this in favor of decimal column
             self.current_price = Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
-          puts bestbuy_json
         rescue
           # for debugging
           puts $!, $@
