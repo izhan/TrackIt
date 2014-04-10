@@ -21,6 +21,21 @@ describe Product do
     end
   end
 
+  # IN TEST ENVIRONMENT ONLY -- should comment out unless you get 403
+  # describe "throttling APIs" do
+  #   describe "for Best Buy API" do
+  #     before do
+  #       @product_list = []
+  #       7.times do |i|
+  #         puts i
+  #         @product = Product.new(url: "http://www.bestbuy.com/site/just-dance-2014-nintendo-wii/9638372.p?id=1219034548328&skuId=9638372&st=categoryid$abcat0706002&lp=2&cp=1")
+  #         @product.save
+  #         @product_list << @product
+  #       end
+  #     end
+  #   end
+  # end
+
   # Testing API
   describe "for testing api" do
     describe "for any example url" do
