@@ -17,10 +17,4 @@ class StaticPagesController < ApplicationController
     @tracker = Tracker.new
     @tracker_list = current_user.trackers.paginate(page: params[:page])
   end
-
-  private
-
-    def bestbuy_api?(url)
-      url.match(/(?<sku_number>[[:digit:]]{7}).p/)
-    end
 end

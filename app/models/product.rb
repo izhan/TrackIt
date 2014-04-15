@@ -3,6 +3,7 @@ require 'json'
 
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
+  include ApiHelper
 
   validates :thumbnail, presence: true # not sure if we need to validate thumbnail
   validates :api, presence: true
@@ -19,8 +20,6 @@ class Product < ActiveRecord::Base
   before_validation :process_url
 
   private
-    # finds sku number
-    BEST_BUY_REGEX = /(\d)+\.p/
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
     def process_url
@@ -50,7 +49,7 @@ class Product < ActiveRecord::Base
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
-      sku_number = self.url[BEST_BUY_REGEX]
+      sku_number = find_bestbuy_url(self.url)
 
       if sku_number
         # gets rid of .p
