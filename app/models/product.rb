@@ -20,7 +20,7 @@ class Product < ActiveRecord::Base
 
   private
     # finds sku number
-    BEST_BUY_REGEX = /(\d)+.p$/
+    BEST_BUY_REGEX = /(\d)+.p/
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
     def process_url
