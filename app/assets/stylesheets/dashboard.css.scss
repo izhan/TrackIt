@@ -5,6 +5,13 @@
     margin-top: 20px;
     margin-bottom: 20px;
     list-style-type: none;
+    .thumbnail-wrapper {
+      height: 100px;
+      width: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
     .media {
       padding: 25px;
       background: $gray-blue;

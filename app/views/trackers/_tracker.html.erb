@@ -1,6 +1,6 @@
 <li>
   <div class="media">
-    <%= image_tag tracker.product.thumbnail || "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg", class: "pull-left", height: 100, width: 100 %>
+    <div class="thumbnail-wrapper pull-left" style="background-image:url('<%= tracker.product.thumbnail || "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg" %>');"></div>
     <div class="media-body">
       <h4 class="media-heading"><%= tracker.name %></h4>
       <div class="media-price">

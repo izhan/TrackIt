@@ -20,7 +20,7 @@ class Product < ActiveRecord::Base
 
   private
     # finds sku number
-    BEST_BUY_REGEX = /(\d)+.p/
+    BEST_BUY_REGEX = /(\d)+\.p/
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
     def process_url
@@ -60,10 +60,10 @@ class Product < ActiveRecord::Base
           if bestbuy_json["total"] == 0
             errors.add(:base, "Best Buy URL Invalid.  Please try again.")
           else
-            self.thumbnail = bestbuy_json["products"][0]["thumbnailImage"]
+            self.thumbnail = bestbuy_json["products"][0]["largeImage"] || bestbuy_json["products"][0]["image"] 
             self.name = bestbuy_json["products"][0]["name"]
             # TODO should get rid of this in favor of decimal column
-            self.current_price = Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
+            self.current_price = Integer(bestbuy_json["products"][0]["salePrice"].to_s.sub(".", "")) || Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
         rescue
           # for debugging
