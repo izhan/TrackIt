@@ -18,7 +18,7 @@ class Product < ActiveRecord::Base
   has_many :users, through: :trackers
 
   # only needs url as input and generates everything else on the fly
-  before_validation :process_url, on: [:create, :update]
+  before_validation :process_url, on: :create #, :update
 
 
   def update_details

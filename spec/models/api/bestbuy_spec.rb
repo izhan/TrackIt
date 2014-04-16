@@ -22,15 +22,15 @@ describe "for best buy api", api: true, bestbuy: true do
       @product.name.should ==  "Uniden - 40-Channel Compact CB Radio - Black"
     end
 
-    describe "when modified" do
-      before do
-        @product.name = "Potato"
-        @product.save
-      end
-      it "should not be able to be modified (consistency among users)" do
-        @product.name.should ==  "Uniden - 40-Channel Compact CB Radio - Black"
-      end
-    end
+    # describe "when modified" do
+    #   before do
+    #     @product.name = "Potato"
+    #     @product.save
+    #   end
+    #   it "should not be able to be modified (consistency among users)" do
+    #     @product.name.should ==  "Uniden - 40-Channel Compact CB Radio - Black"
+    #   end
+    # end
   end
 
   describe "edge cases" do

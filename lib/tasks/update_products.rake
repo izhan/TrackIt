@@ -12,6 +12,7 @@ def update_api
   puts "============================================="
 
   errors = []
+  success = []
   bestbuy_counter = 1 # max 6 calls per second
   change_count = 0
 
@@ -28,7 +29,7 @@ def update_api
 
     p.update_details
     if p.changed?
-      puts p.inspect
+      success << p.url
       p.save
       change_count += 1
     end
@@ -44,10 +45,19 @@ def update_api
 
   puts "#{pluralize(change_count, 'product')} updated."
 
+  if success.any?
+    puts ""
+    puts "Following urls were updated:"
+    success.each do |s|
+      puts "  +  " + s
+    end
+    puts "---------------------------------------------"
+  end
+
   if errors.any?
     puts "Errors on these following urls:"
     errors.each do |e|
-      puts e
+      puts "  -  " + e
     end
   end
 end
