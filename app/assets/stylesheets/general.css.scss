@@ -6,7 +6,7 @@
 }
 
 /* begin outline buttons */
-.btn-outline, .btn-outline-default, .btn-outline-primary {
+.btn-outline, .btn-outline-default, .btn-outline-primary .btn-outline-red {
   background-color: transparent;
   border-radius: 0;
   border: 2px solid;
@@ -20,16 +20,23 @@
     border-color: darken($white, 5%);
   }
 }
-
-.btn-outline-primary {
-  color: $primary-blue;
-  border-color: $primary-blue;
+.btn-outline, .btn-outline-red {
+  color: $primary-red;
+  border-color: $primary-red;
   &:hover, &:focus {
-    color: darken($primary-blue, 5%);
-    border-color: darken($primary-blue, 5%);
+    color: darken($primary-red, 5%);
+    border-color: darken($primary-red, 5%);
   }
 }
 
+.btn-outline-primary {
+  color: $dark-blue;
+  border-color: $dark-blue;
+  &:hover, &:focus {
+    color: darken($dark-blue, 5%);
+    border-color: darken($dark-blue, 5%);
+  }
+}
 .btn-outline-inverted:hover, .btn-outline-inverted:focus {
   &.btn-outline-default {
     color: $primary-blue;
@@ -38,8 +45,13 @@
   }
   &.btn-outline-primary {
     color: $white;
-    background-color: $primary-blue;
-    border-color: $primary-blue;
+    background-color: $dark-blue;
+    border-color: $dark-blue;
+  }
+  &.btn-outline-red {
+    color: $white;
+    background-color: $primary-red;
+    border-color: $primary-red;
   }
 }
 

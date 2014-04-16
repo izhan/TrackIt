@@ -10,8 +10,8 @@
        <span>Original: $<%= to_dollars(tracker.original_price) %></span>
       </div>
       <div class="media-buttons">
-        <%= link_to "purchase", "http://"+tracker.product.url, :target=> "_blank", class: "btn btn-primary" %>
-        <%= link_to "remove", tracker, data: { confirm: "Are you sure? If so, this item will no longer be tracked." }, method: :delete, class: "btn btn-danger" %>  
+        <%= link_to "purchase", "http://"+tracker.product.url, :target=> "_blank", class: "btn btn-outline-default btn-outline-primary btn-outline-inverted center" %>
+        <%= link_to "remove", tracker, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-default btn-outline-red btn-outline-inverted center" %>  
       </div>
     </div>
   </div>
