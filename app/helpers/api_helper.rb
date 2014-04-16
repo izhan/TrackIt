@@ -1,7 +1,8 @@
 module ApiHelper
   # finds sku number
   BEST_BUY_REGEX = /(\d)+\.p/
-  AMAZON_REGEX = /amazon\.com\/(?:gp\/product|dp\/product|gp\/product\/glance|exec\/obidos\/asin|[^\/]+\/dp|dp)\/(?<asin>[^\/]+)/
+  # @note gp/product/glance must go before gp/product
+  AMAZON_REGEX = /(?:amazon\.com\/(?:gp\/product\/glance|gp\/product|dp\/product|exec\/obidos\/asin|[^\/]+\/dp|dp)\/(?<asin>[^\/]+)|amzn.com\/(?<asin>[^\/]+))/
 
   # TODO currently does not find bestbuy mobile links
   def find_bestbuy_id(url)

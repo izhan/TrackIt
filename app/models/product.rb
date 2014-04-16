@@ -82,13 +82,19 @@ class Product < ActiveRecord::Base
     # TODO check differences between new vs old
     def handle_amazon
       asin = find_amazon_id(self.url)
-      amzn_request = Amazon::Ecs.item_lookup("B004J3V90Y", :response_group => 'Images,ItemAttributes,Offers')
+      if asin
+        amzn_request = Amazon::Ecs.item_lookup(asin, :response_group => 'Images,ItemAttributes,Offers')
 
-      if amzn_request.is_valid_request? && !amzn_request.has_error?
-        result = amzn_request.first_item
-        self.name = result.get('ItemAttributes/Title')
-        self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
-        self.current_price = result.get('OfferSummary/LowestNewPrice/Amount')
+        if amzn_request.is_valid_request? && !amzn_request.has_error?
+          result = amzn_request.first_item
+          self.name = result.get('ItemAttributes/Title')
+          self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
+          # sometimes, it defaults to too low price
+          self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || 1
+          self.url = "amazon.com/dp/#{asin}"
+        else
+          errors.add(:base, "Amazon URL Invalid.  Please try again.")
+        end
       else
         errors.add(:base, "Amazon URL Invalid.  Please try again.")
       end
