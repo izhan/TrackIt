@@ -49,7 +49,7 @@ class Product < ActiveRecord::Base
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
-      sku_number = find_bestbuy_url(self.url)
+      sku_number = find_bestbuy_id(self.url)
 
       if sku_number
         # gets rid of .p
@@ -74,6 +74,12 @@ class Product < ActiveRecord::Base
       end
     end
 
+    def handle_amazon
+      asin = find_amazon_id(self.url)
+
+      
+    end
+
     def handle_example
       if !self.name
         self.name = "Testing API Item 1"
@@ -82,6 +88,7 @@ class Product < ActiveRecord::Base
       end
     end
 
+    # TODO handle amzn.com to amazon
     def categorize_api(api)
       known_apis = {
         "example.com" => "example",
