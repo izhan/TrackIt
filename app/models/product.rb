@@ -53,7 +53,6 @@ class Product < ActiveRecord::Base
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
-      puts "handling bestbuy"
       sku_number = find_bestbuy_id(self.url)
 
       if sku_number
@@ -87,17 +86,11 @@ class Product < ActiveRecord::Base
 
       if amzn_request.is_valid_request? && !amzn_request.has_error?
         result = amzn_request.first_item
-        puts "I AM GOOD"
         self.name = result.get('ItemAttributes/Title')
         self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
         self.current_price = result.get('OfferSummary/LowestNewPrice/Amount')
-        puts self.inspect
       else
-        puts "Amazon Error (is valid + has error)"
-        puts amzn_request.is_valid_request?
-        puts amzn_request.has_error?
-        puts amzn_request.inspect
-        errors.add(:base, "Best Buy URL Invalid.  Please try again.")
+        errors.add(:base, "Amazon URL Invalid.  Please try again.")
       end
     end
 
