@@ -61,7 +61,7 @@ def make_trackers
   ]
 
   bestbuy_counter = 1 # limit to 6 a second
-  puts "Creating #{amazon_urls.size + bestbuy_urls} Trackers"
+  puts "Creating #{amazon_urls.size + bestbuy_urls.size} Trackers"
   amazon_urls.each do |url|
     testinguser.trackers.create(url: url)
     sleep(1)
