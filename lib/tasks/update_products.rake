@@ -28,6 +28,8 @@ def update_api
     end
 
     p.update_details
+
+    # if changed, then send mail
     if p.changed?
       success << p.url
       p.save

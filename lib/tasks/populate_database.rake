@@ -76,5 +76,6 @@ def make_trackers
     bestbuy_counter += 1
     print "."
   end
+  puts ""
   puts "#{testinguser.trackers.size} total trackers created"
 end

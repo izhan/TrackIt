@@ -1,6 +1,8 @@
 class Tracker < ActiveRecord::Base
   include ProductTrackerHelper
 
+  ## @note Tracker Class includes -- orginal_price, alert_price, name
+
   default_scope { order('created_at DESC') }
 
   attr_accessor :url
