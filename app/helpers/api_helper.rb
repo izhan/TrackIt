@@ -15,4 +15,6 @@ module ApiHelper
 
   def standarize_amazon_url(url)
   end
+
+  # TODO should have a method that appends amazon associate tag
 end

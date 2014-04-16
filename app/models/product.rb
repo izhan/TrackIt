@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'amazon/ecs'
 
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
@@ -22,6 +23,7 @@ class Product < ActiveRecord::Base
   private
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
+    # TODO being processed twice...
     def process_url
       self.url = clean_url(self.url)
       host = get_host(self.url)
@@ -51,6 +53,7 @@ class Product < ActiveRecord::Base
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
+      puts "handling bestbuy"
       sku_number = find_bestbuy_id(self.url)
 
       if sku_number
@@ -76,12 +79,26 @@ class Product < ActiveRecord::Base
       end
     end
 
+    # @note use http://associates-amazon.s3.amazonaws.com/scratchpad/index.html to look for params
+    # TODO check differences between new vs old
     def handle_amazon
       asin = find_amazon_id(self.url)
+      amzn_request = Amazon::Ecs.item_lookup("B004J3V90Y", :response_group => 'Images,ItemAttributes,Offers')
 
-      self.name = "AMAZON TEST"
-      self.current_price = "420"
-      self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
+      if amzn_request.is_valid_request? && !amzn_request.has_error?
+        result = amzn_request.first_item
+        puts "I AM GOOD"
+        self.name = result.get('ItemAttributes/Title')
+        self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
+        self.current_price = result.get('OfferSummary/LowestNewPrice/Amount')
+        puts self.inspect
+      else
+        puts "Amazon Error (is valid + has error)"
+        puts amzn_request.is_valid_request?
+        puts amzn_request.has_error?
+        puts amzn_request.inspect
+        errors.add(:base, "Best Buy URL Invalid.  Please try again.")
+      end
     end
 
     def handle_example
