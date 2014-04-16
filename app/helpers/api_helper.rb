@@ -8,6 +8,7 @@ module ApiHelper
     url[BEST_BUY_REGEX]
   end
 
+  # TODO finish
   def find_amazon_id(url)
     "B004J3V90Y"
   end

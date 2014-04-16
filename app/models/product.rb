@@ -29,13 +29,15 @@ class Product < ActiveRecord::Base
       self.api = categorize_api(host)
 
       if self.api == "scrape"
-        # only temp.  should scrape the website
+        # TODO hould scrape the website
         self.current_price = 100000
         self.name = "Temporary Scraping Holder"
         self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
-      # should handle best buy here
+      # handle known urls here
       elsif self.api == "bestbuy"
         handle_bestbuy()
+      elsif self.api == "amazon"
+        handle_amazon()
       elsif self.api == "example"
         handle_example()
       else
@@ -77,7 +79,9 @@ class Product < ActiveRecord::Base
     def handle_amazon
       asin = find_amazon_id(self.url)
 
-      
+      self.name = "AMAZON TEST"
+      self.current_price = "420"
+      self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
     end
 
     def handle_example
@@ -88,11 +92,12 @@ class Product < ActiveRecord::Base
       end
     end
 
-    # TODO handle amzn.com to amazon
     def categorize_api(api)
       known_apis = {
         "example.com" => "example",
-        "bestbuy.com" => "bestbuy"
+        "bestbuy.com" => "bestbuy",
+        "amzn.com" => "amazon",
+        "amazon.com" => "amazon"
       }
       if known_apis.include?(api)
         return known_apis[api]

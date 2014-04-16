@@ -84,6 +84,19 @@ describe "for amazon api", amazon: true do
       end
     end
 
+    describe "for amzn.com urls" do
+      before do
+        @product = Product.new(url: "amzn.com/B002KAOS60")
+        @product.save
+      end
+
+      it "should create correct item" do
+        @product.url.should == "amazon.com/dp/b002kaos60"
+        @product.api.should == "amazon"
+        @product.current_price.should == 1000
+        @product.name.should == "The Wikipedia Revolution: How a Bunch of Nobodies Created the World's Greatest Encyclopedia"
+      end
+    end
   end
 
   describe "item with old/new options" do
