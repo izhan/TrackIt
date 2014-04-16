@@ -64,6 +64,10 @@ gem "addressable"
 
 gem "slowweb"
 
+gem "amazon-ecs"
+# for amazon gem plus scraping for later
+gem "nokogiri"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -1,8 +1,10 @@
 require 'open-uri'
 require 'json'
+require 'amazon/ecs'
 
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
+  include ApiHelper
 
   validates :thumbnail, presence: true # not sure if we need to validate thumbnail
   validates :api, presence: true
@@ -19,10 +21,9 @@ class Product < ActiveRecord::Base
   before_validation :process_url
 
   private
-    # finds sku number
-    BEST_BUY_REGEX = /(\d)+\.p/
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
+    # TODO being processed twice...
     def process_url
       self.url = clean_url(self.url)
       host = get_host(self.url)
@@ -30,13 +31,15 @@ class Product < ActiveRecord::Base
       self.api = categorize_api(host)
 
       if self.api == "scrape"
-        # only temp.  should scrape the website
+        # TODO hould scrape the website
         self.current_price = 100000
         self.name = "Temporary Scraping Holder"
         self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
-      # should handle best buy here
+      # handle known urls here
       elsif self.api == "bestbuy"
         handle_bestbuy()
+      elsif self.api == "amazon"
+        handle_amazon()
       elsif self.api == "example"
         handle_example()
       else
@@ -50,7 +53,7 @@ class Product < ActiveRecord::Base
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
-      sku_number = self.url[BEST_BUY_REGEX]
+      sku_number = find_bestbuy_id(self.url)
 
       if sku_number
         # gets rid of .p
@@ -75,6 +78,28 @@ class Product < ActiveRecord::Base
       end
     end
 
+    # @note use http://associates-amazon.s3.amazonaws.com/scratchpad/index.html to look for params
+    # TODO check differences between new vs old
+    def handle_amazon
+      asin = find_amazon_id(self.url)
+      if asin
+        amzn_request = Amazon::Ecs.item_lookup(asin, :response_group => 'Images,ItemAttributes,Offers')
+
+        if amzn_request.is_valid_request? && !amzn_request.has_error?
+          result = amzn_request.first_item
+          self.name = result.get('ItemAttributes/Title')
+          self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
+          # sometimes, it defaults to too low price
+          self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || 1
+          self.url = "amazon.com/dp/#{asin}"
+        else
+          errors.add(:base, "Amazon URL Invalid.  Please try again.")
+        end
+      else
+        errors.add(:base, "Amazon URL Invalid.  Please try again.")
+      end
+    end
+
     def handle_example
       if !self.name
         self.name = "Testing API Item 1"
@@ -86,7 +111,9 @@ class Product < ActiveRecord::Base
     def categorize_api(api)
       known_apis = {
         "example.com" => "example",
-        "bestbuy.com" => "bestbuy"
+        "bestbuy.com" => "bestbuy",
+        "amzn.com" => "amazon",
+        "amazon.com" => "amazon"
       }
       if known_apis.include?(api)
         return known_apis[api]
