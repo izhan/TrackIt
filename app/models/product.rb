@@ -102,7 +102,7 @@ class Product < ActiveRecord::Base
 
     def handle_example
       if !self.name
-        self.name = "Testing API Item 1"
+        self.name = self.url
         self.current_price = 100
         self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
       end

@@ -1,6 +1,8 @@
 class Tracker < ActiveRecord::Base
   include ProductTrackerHelper
 
+  default_scope order('created_at DESC')
+
   attr_accessor :url
 
   belongs_to :user
