@@ -7,7 +7,7 @@ describe Product do
   it { should respond_to(:name) }
   it { should respond_to(:thumbnail) }
 
-  describe "validates url" do
+  describe "validates url", api: true do
     before do
       @product = Product.new()
     end
@@ -69,7 +69,7 @@ describe Product do
   end
 
   ## USES BEST BUY API for now.  replace later
-  describe "should be able to create a new obj with just url" do
+  describe "should be able to create a new obj with just url", api: true, bestbuy: true do
     before do
       @product = Product.new(url: "http://www.bestbuy.com/site/masticating-juicer/1614687.p?id=1219057246863&skuId=1614687&st=categoryid$pcmcat194000050019&cp=1&lp=8")
       @product.save

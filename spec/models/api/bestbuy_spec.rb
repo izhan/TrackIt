@@ -1,5 +1,4 @@
-# BEST BUY
-describe "for best buy api" do
+describe "for best buy api", api: true, bestbuy: true do
   describe "for invalid url" do
     before do
       @product = Product.new(url: "http://www.bestbuy.com/asdf123")

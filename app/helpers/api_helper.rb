@@ -9,6 +9,7 @@ module ApiHelper
   end
 
   def find_amazon_id(url)
+    "B004J3V90Y"
   end
 
   def standarize_amazon_url(url)
