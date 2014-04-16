@@ -6,13 +6,13 @@
   <body>
     <h1>Hello, <%= @user.first_name %></h1>
     <p>
-      <%= @tracker.name %> has recently decreased in price from <%= to_dollars(@tracker.original_price) %> to <%= to_dollars(@tracker.product.current_price) %>.<br>
+      <%= @tracker.name %> has recently decreased in price from $<%= to_dollars(@tracker.original_price) %> to $<%= to_dollars(@tracker.product.current_price) %><br>
     </p>
     <p>
-      Your savings: <%= to_dollars(@tracker.original_price - @tracker.product.current_price) %><br>
+      Your savings: $<%= to_dollars(@tracker.original_price - @tracker.product.current_price) %><br>
     </p>
     <p>
-      To view the page, click <a href="http://<%= @tracker.product.url %>">here</a>..
+      To view the page, click <a href="http://<%= @tracker.product.url %>">here</a>.
     </p>
   </body>
 </html>

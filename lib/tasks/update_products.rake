@@ -29,10 +29,14 @@ def update_api
 
     p.update_details
 
-    # if changed, then send mail
     if p.changed?
       success << p.url
       p.save
+      # notify all users
+      p.trackers.each do |t|
+        AlertMailer.alert_email(t.user, t).deliver
+      end
+      
       change_count += 1
     end
 
