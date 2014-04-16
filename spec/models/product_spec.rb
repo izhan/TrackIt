@@ -50,7 +50,7 @@ describe Product do
         @product.valid?.should == true
         @product.api.should == "example"
         @product.current_price.should == 100
-        @product.name.should ==  "Testing API Item 1"
+        @product.name.should ==  "example.com/asdf123"
       end
 
       describe "when modified" do

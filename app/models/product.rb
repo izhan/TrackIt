@@ -18,7 +18,30 @@ class Product < ActiveRecord::Base
   has_many :users, through: :trackers
 
   # only needs url as input and generates everything else on the fly
-  before_validation :process_url
+  before_validation :process_url, on: [:create, :update]
+
+
+  def update_details
+    if self.api == "scrape"
+      # TODO hould scrape the website
+      self.current_price = 50000
+      self.name = "Updated Temporary Scraping Holder"
+      self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
+    # handle known urls here
+    elsif self.api == "bestbuy"
+      handle_bestbuy()
+    elsif self.api == "amazon"
+      handle_amazon()
+    elsif self.api == "example"
+      handle_example()
+    else
+    # shouldn't get here
+      puts "ERROR UH OH"
+      self.current_price = 100000
+      self.name = "Fatal Error Scraping Holder"
+      self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
+    end
+  end
 
   private
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
