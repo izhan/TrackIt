@@ -1,16 +1,17 @@
 $(document).ready(function(){
 	$("#search-trackers").click(function(){
-		alert('clicked');
-		var array = $('.media-heading');
-		var searchText = $('#search-tracker');
-		alert(searchText.html());
-		var $currentElement;
-		for (var i in array)
+		var array = $('.media');
+		var arrayNames = $('.media-wrapper-heading');
+		var str = '';
+		var searchText = $('#search-tracker').val().toLowerCase();
+		for (var i = 0; i < arrayNames.length; i++)
 		{
-			if (array[i].text() == searchText)
-				array[i].show();
+			str = '' + $(arrayNames[i]).text().toLowerCase();
+			if (str.indexOf(searchText) != -1) {
+				$(array[i]).show(); }
 			else
-				array[i].hide();
+				$(array[i]).hide();
+
 		};
 	});	
 });
