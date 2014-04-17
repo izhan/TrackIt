@@ -23,7 +23,7 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/0439785960"
         @product.api.should == "amazon"
-        @product.current_price.should == 387
+        #@product.current_price.should == 387
         @product.name.should == "Harry Potter and the Half-Blood Prince (Book 6)"
       end
     end
@@ -37,7 +37,7 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/b00aw04zmm"
         @product.api.should == "amazon"
-        @product.current_price.should == 16899
+        #@product.current_price.should == 16899
         @product.name.should == "Panda Small Compact Portable Washing Machine(6-7lbs Capacity) with Spin Dryer"
       end
     end
@@ -51,7 +51,7 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/b00bhe9ox2"
         @product.api.should == "amazon"
-        @product.current_price.should == 394
+        #@product.current_price.should == 394
         @product.name.should == "Colgate Total Pro Gum Health Toothpaste 75ml"
       end
     end
@@ -65,7 +65,7 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/b00ddmj332"
         @product.api.should == "amazon"
-        @product.current_price.should == 827
+        #@product.current_price.should == 827
         @product.name.should == "Pampers Sensitive Wipes 12x Pack 744 Count"
       end
     end
@@ -129,4 +129,5 @@ describe "for amazon api", amazon: true do
 
   ## TODO , VERY low price??
   ## TODO creating duplicates?
+  # TODO for products with no offers
 end
