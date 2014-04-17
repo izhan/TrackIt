@@ -19,7 +19,23 @@ module ApiHelper
   end
 
   def standarize_amazon_url(url)
+    asin = find_amazon_id(url)
+    "amazon.com/dp/#{asin}"
   end
+
+  def categorize_api(api)
+    known_apis = {
+      "example.com" => "example",
+      "bestbuy.com" => "bestbuy",
+      "amzn.com" => "amazon",
+      "amazon.com" => "amazon"
+    }
+    if known_apis.include?(api)
+      return known_apis[api]
+    else
+      return "scrape"
+    end
+  end 
 
   # TODO should have a method that appends amazon associate tag
 end

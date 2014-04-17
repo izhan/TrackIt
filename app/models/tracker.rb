@@ -1,5 +1,6 @@
 class Tracker < ActiveRecord::Base
   include ProductTrackerHelper
+  include ApiHelper
 
   ## @note Tracker Class includes -- orginal_price, alert_price, name
 
@@ -40,6 +41,16 @@ class Tracker < ActiveRecord::Base
     end
 
     def get_product
+      # TODO clean this up
+      begin
+        temp_url = clean_url(self.url)
+        host = get_host(temp_url)
+        host = categorize_api(host)
+        if host == "amazon"
+          self.url = standarize_amazon_url(temp_url)
+        end
+      rescue
+      end
       if Product.where(url: clean_url(self.url)).blank?
         some_product = Product.create(url: self.url)
       else
