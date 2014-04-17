@@ -46,7 +46,6 @@ class Product < ActiveRecord::Base
   private
     BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
-    # TODO being processed twice...
     def process_url
       self.url = clean_url(self.url)
       host = get_host(self.url)
@@ -114,7 +113,7 @@ class Product < ActiveRecord::Base
           self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
           # sometimes, it defaults to too low price
           self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || 1
-          self.url = "amazon.com/dp/#{asin}"
+          self.url = standarize_amazon_url(self.url)
         else
           errors.add(:base, "Amazon URL Invalid.  Please try again.")
         end
@@ -130,18 +129,4 @@ class Product < ActiveRecord::Base
         self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
       end
     end
-
-    def categorize_api(api)
-      known_apis = {
-        "example.com" => "example",
-        "bestbuy.com" => "bestbuy",
-        "amzn.com" => "amazon",
-        "amazon.com" => "amazon"
-      }
-      if known_apis.include?(api)
-        return known_apis[api]
-      else
-        return "scrape"
-      end
-    end 
 end
