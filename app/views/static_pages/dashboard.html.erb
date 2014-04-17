@@ -12,12 +12,10 @@
   </div>
 </div>
 <h1>Your currently tracked products: </h1>
-<%= form_tag trackers_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+<p>
+  <%= text_field_tag "search", nil, id: "search-tracker" %>
+  <%= submit_tag "search", :name => nil, id: "search-trackers" %>
+</p>
 <div class="dashboard-results">
   <% if @tracker_list.any? %>
     <ul class="trackers">
