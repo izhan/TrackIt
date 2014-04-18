@@ -7,9 +7,6 @@ class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
 
   def home
-    puts "poop"
-    puts request.headers['HTTP_USER_AGENT']
-    puts request.headers.inspect
     if signed_in?
       redirect_to dashboard_path
     end
@@ -25,11 +22,14 @@ class StaticPagesController < ApplicationController
     if url
       begin
         sanitized_url = add_http(url)
+        # TODO, add more headers?
         website_file = open(sanitized_url, 
           :allow_redirections => :all,
           "User-Agent" => request.headers['HTTP_USER_AGENT']
         )
+
         @page = Nokogiri::HTML(website_file)
+        @page.encoding = 'UTF-8'
 
         root_url = Addressable::URI.parse(sanitized_url).scheme + "://" + Addressable::URI.parse(sanitized_url).host
 
@@ -53,18 +53,30 @@ class StaticPagesController < ApplicationController
         #   end
         # end
 
+        # prepares for display
+        @page = clean_page(@page)
+
+        # recreate the webpage EXACTLY
+        render :layout => false
+
       rescue
         puts $!, $@
         flash.now[:danger] = "Sorry, please try again"
       end
     end
 
-    # recreate
-    render :layout => false
   end
 
   def dashboard
     @tracker = Tracker.new
     @tracker_list = current_user.trackers.paginate(page: params[:page])
   end
+
+  private
+    def clean_page(page)
+      # nokogiri adds newlines for some reason.  killing the newlines helps with inline-block items 
+      page = page.to_s.gsub("\n", "")
+
+      # TODO should also properly handle unicode such as \u0092 => '
+    end
 end
