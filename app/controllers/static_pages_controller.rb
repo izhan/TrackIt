@@ -36,22 +36,22 @@ class StaticPagesController < ApplicationController
         # base href tag needed for relative links to work
         base = Nokogiri::XML::Node.new "base", @page
         base['href'] = website_file.base_uri.to_s # not guaranteed to be same as the url param because of url redirection
-        @page.at_css('head').add_child(base)
+        @page.at_css('head').children.first.add_previous_sibling(base)
 
-        # getting rid of all relative javascript links
-        @page.css('script').each do |d|
-          if d.attribute('src')
-            d['src'] = Addressable::URI.join(root_url, d.attribute('src'))
-          end
-          # gets rid of anything that matches "/..." or '/...' but not "//..." or '//...'  Probably not needed....
-          # d.content = d.content.gsub(/'\/[^\/](.+)'/, '"jcrew.com/\1"').gsub(/"\/[^\/](.+)"/, '"jcrew.com/\1"')
-        end
-        # getting rid of all relative css links
-        @page.css('link').each do |d|
-          if d.attribute('href')
-            d['href'] = Addressable::URI.join(root_url, d.attribute('href'))
-          end
-        end
+        # # getting rid of all relative javascript links
+        # @page.css('script').each do |d|
+        #   if d.attribute('src')
+        #     d['src'] = Addressable::URI.join(root_url, d.attribute('src'))
+        #   end
+        #   # gets rid of anything that matches "/..." or '/...' but not "//..." or '//...'  Probably not needed....
+        #   # d.content = d.content.gsub(/'\/[^\/](.+)'/, '"jcrew.com/\1"').gsub(/"\/[^\/](.+)"/, '"jcrew.com/\1"')
+        # end
+        # # getting rid of all relative css links
+        # @page.css('link').each do |d|
+        #   if d.attribute('href')
+        #     d['href'] = Addressable::URI.join(root_url, d.attribute('href'))
+        #   end
+        # end
 
       rescue
         puts $!, $@
