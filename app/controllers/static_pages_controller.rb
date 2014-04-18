@@ -7,6 +7,9 @@ class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
 
   def home
+    puts "poop"
+    puts request.headers['HTTP_USER_AGENT']
+    puts request.headers.inspect
     if signed_in?
       redirect_to dashboard_path
     end
@@ -22,7 +25,10 @@ class StaticPagesController < ApplicationController
     if url
       begin
         sanitized_url = add_http(url)
-        website_file = open(sanitized_url, :allow_redirections => :all)
+        website_file = open(sanitized_url, 
+          :allow_redirections => :all,
+          "User-Agent" => request.headers['HTTP_USER_AGENT']
+        )
         @page = Nokogiri::HTML(website_file)
 
         root_url = Addressable::URI.parse(sanitized_url).scheme + "://" + Addressable::URI.parse(sanitized_url).host
@@ -52,6 +58,9 @@ class StaticPagesController < ApplicationController
         flash.now[:danger] = "Sorry, please try again"
       end
     end
+
+    # recreate
+    render :layout => false
   end
 
   def dashboard
