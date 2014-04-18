@@ -17,7 +17,11 @@ class StaticPagesController < ApplicationController
   def scraper
     url = params[:url]
     if url
-      @page = Nokogiri::HTML(open(add_http(url)))
+      begin
+        @page = Nokogiri::HTML(open(add_http(url)))
+      rescue
+        flash.now[:danger] = "Sorry, please try again"
+      end
     end
   end
 
