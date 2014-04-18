@@ -67,6 +67,8 @@ gem "slowweb"
 gem "amazon-ecs"
 # for amazon gem plus scraping for later
 gem "nokogiri"
+# for redirecting pages like jcrew.com
+gem "open_uri_redirections"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
