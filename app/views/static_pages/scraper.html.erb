@@ -1,0 +1,14 @@
+<% if @page %>
+
+<%=raw @page %>
+
+<% else %>
+
+scraper.html.erb
+<%= form_tag("/scraper", method: "get") do %>
+  <%= label_tag(:url, "Search for:") %>
+  <%= text_field_tag(:url) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% end %>
