@@ -48,10 +48,11 @@
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
-<%= # @note xpath algorithm is from http://stackoverflow.com/questions/2661818/javascript-get-xpath-of-a-node %>
+<% # @note xpath algorithm is from http://stackoverflow.com/questions/2661818/javascript-get-xpath-of-a-node %>
 <script>
 var potato;
 var scrapedPrice;
+var SCRAPER_PRICE_REGEX = /^((sale|saleprice|price|US|USD)(:|-)?)?\$?(\d+(,\d{3})*(\.\d{2})?)?$/i
 jq111 = jQuery.noConflict(true);
 
 // must be on load unfortunately....
@@ -104,14 +105,15 @@ jq111(window).load(function(){
           break;
         }
       }
-      // validates whether it is a price
-      if (hasText && text.replace(/\s/g, "").search(/^\$?\d+(,\d{3})*(\.\d*)?$/) != -1)
+      // validates whether it is a price.  detects string sale, sale price, price, (case insensitive)
+      if (hasText && text.replace(/\s/g, "").search(SCRAPER_PRICE_REGEX) != -1)
       {
+        var clean_price = text.replace(/\s/g, "").match(SCRAPER_PRICE_REGEX)[4].replace(",", "");
         jq111(scrapedPrice).removeClass('chicken sandwich');
         scrapedPrice = this;
         console.log(createXPathFromElement(this));
         potato = this;
-        jq111('#scraper-current-price').text(text);
+        jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');
         event.stopPropagation()
       }
