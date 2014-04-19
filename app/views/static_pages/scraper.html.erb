@@ -4,21 +4,26 @@
 <%=raw @page %>
 
 <style>
-  .dudeee {
+  .chicken {
     background-color: red!important;
+  }
+  .sandwich, .chicken.sandwich {
+    background-color: yellow!important;
   }
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 var potato;
+jq111 = jQuery.noConflict(true);
 
-$(document).ready(function(){
+// must be on load unfortunately....
+jq111(window).load(function(){
   // use mouseover because fires more when child goes to parent
-  $('*:not(body, script, style)').on("mouseover", function(event){
-    $(potato).removeClass('dudeee');
-    var text = $(this).text();
-    contents = $(this).contents();
+  jq111('*:not(body, script, style)').on("mouseover", function(event){
+    jq111(potato).removeClass('chicken');
+    var text = jq111(this).text();
+    contents = jq111(this).contents();
 
     // make sure that at least the children have text
     if (text.trim() != '') {
@@ -35,7 +40,37 @@ $(document).ready(function(){
       if (hasText)
       {
         potato = this;
-        $(this).addClass('dudeee');
+        jq111(this).addClass('chicken');
+        event.stopPropagation()
+      }
+    }
+  });
+  // use mouseover because fires more when child goes to parent
+  jq111('*:not(body, script, style)').on("click", function(event){
+    event.preventDefault();
+    jq111(potato).removeClass('chicken');
+    var text = jq111(this).text();
+    contents = jq111(this).contents();
+
+    // make sure that at least the children have text
+    if (text.trim() != '') {
+      var hasText = false;
+      // making sure this thing actually does contain text
+      for (var i = 0; i < contents.length; i++)
+      {
+        // is it a text node?  and also not just whitespace?
+        if (contents[i].nodeType == 3 && contents[i].nodeValue.trim() != ''){
+          hasText = true;
+          break;
+        }
+      }
+      // validates whether it is a price
+      if (hasText && text.replace(/\s/g, "").search(/^\$?\d+(,\d{3})*(\.\d*)?$/) != -1)
+      {
+        potato = this;
+        jq111(this).addClass('chicken');
+        jq111(this).addClass('sandwich');
+        alert("Is the price " + text.replace(/\s/g, "") + "?");
         event.stopPropagation()
       }
     }
@@ -59,9 +94,6 @@ $(document).ready(function(){
   });
 });
 </script>
-<style>
-</style>
-
 <% else %>
 
 scraper.html.erb
