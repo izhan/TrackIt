@@ -58,7 +58,7 @@ class StaticPagesController < ApplicationController
         # end
 
         # prepares for display
-        @page = clean_page(@page)
+        # @page = clean_page(@page)
 
         # recreate the webpage EXACTLY
         render :layout => false
@@ -78,7 +78,7 @@ class StaticPagesController < ApplicationController
 
   private
     def clean_page(page)
-      # nokogiri adds newlines for some reason.  killing the newlines helps with inline-block items 
+      # nokogiri adds newlines for some reason.  killing the newlines helps with inline-block items.  on second thought....not a great idea
       page = page.to_s.gsub("\n", "")
 
       # TODO should also properly handle unicode such as \u0092 => '
