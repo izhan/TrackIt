@@ -8,7 +8,7 @@ class ScraperController < ApplicationController
     url = params[:url]
     if url
       begin
-        sanitized_url = add_http(url)
+        sanitized_url = add_http_and_clean(url)
         # TODO, add more headers?
         website_file = open(sanitized_url, 
           :allow_redirections => :all,
@@ -55,7 +55,8 @@ class ScraperController < ApplicationController
 
       rescue
         puts $!, $@
-        flash.now[:danger] = "Sorry, please try again"
+        flash[:danger] = "Sorry, please try again"
+        redirect_to scraper_path
       end
     else
       redirect_to scraper_path
