@@ -1,6 +1,66 @@
 <% if @page %>
 
+
 <%=raw @page %>
+
+<style>
+  .dudeee {
+    background-color: red!important;
+  }
+</style>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+var potato;
+
+$(document).ready(function(){
+  // use mouseover because fires more when child goes to parent
+  $('*:not(body, script, style)').on("mouseover", function(event){
+    $(potato).removeClass('dudeee');
+    var text = $(this).text();
+    contents = $(this).contents();
+
+    // make sure that at least the children have text
+    if (text.trim() != '') {
+      var hasText = false;
+      // making sure this thing actually does contain text
+      for (var i = 0; i < contents.length; i++)
+      {
+        // is it a text node?  and also not just whitespace?
+        if (contents[i].nodeType == 3 && contents[i].nodeValue.trim() != ''){
+          hasText = true;
+          break;
+        }
+      }
+      if (hasText)
+      {
+        potato = this;
+        $(this).addClass('dudeee');
+        event.stopPropagation()
+      }
+    }
+
+    // var text = $(this).text()
+    // // not empty and looks like money.  
+    // if text.trim() != '' && text.replace(/\s/g, "").search(/^\$?\d+(,\d{3})*(\.\d*)?$/) != -1
+    // {
+    //   // if parent has text node AND is also valid, then there must be more digits...abort!
+
+    //   // must contain at least some of the text
+    //   var contents = $(this).contents();
+    //   var doesContain = false;
+    //   for (var i = 0; i < contents.length; i++)
+    //   {
+    //     // is it a text node?  and also not just whitespace?
+    //     if (contents[i].nodeType == 3 && contents[i].nodeValue.trim() == '')
+    //       doesContain = true;
+    //   }
+    // }
+  });
+});
+</script>
+<style>
+</style>
 
 <% else %>
 

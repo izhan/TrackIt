@@ -53,6 +53,10 @@ class StaticPagesController < ApplicationController
         #   end
         # end
 
+        # @page.search('//text()').each do |node|
+        #   node.content = "YOLO"
+        # end
+
         # prepares for display
         @page = clean_page(@page)
 
