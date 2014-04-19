@@ -60,6 +60,8 @@ class StaticPagesController < ApplicationController
         # prepares for display
         # @page = clean_page(@page)
 
+        #@page.xpath('//*[@id="priceblock-wrapper-wrapper"]/div/div/div[2]')
+
         # recreate the webpage EXACTLY
         render :layout => false
 
