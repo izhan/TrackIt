@@ -19,6 +19,7 @@ TrackIt::Application.routes.draw do
   get 'contact', to: 'static_pages#contact'
   get 'dashboard', to: 'static_pages#dashboard'
   get 'scraper', to: 'scraper#scraper'
+  get 'results', to: 'scraper#results'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

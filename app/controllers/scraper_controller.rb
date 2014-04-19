@@ -1,6 +1,10 @@
 class ScraperController < ApplicationController
   include ScraperHelper
+
   def scraper
+  end
+
+  def results
     url = params[:url]
     if url
       begin
@@ -53,6 +57,8 @@ class ScraperController < ApplicationController
         puts $!, $@
         flash.now[:danger] = "Sorry, please try again"
       end
+    else
+      redirect_to scraper_path
     end
   end
 
