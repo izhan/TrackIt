@@ -2,6 +2,7 @@
 <style>
   .chicken {
     background-color: red!important;
+    cursor: pointer;
   }
   .sandwich, .chicken.sandwich {
     background-color: yellow!important;
@@ -15,7 +16,7 @@
     background: #000;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 998;
     top: 0;
     left: 0;
     position: fixed;
@@ -24,7 +25,9 @@
     padding-top: 80px!important;
   }
   #scraper-toolbar {
-    position: absolute;
+    position: fixed;
+    z-index: 999;
+    background: #eee;
     left: 0;
     right: 0;
     height: 80px;
@@ -35,16 +38,18 @@
     box-sizing: border-box;
   }
 </style>
-<div id="scraper-toolbar" class="scraper-no-touch">
-  <%= link_to "Go back", scraper_path, class:"scraper-no-touch" %> Selected price: <span class="scraper-current-price"></span>
+<div id="scraper-toolbar" class="scraper-immune">
+  <!-- must be harded coded for now because of modifications to base -->
+  <%= link_to "Go back", "#{root_url}scraper" %> Selected price: <span id="scraper-current-price"></span>
 </div>
-<div id="scraper-loading-div" class="scraper-no-touch">Loading...please wait</div>
+<div id="scraper-loading-div" class="scraper-immune">Loading...please wait</div>
 
 <%=raw @page %>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 var potato;
+var scrapedPrice;
 jq111 = jQuery.noConflict(true);
 
 // must be on load unfortunately....
@@ -53,7 +58,7 @@ jq111(window).load(function(){
   jq111('#scraper-loading-div').hide();
 
   // use mouseover because fires more when child goes to parent
-  jq111('*:not(body, script, style, .scraper-no-touch, .scraper-no-touch *)').on("mouseover", function(event){
+  jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("mouseover", function(event){
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
     contents = jq111(this).contents();
@@ -79,7 +84,9 @@ jq111(window).load(function(){
     }
   });
   // use mouseover because fires more when child goes to parent
-  jq111('*:not(body, script, style, .scraper-no-touch)').on("click", function(event){
+  jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("click", function(event){
+    console.log("CLICKED");
+    console.log(this);
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
@@ -100,6 +107,8 @@ jq111(window).load(function(){
       // validates whether it is a price
       if (hasText && text.replace(/\s/g, "").search(/^\$?\d+(,\d{3})*(\.\d*)?$/) != -1)
       {
+        jq111(scrapedPrice).removeClass('chicken sandwich');
+        scrapedPrice = this;
         console.log(createXPathFromElement(this));
         potato = this;
         jq111('#scraper-current-price').text(text);
