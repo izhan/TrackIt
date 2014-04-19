@@ -47,6 +47,8 @@
 <%=raw @page %>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<%= # @note xpath algorithm is from http://stackoverflow.com/questions/2661818/javascript-get-xpath-of-a-node %>
 <script>
 var potato;
 var scrapedPrice;
@@ -85,8 +87,6 @@ jq111(window).load(function(){
   });
   // use mouseover because fires more when child goes to parent
   jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("click", function(event){
-    console.log("CLICKED");
-    console.log(this);
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
@@ -118,7 +118,6 @@ jq111(window).load(function(){
     }
   });
 
-  // from http://stackoverflow.com/questions/2661818/javascript-get-xpath-of-a-node
   function createXPathFromElement(elm) { 
     var allNodes = document.getElementsByTagName('*'); 
     var segs = []
