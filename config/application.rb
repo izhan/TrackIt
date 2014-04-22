@@ -22,6 +22,8 @@ module TrackIt
     # config.i18n.default_locale = :de
 
     # TODO move this to specific controllers
-    config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
+    config.action_dispatch.default_headers = {
+        'X-Frame-Options' => 'ALLOWALL'
+    }
   end
 end
