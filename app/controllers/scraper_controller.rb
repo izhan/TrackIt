@@ -12,8 +12,8 @@ class ScraperController < ApplicationController
         sanitized_url = add_http_and_clean(url)
         # TODO, add more headers?
         website_file = open(sanitized_url, 
-          :allow_redirections => :all,
-          "User-Agent" => request.headers['HTTP_USER_AGENT']
+          :allow_redirections => :all
+          # "User-Agent" => request.headers['HTTP_USER_AGENT'] # maybe shouldn't use this so we dont have to store user agent
         )
 
         @page = Nokogiri::HTML(website_file)

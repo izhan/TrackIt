@@ -5,6 +5,7 @@ require 'amazon/ecs'
 class Product < ActiveRecord::Base
   include ProductTrackerHelper
   include ApiHelper
+  include ScraperHelper
 
   attr_accessor :input_price
 
@@ -25,7 +26,7 @@ class Product < ActiveRecord::Base
 
   def update_details
     if self.api == "scrape"
-      # TODO hould scrape the website
+      # TODO should handle this
       self.current_price = 50000
       self.name = "Updated Temporary Scraping Holder"
       self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
@@ -55,10 +56,41 @@ class Product < ActiveRecord::Base
       self.api = categorize_api(host)
 
       if self.api == "scrape"
-        # TODO hould scrape the website
-        self.current_price = 100000
-        self.name = "Temporary Scraping Holder"
-        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
+        # should follow exactly the results page
+        begin
+          sanitized_url = add_http_and_clean(self.url)
+          # TODO, add more headers?
+          website_file = open(sanitized_url, 
+            :allow_redirections => :all
+          )
+
+          @page = Nokogiri::HTML(website_file)
+          @page.encoding = 'UTF-8'
+
+          # for now, dont worry about javascript execution
+          xpath_price = @page.xpath(self.xpath)
+          # get rid of everything else
+          # reminder: js regex is /^((sale|saleprice|price|US|USD)(:|-)?)?\$?(\d+(,\d{3})*(\.\d{2})?)?$/i
+          # also removes all commas and whitespace
+          xpath_price = xpath_price.text
+          if !xpath_price.include?(".")
+            xpath_price = xpath_price + ".00"
+          end
+          xpath_price = xpath_price.gsub(/\s+/, "").gsub("sale", "").gsub("price", "").gsub("US", "").gsub("USD", "").gsub(":", "").gsub("-", "").gsub(",", "").gsub(".", "").gsub("$", "")
+          
+          if xpath_price == self.input_price
+            self.current_price = self.input_price
+            self.name = "Scraped: " + self.url
+            self.thumbnail = "http://www.pitt.edu/~btb25/happycat.jpg"
+          else
+            logger.debug "prices didn't match"
+            errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
+          end
+        rescue
+          logger.debug "nokogiri scraping failed"
+          puts $!, $@
+          errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
+        end
       # handle known urls here
       elsif self.api == "bestbuy"
         handle_bestbuy()
