@@ -25,6 +25,6 @@ class TrackersController < ApplicationController
   private
 
     def tracker_params
-      params.require(:tracker).permit(:url)
+      params.require(:tracker).permit(:url, :xpath, :input_price) # TODO security flaw?
     end
 end

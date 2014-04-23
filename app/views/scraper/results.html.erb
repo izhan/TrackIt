@@ -46,6 +46,12 @@
 
 <%=raw @page %>
 
+<%= form_for(@tracker) do |f| %>
+  <%= f.hidden_field :url %>
+  <%= f.hidden_field :xpath %>
+  <%= f.hidden_field :input_price %>
+<% end %>
+
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <% # @note xpath algorithm is from http://stackoverflow.com/questions/2661818/javascript-get-xpath-of-a-node %>

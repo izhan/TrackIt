@@ -7,6 +7,8 @@ class Tracker < ActiveRecord::Base
   default_scope { order('created_at DESC') }
 
   attr_accessor :url
+  attr_accessor :xpath
+  attr_accessor :input_price
 
   belongs_to :user
   belongs_to :product
@@ -50,6 +52,7 @@ class Tracker < ActiveRecord::Base
           self.url = standarize_amazon_url(temp_url)
         end
       rescue
+        # TODO any error handling here?
       end
       if Product.where(url: clean_url(self.url)).blank?
         some_product = Product.create(url: self.url)

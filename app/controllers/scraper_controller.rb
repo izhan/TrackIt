@@ -5,6 +5,8 @@ class ScraperController < ApplicationController
   end
 
   def results
+    @tracker = Tracker.new
+
     url = params[:url]
     if url
       begin
