@@ -25,7 +25,8 @@ class ScraperController < ApplicationController
         base = Nokogiri::XML::Node.new "base", @page
         base['href'] = website_file.base_uri.to_s # not guaranteed to be same as the url param because of url redirection
         @page.at_css('head').children.first.add_previous_sibling(base)
-        @page.search('body').add_class("scraper-result-body")
+        # TODO maybe this isnt needed...
+        # @page.search('body').add_class("scraper-result-body")
 
         # # getting rid of all relative javascript links
         # @page.css('script').each do |d|

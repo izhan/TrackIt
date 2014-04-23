@@ -21,7 +21,7 @@
     left: 0;
     position: fixed;
   }
-  body.scraper-result-body {
+  body {
     padding-top: 80px!important;
   }
   #scraper-toolbar {
@@ -62,32 +62,35 @@ function createXPathFromElement(elm) {
   var segs = []
   for (; elm && elm.nodeType == 1; elm = elm.parentNode) 
   { 
-      if (elm.hasAttribute('id')) { 
-              var uniqueIdCount = 0; 
-              for (var n=0;n < allNodes.length;n++) { 
-                  if (allNodes[n].hasAttribute('id') && allNodes[n].id == elm.id) uniqueIdCount++; 
-                  if (uniqueIdCount > 1) break; 
-              }; 
-              if ( uniqueIdCount == 1) { 
-                  segs.unshift('id("' + elm.getAttribute('id') + '")'); 
-                  return segs.join('/'); 
-              } else { 
-                  segs.unshift(elm.localName.toLowerCase() + '[@id="' + elm.getAttribute('id') + '"]'); 
-              } 
-      } else if (elm.hasAttribute('class')) { 
-          segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]'); 
-      } else { 
-          for (i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 
-              if (sib.localName == elm.localName)  i++; }; 
-              segs.unshift(elm.localName.toLowerCase() + '[' + i + ']'); 
+    if (elm.hasAttribute('id')) { 
+      var uniqueIdCount = 0; 
+      for (var n=0;n < allNodes.length;n++) { 
+        if (allNodes[n].hasAttribute('id') && allNodes[n].id == elm.id) uniqueIdCount++; 
+        if (uniqueIdCount > 1) break; 
       }; 
+      if ( uniqueIdCount == 1) { 
+        segs.unshift('id("' + elm.getAttribute('id') + '")'); 
+        return segs.join('/'); 
+      } else { 
+        segs.unshift(elm.localName.toLowerCase() + '[@id="' + elm.getAttribute('id') + '"]'); 
+      } 
+    } 
+    else if (elm.hasAttribute('class')) { 
+      for (var i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 
+        if (sib.className == elm.getAttribute('class'))  i++;  // counting number of same class
+      }; 
+      // also adding in index for good measure
+      // TODO this will probably not be always right because lack of parenthesis
+      segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]' + '[' + i + ']'); 
+    } 
+    else { 
+      for (var i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 
+        if (sib.localName == elm.localName)  i++; 
+      }; 
+      segs.unshift(elm.localName.toLowerCase() + '[' + i + ']'); 
+    }; 
   }; 
   return segs.length ? '/' + segs.join('/') : null; 
-}; 
-function lookupElementByXPath(path) { 
-    var evaluator = new XPathEvaluator(); 
-    var result = evaluator.evaluate(path, document.documentElement, null,XPathResult.FIRST_ORDERED_NODE_TYPE, null); 
-    return  result.singleNodeValue; 
 };
 
 var potato;
@@ -97,6 +100,9 @@ jq111 = jQuery.noConflict(true);
 
 // must be on load unfortunately....
 jq111(window).load(function(){
+  // TODO should need this sometime soon... for IE 9 -
+  // xml.setProperty("SelectionLanguage","XPath");
+
   // activate submit button
   jq111('#scraper-submit').on("click", function(){
     jq111('#new_tracker').submit();
@@ -164,6 +170,7 @@ jq111(window).load(function(){
         potato = this;
         scrapedPrice = this;
         jq111('#tracker_xpath').val(createXPathFromElement(this));
+        console.log(createXPathFromElement(this));
         jq111('#tracker_input_price').val(clean_price.replace(".", ""));
         jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');

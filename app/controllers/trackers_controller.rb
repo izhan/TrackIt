@@ -4,9 +4,6 @@ class TrackersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    puts "CREATION"
-    puts tracker_params
-    puts tracker_params.inspect
     @tracker = current_user.trackers.new(tracker_params)
     if @tracker.save
       flash[:success] = "Tracker added!"

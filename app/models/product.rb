@@ -76,7 +76,7 @@ class Product < ActiveRecord::Base
           if !xpath_price.include?(".")
             xpath_price = xpath_price + ".00"
           end
-          xpath_price = xpath_price.gsub(/\s+/, "").gsub("sale", "").gsub("price", "").gsub("US", "").gsub("USD", "").gsub(":", "").gsub("-", "").gsub(",", "").gsub(".", "").gsub("$", "")
+          xpath_price = xpath_price.gsub(/\s+/, "").gsub(/(sale)/i, "").gsub(/(price)/i, "").gsub(/(US)/i, "").gsub(/(USD)/i, "").gsub(":", "").gsub("-", "").gsub(",", "").gsub(".", "").gsub("$", "")
           
           if xpath_price == self.input_price
             self.current_price = self.input_price
@@ -84,6 +84,8 @@ class Product < ActiveRecord::Base
             self.thumbnail = "http://www.pitt.edu/~btb25/happycat.jpg"
           else
             logger.debug "prices didn't match"
+            logger.debug "expected: " + self.input_price
+            logger.debug "got: " + xpath_price
             errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
           end
         rescue
