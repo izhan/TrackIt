@@ -34,7 +34,7 @@ def update_api
       p.save
       # notify all users
       p.trackers.each do |t|
-        if t.alert_price < p.current_price
+        if p.current_price < t.alert_price
           AlertMailer.alert_email(t.user, t).deliver
         end
       end
