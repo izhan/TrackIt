@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404025016) do
+ActiveRecord::Schema.define(version: 20140423031438) do
 
   create_table "products", force: true do |t|
     t.string   "url"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140404025016) do
     t.string   "thumbnail"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "xpath"
   end
 
   create_table "trackers", force: true do |t|

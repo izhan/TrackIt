@@ -55,7 +55,7 @@ class Tracker < ActiveRecord::Base
         # TODO any error handling here?
       end
       if Product.where(url: clean_url(self.url)).blank?
-        some_product = Product.create(url: self.url)
+        some_product = Product.create(url: self.url, xpath: self.xpath, input_price: self.input_price)
       else
         some_product = Product.where(url: clean_url(self.url)).first
       end

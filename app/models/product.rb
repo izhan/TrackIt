@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
   include ProductTrackerHelper
   include ApiHelper
 
+  attr_accessor :input_price
+
   validates :thumbnail, presence: true # not sure if we need to validate thumbnail
   validates :api, presence: true
   validates :name, presence: true

@@ -11,12 +11,12 @@ describe "for best buy api", api: true, bestbuy: true do
 
   describe "for valid url" do
     before do
-      @product = Product.new(url: "http://www.bestbuy.com/site/40-channel-compact-cb-radio/9044321.p?id=1218012121855&skuId=9044321&st=categoryid$abcat0302011&cp=1&lp=1")
+      @product = Product.new(url: "http://www.bestbuy.com/site/playstation-3-gaming-console/5276086.p?id=1219117626904&skuId=5276086&st=ps3&cp=1&lp=3")
       @product.save
     end
 
     it "should parse the url and gather right info about product" do
-      @product.url.should ==  "bestbuy.com/site/40-channel-compact-cb-radio/5276086.p"
+      @product.url.should ==  "bestbuy.com/site/playstation-3-gaming-console/5276086.p"
       @product.api.should ==  "bestbuy"
       #@product.current_price.should ==  6499
       @product.name.should ==  "Sony - PlayStation 3 Gaming Console"
