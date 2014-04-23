@@ -49,6 +49,7 @@
 <%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
   <%= f.hidden_field :xpath %>
   <%= f.hidden_field :input_price %>
+  <%= f.hidden_field :url, value: params[:url] %>
   <%= f.submit "start tracking" %>
 <% end %>
 
@@ -128,7 +129,6 @@ jq111(window).load(function(){
   });
   // use mouseover because fires more when child goes to parent
   jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("click", function(event){
-    console.log("lol clicked");
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
@@ -150,11 +150,16 @@ jq111(window).load(function(){
       if (hasText && text.replace(/\s/g, "").search(SCRAPER_PRICE_REGEX) != -1)
       {
         var clean_price = text.replace(/\s/g, "").match(SCRAPER_PRICE_REGEX)[4].replace(",", "");
+        // adding 00 if needed
+        if (clean_price.indexOf(".") == -1)
+        {
+          clean_price = clean_price + ".00";
+        }
         jq111(scrapedPrice).removeClass('chicken sandwich');
+        potato = this;
         scrapedPrice = this;
         jq111('#tracker_xpath').val(createXPathFromElement(this));
         jq111('#tracker_input_price').val(clean_price.replace(".", ""));
-        potato = this;
         jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');
         event.stopPropagation()
