@@ -26,10 +26,7 @@ class Product < ActiveRecord::Base
 
   def update_details
     if self.api == "scrape"
-      # TODO should handle this
-      self.current_price = 50000
-      self.name = "Updated Temporary Scraping Holder"
-      self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg"
+      handle_scrape()
     # handle known urls here
     elsif self.api == "bestbuy"
       handle_bestbuy()
@@ -56,43 +53,7 @@ class Product < ActiveRecord::Base
       self.api = categorize_api(host)
 
       if self.api == "scrape"
-        # should follow exactly the results page
-        begin
-          sanitized_url = add_http_and_clean(self.url)
-          # TODO, add more headers?
-          website_file = open(sanitized_url, 
-            :allow_redirections => :all
-          )
-
-          @page = Nokogiri::HTML(website_file)
-          @page.encoding = 'UTF-8'
-
-          # for now, dont worry about javascript execution
-          xpath_price = @page.xpath(self.xpath)
-          # get rid of everything else
-          # reminder: js regex is /^((sale|saleprice|price|US|USD)(:|-)?)?\$?(\d+(,\d{3})*(\.\d{2})?)?$/i
-          # also removes all commas and whitespace
-          xpath_price = xpath_price.text
-          if !xpath_price.include?(".")
-            xpath_price = xpath_price + ".00"
-          end
-          xpath_price = xpath_price.gsub(/\s+/, "").gsub(/(sale)/i, "").gsub(/(price)/i, "").gsub(/(US)/i, "").gsub(/(USD)/i, "").gsub(":", "").gsub("-", "").gsub(",", "").gsub(".", "").gsub("$", "")
-          
-          if xpath_price == self.input_price
-            self.current_price = self.input_price
-            self.name = "Scraped: " + self.url
-            self.thumbnail = "http://www.pitt.edu/~btb25/happycat.jpg"
-          else
-            logger.debug "prices didn't match"
-            logger.debug "expected: " + self.input_price
-            logger.debug "got: " + xpath_price
-            errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
-          end
-        rescue
-          logger.debug "nokogiri scraping failed"
-          puts $!, $@
-          errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
-        end
+        handle_scrape()
       # handle known urls here
       elsif self.api == "bestbuy"
         handle_bestbuy()
@@ -163,6 +124,53 @@ class Product < ActiveRecord::Base
         self.name = self.url
         self.current_price = 100
         self.thumbnail = "http://ah.novartis.com.au/verve/_resources/Companion_cat_thumbnail.gif"
+      end
+    end
+
+    def handle_scrape
+      # should follow exactly the results page
+      begin
+        sanitized_url = add_http_and_clean(self.url)
+        # TODO, add more headers?
+        website_file = open(sanitized_url, 
+          :allow_redirections => :all
+        )
+
+        @page = Nokogiri::HTML(website_file)
+        @page.encoding = 'UTF-8'
+
+        # for now, dont worry about javascript execution
+        xpath_price = @page.xpath(self.xpath)
+        # get rid of everything else
+        # reminder: js regex is /^((sale|saleprice|price|US|USD)(:|-)?)?\$?(\d+(,\d{3})*(\.\d{2})?)?$/i
+        # also removes all commas and whitespace
+        xpath_price = xpath_price.text
+        if !xpath_price.include?(".")
+          xpath_price = xpath_price + ".00"
+        end
+        xpath_price = xpath_price.gsub(/\s+/, "").gsub(/(sale)/i, "").gsub(/(price)/i, "").gsub(/(US)/i, "").gsub(/(USD)/i, "").gsub(":", "").gsub("-", "").gsub(",", "").gsub(".", "").gsub("$", "")
+        
+        # on first creation
+        if self.input_price 
+          if xpath_price == self.input_price
+            self.current_price = xpath_price
+            self.name = "Scraped: " + self.url
+            self.thumbnail = "http://www.pitt.edu/~btb25/happycat.jpg"
+          else
+            logger.debug "prices didn't match"
+            logger.debug "expected: " + self.input_price
+            logger.debug "got: " + xpath_price
+            errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
+          end
+        else
+          self.current_price = xpath_price
+          self.name = "Scraped: " + self.url
+          self.thumbnail = "http://www.pitt.edu/~btb25/happycat.jpg"
+        end
+      rescue
+        logger.debug "nokogiri scraping failed"
+        puts $!, $@
+        errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
       end
     end
 end
