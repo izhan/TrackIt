@@ -5,9 +5,8 @@ class ScraperController < ApplicationController
   end
 
   def results
-    @tracker = Tracker.new
-
     url = params[:url]
+    @tracker = Tracker.new(url: url)
     if url
       begin
         sanitized_url = add_http_and_clean(url)

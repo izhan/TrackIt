@@ -46,10 +46,10 @@
 
 <%=raw @page %>
 
-<%= form_for(@tracker) do |f| %>
-  <%= f.hidden_field :url %>
+<%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
   <%= f.hidden_field :xpath %>
   <%= f.hidden_field :input_price %>
+  <%= f.submit "start tracking" %>
 <% end %>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -128,6 +128,7 @@ jq111(window).load(function(){
   });
   // use mouseover because fires more when child goes to parent
   jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("click", function(event){
+    console.log("lol clicked");
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
@@ -151,7 +152,8 @@ jq111(window).load(function(){
         var clean_price = text.replace(/\s/g, "").match(SCRAPER_PRICE_REGEX)[4].replace(",", "");
         jq111(scrapedPrice).removeClass('chicken sandwich');
         scrapedPrice = this;
-        console.log(createXPathFromElement(this));
+        jq111('#tracker_xpath').val(createXPathFromElement(this));
+        jq111('#tracker_input_price').val(clean_price.replace(".", ""));
         potato = this;
         jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');
