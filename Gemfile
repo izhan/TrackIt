@@ -69,6 +69,8 @@ gem "amazon-ecs"
 gem "nokogiri"
 # for redirecting pages like jcrew.com
 gem "open_uri_redirections"
+# for scheduling rake tasks
+gem 'whenever', :require => false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
