@@ -16,6 +16,7 @@
   <%= text_field_tag "search", nil, id: "search-tracker" %>
   <%= submit_tag "search", :name => nil, id: "search-trackers" %>
 </p>
+<%= link_to "Scraper", scraper_path %>
 <div class="dashboard-results">
   <% if @tracker_list.any? %>
     <ul class="trackers">

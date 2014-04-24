@@ -17,6 +17,7 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
+# TODO needed?
 set :environment, "development"
 
 every :hour do

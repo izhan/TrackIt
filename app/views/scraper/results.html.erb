@@ -16,7 +16,7 @@
     background: #000;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 9999;
     top: 0;
     left: 0;
     position: fixed;
@@ -26,7 +26,7 @@
   }
   #scraper-toolbar {
     position: fixed;
-    z-index: 998;
+    z-index: 9998;
     background: #eee;
     left: 0;
     right: 0;
@@ -37,21 +37,30 @@
     padding-top: 15px;
     box-sizing: border-box;
   }
+  #scraper-selection {
+    display: inline-block;
+    width: 300px;
+    text-align: left;
+    margin-left: 20px;
+  }
 </style>
 <div id="scraper-toolbar" class="scraper-immune">
   <!-- must be harded coded for now because of modifications to base -->
-  <%= link_to "Go back", "#{root_url}scraper" %> Selected price: <span id="scraper-current-price"></span>
-  <span id="scraper-submit">SUBMIT</span>
+  <%= link_to "Go back", "#{root_url}scraper" %> 
+  <div id="scraper-selection">
+    Selected price: <span id="scraper-current-price"></span>
+  </div>
+  <%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
+    <%= f.hidden_field :xpath %>
+    <%= f.hidden_field :input_price %>
+    <%= f.hidden_field :url, value: params[:url] %>
+    <%= f.submit "SUBMIT" %>
+  <% end %>
 </div>
 <div id="scraper-loading-div" class="scraper-immune">Loading...please wait</div>
 
 <%=raw @page %>
 
-<%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
-  <%= f.hidden_field :xpath %>
-  <%= f.hidden_field :input_price %>
-  <%= f.hidden_field :url, value: params[:url] %>
-<% end %>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -98,15 +107,12 @@ var scrapedPrice;
 var SCRAPER_PRICE_REGEX = /^((sale|saleprice|price|US|USD)(:|-)?)?\$?(\d+(,\d{3})*(\.\d{2})?)?$/i
 jq111 = jQuery.noConflict(true);
 
-// must be on load unfortunately....
-jq111(window).load(function(){
+// before, was jq111(window).load()
+jq111(document).ready(function(){
   // TODO should need this sometime soon... for IE 9 -
   // xml.setProperty("SelectionLanguage","XPath");
 
-  // activate submit button
-  jq111('#scraper-submit').on("click", function(){
-    jq111('#new_tracker').submit();
-  });
+  console.log("document loaded!  scraping stuff active");
 
   // hiding loading page
   jq111('#scraper-loading-div').hide();

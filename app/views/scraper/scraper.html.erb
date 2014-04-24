@@ -1,4 +1,4 @@
-scraper.html.erb
+<%= link_to "Dashboard", dashboard_path %>
 <%= form_tag("/results", method: "get") do %>
   <%= label_tag(:url, "Search for:") %>
   <%= text_field_tag(:url) %>
