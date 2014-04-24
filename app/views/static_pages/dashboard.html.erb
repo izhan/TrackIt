@@ -11,12 +11,14 @@
     <% end %>
   </div>
 </div>
+<br><br>
+<%= link_to "Bookmarklet", bookmarklet_path, class: "btn btn-lg btn-outline-primary btn-outline-inverted" %>
+<%= link_to "Scraper", scraper_path, class: "btn btn-lg btn-outline-primary btn-outline-inverted" %>
 <h1>Your currently tracked products: </h1>
 <p>
   <%= text_field_tag "search", nil, id: "search-tracker" %>
   <%= submit_tag "search", :name => nil, id: "search-trackers" %>
 </p>
-<%= link_to "Scraper", scraper_path %>
 <div class="dashboard-results">
   <% if @tracker_list.any? %>
     <ul class="trackers">
