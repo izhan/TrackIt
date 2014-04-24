@@ -18,5 +18,8 @@ class StaticPagesController < ApplicationController
   def dashboard
     @tracker = Tracker.new
     @tracker_list = current_user.trackers.paginate(page: params[:page])
+    puts "poop"
+    puts params[:tracker_url]
+    @tracker.url = params[:tracker_url] || ""
   end
 end
