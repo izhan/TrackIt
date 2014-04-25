@@ -18,10 +18,10 @@
 # end
 
 # TODO needed?
-set :environment, "development"
+# set :environment, "development"
 
-every :hour do
-  rake "db:update"
-end
+# every :hour do
+#   rake "db:update"
+# end
 
 # Learn more: http://github.com/javan/whenever
