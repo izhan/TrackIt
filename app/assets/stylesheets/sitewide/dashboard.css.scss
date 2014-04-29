@@ -32,6 +32,16 @@
         font-weight: bold;
         padding: 10px;
       }
+      .media-heading:hover {
+        overflow:visible;
+        white-space:normal;
+        background: #f8f8f8;
+        position:relative;
+        z-index: 1;
+        transition:height 0.15s;
+        height: 45%;
+        clear: left;
+      }
       .media-price {
         .price-rise {
           color: red;

@@ -21,6 +21,8 @@
   }
 }
 .btn-outline, .btn-outline-red {
+  border: 1px solid;
+  padding: 0px 5px 1px 5px;
   color: $primary-red;
   border-color: $primary-red;
   &:hover, &:focus {
@@ -49,6 +51,8 @@
     border-color: $dark-blue;
   }
   &.btn-outline-red {
+    border: 1px solid;
+    padding: 0px 5px 1px 5px;
     color: $white;
     background-color: $primary-red;
     border-color: $primary-red;
