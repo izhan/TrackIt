@@ -1,15 +1,15 @@
-<li>
+<li class= "col-xs-12 col-sm-6 col-md-4 col-lg-4">
   <div class="media">
+    <h4 class="media-wrapper-heading media-heading"><%=tracker.name %></h4>
     <div class="thumbnail-wrapper pull-left" style="background-image:url('<%= tracker.product.thumbnail || "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg" %>');"></div>
     <div class="media-body">
-      <h4 class="media-wrapper-heading media-heading"><%=tracker.name %></h4>
       <div class ="media-price">
         <span class="<%= price_class(tracker) %>">Current: $<%= to_dollars(tracker.product.current_price) %></span>
       </div>
       <div class="media-price">
        <span>Original: $<%= to_dollars(tracker.original_price) %></span>
       </div>
-      <div class="media-buttons">
+      <div class="media-buttons pull-left">
         <%= link_to "purchase", "http://"+tracker.product.url, :target=> "_blank", class: "btn btn-outline-default btn-outline-primary btn-outline-inverted center" %>
         <%= link_to "remove", tracker, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-default btn-outline-red btn-outline-inverted center" %>  
       </div>

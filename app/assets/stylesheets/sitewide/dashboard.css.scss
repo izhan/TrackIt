@@ -1,6 +1,8 @@
 @import "variables";
 .trackers {
   li {
+    display: inline-block;
+
     margin-top: 40px;
     margin-bottom: 20px;
     list-style-type: none;
@@ -12,16 +14,23 @@
       background-size: contain;
     }
     .media {
-      padding: 25px;
+      padding: 10px;
       background: $gray-blue;
-      margin-bottom: 20px;
-      border-radius: 8px; 
+      margin-bottom: 10px;
+      border-radius: 4px;
+      height: 200px; 
       .media-body {
         padding: 10px;
       }
       .media-heading {
+        line-height: 20px;
+        height: 40px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow:hidden;
         font-size: 18px;
         font-weight: bold;
+        padding: 10px;
       }
       .media-price {
         .price-rise {
@@ -36,4 +45,12 @@
       }
     }
   }
+  ul {
+    -moz-column-gap: 20px;
+    -webkit-column-gap: 20px;
+    column-count: 4;
+    column-gap: 20px;
+    display: table;
+  }
 }
+ul > li { display: table-cell; vertical-align: bottom; }
