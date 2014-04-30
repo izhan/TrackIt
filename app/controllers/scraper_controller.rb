@@ -1,9 +1,6 @@
 class ScraperController < ApplicationController
   include ScraperHelper
-
-  def scraper
-  end
-
+  
   def results
     url = params[:url]
     if url
@@ -59,10 +56,10 @@ class ScraperController < ApplicationController
         logger.error e.message
         e.backtrace.each { |line| logger.error line }
         flash[:danger] = "Sorry, please try again"
-        redirect_to scraper_path
+        redirect_to dashboard_path
       end
     else
-      redirect_to scraper_path
+      redirect_to dashboard_path
     end
   end
 
