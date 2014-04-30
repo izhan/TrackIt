@@ -93,7 +93,7 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/b002kaos60"
         @product.api.should == "amazon"
-        @product.current_price.should == 346
+        @product.current_price.should == 361
         @product.name.should == "The Wikipedia Revolution: How a Bunch of Nobodies Created the World's Greatest Encyclopedia"
       end
     end

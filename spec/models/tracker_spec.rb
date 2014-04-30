@@ -7,7 +7,7 @@ describe Tracker do
   it { should respond_to(:product_id) }
   it { should respond_to(:user_id) }
 
-  describe "creating a new tracker", api: true, bestbuy: true, focus: true do
+  describe "creating a new tracker", api: true, bestbuy: true do
     subject { page }
 
     before do

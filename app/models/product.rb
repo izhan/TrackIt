@@ -36,7 +36,7 @@ class Product < ActiveRecord::Base
       handle_example()
     else
     # shouldn't get here
-      puts "ERROR UH OH"
+      logger.debug "ERROR UH OH"
       self.current_price = 100000
       self.name = "Fatal Error Scraping Holder"
       self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
@@ -63,7 +63,7 @@ class Product < ActiveRecord::Base
         handle_example()
       else
         # shouldn't get here
-        puts "ERROR UH OH"
+        logger.debug "ERROR UH OH"
         self.current_price = 100000
         self.name = "Temporary Error Scraping Holder"
         self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
@@ -89,7 +89,7 @@ class Product < ActiveRecord::Base
           end
         rescue
           # for debugging
-          puts $!, $@
+          logger.debug $!, $@
           errors.add(:base, "Best Buy URL Invalid.  Please try again.")
         end
       else
@@ -169,7 +169,7 @@ class Product < ActiveRecord::Base
         end
       rescue
         logger.debug "nokogiri scraping failed"
-        puts $!, $@
+        logger.debug $!, $@
         errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
       end
     end

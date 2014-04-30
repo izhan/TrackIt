@@ -56,7 +56,7 @@ class ScraperController < ApplicationController
         render :layout => false
 
       rescue
-        puts $!, $@
+        logger.debug $!, $@
         flash[:danger] = "Sorry, please try again"
         redirect_to scraper_path
       end
