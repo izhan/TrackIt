@@ -1,9 +1,18 @@
 class TrackersController < ApplicationController
   include ProductTrackerHelper
+  include ApiHelper
 
   before_action :authenticate_user!
 
   def create
+    # redirect to scraper if we don't have an api for it
+    temp_host = get_host(clean_url(tracker_params[:url]))
+    temp_api = categorize_api(temp_host)
+    if temp_api == "scrape"
+      redirect_to results_path url: tracker_params[:url]
+      return
+    end
+
     @tracker = current_user.trackers.new(tracker_params)
     if @tracker.save
       flash[:success] = "Tracker added!"
