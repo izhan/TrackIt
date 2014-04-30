@@ -39,7 +39,7 @@ class Product < ActiveRecord::Base
       puts "ERROR UH OH"
       self.current_price = 100000
       self.name = "Fatal Error Scraping Holder"
-      self.thumbnail = "http://commons.wikimedia.org/wiki/File:No_image_available.svg"
+      self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
     end
   end
 
@@ -66,7 +66,7 @@ class Product < ActiveRecord::Base
         puts "ERROR UH OH"
         self.current_price = 100000
         self.name = "Temporary Error Scraping Holder"
-        self.thumbnail = "http://commons.wikimedia.org/wiki/File:No_image_available.svg"
+        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
       end
     end
 
@@ -123,7 +123,7 @@ class Product < ActiveRecord::Base
       if !self.name
         self.name = self.url
         self.current_price = 100
-        self.thumbnail = "http://commons.wikimedia.org/wiki/File:No_image_available.svg"
+        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
       end
     end
 
@@ -155,7 +155,7 @@ class Product < ActiveRecord::Base
           if xpath_price == self.input_price
             self.current_price = xpath_price
             self.name = "Scraped: " + self.url
-            self.thumbnail = "http://commons.wikimedia.org/wiki/File:No_image_available.svg"
+            self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
           else
             logger.debug "prices didn't match"
             logger.debug "expected: " + self.input_price
@@ -165,7 +165,7 @@ class Product < ActiveRecord::Base
         else
           self.current_price = xpath_price
           self.name = "Scraped: " + self.url
-          self.thumbnail = "http://commons.wikimedia.org/wiki/File:No_image_available.svg
+          self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
         end
       rescue
         logger.debug "nokogiri scraping failed"
