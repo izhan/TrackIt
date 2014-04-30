@@ -55,8 +55,9 @@ class ScraperController < ApplicationController
         # recreate the webpage EXACTLY
         render :layout => false
 
-      rescue
-        logger.debug $!, $@
+      rescue => e
+        logger.error e.message
+        e.backtrace.each { |line| logger.error line }
         flash[:danger] = "Sorry, please try again"
         redirect_to scraper_path
       end

@@ -28,6 +28,33 @@ class Product < ActiveRecord::Base
     if self.api == "scrape"
       handle_scrape()
     # handle known urls here
+  elsif self.api == "bestbuy"
+    handle_bestbuy()
+  elsif self.api == "amazon"
+    handle_amazon()
+  elsif self.api == "example"
+    handle_example()
+  else
+    # shouldn't get here
+    logger.debug "ERROR UH OH"
+    self.current_price = 100000
+    self.name = "Fatal Error Scraping Holder"
+    self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
+  end
+end
+
+private
+BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
+
+def process_url
+  self.url = clean_url(self.url)
+  host = get_host(self.url)
+
+  self.api = categorize_api(host)
+
+  if self.api == "scrape"
+    handle_scrape()
+      # handle known urls here
     elsif self.api == "bestbuy"
       handle_bestbuy()
     elsif self.api == "amazon"
@@ -35,33 +62,6 @@ class Product < ActiveRecord::Base
     elsif self.api == "example"
       handle_example()
     else
-    # shouldn't get here
-      logger.debug "ERROR UH OH"
-      self.current_price = 100000
-      self.name = "Fatal Error Scraping Holder"
-      self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
-    end
-  end
-
-  private
-    BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
-
-    def process_url
-      self.url = clean_url(self.url)
-      host = get_host(self.url)
-
-      self.api = categorize_api(host)
-
-      if self.api == "scrape"
-        handle_scrape()
-      # handle known urls here
-      elsif self.api == "bestbuy"
-        handle_bestbuy()
-      elsif self.api == "amazon"
-        handle_amazon()
-      elsif self.api == "example"
-        handle_example()
-      else
         # shouldn't get here
         logger.debug "ERROR UH OH"
         self.current_price = 100000
@@ -87,9 +87,10 @@ class Product < ActiveRecord::Base
             # TODO should get rid of this in favor of decimal column
             self.current_price = Integer(bestbuy_json["products"][0]["salePrice"].to_s.sub(".", "")) || Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
-        rescue
+        rescue => e
           # for debugging
-          logger.debug $!, $@
+          logger.error e.message
+          e.backtrace.each { |line| logger.error line }
           errors.add(:base, "Best Buy URL Invalid.  Please try again.")
         end
       else
@@ -134,7 +135,7 @@ class Product < ActiveRecord::Base
         # TODO, add more headers?
         website_file = open(sanitized_url, 
           :allow_redirections => :all
-        )
+          )
 
         @page = Nokogiri::HTML(website_file)
         @page.encoding = 'UTF-8'
@@ -167,10 +168,11 @@ class Product < ActiveRecord::Base
           self.name = "Scraped: " + self.url
           self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
         end
-      rescue
-        logger.debug "nokogiri scraping failed"
-        logger.debug $!, $@
+      rescue => e
+        logger.error "nokogiri scraping failed"
+        logger.error e.message
+        e.backtrace.each { |line| logger.error line }
         errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
       end
     end
-end
+  end
