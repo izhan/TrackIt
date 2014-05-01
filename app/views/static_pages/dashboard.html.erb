@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="jumbotron hero-spacer">
-        <h1>Get Thrifting!</h1>
+        <h1>Welcome back!</h1>
         <p style="text-align:center">Paste the URL of the product you want to track below and we'll notify you when it goes on sale.</p>
         <h2 class="form-header">Product URL:</h2>
           <%= bootstrap_form_for(@tracker) do |f| %>
@@ -17,7 +17,8 @@
         <div class="col-lg-12">
             <h3>Your Tracked Items 
               <%= text_field_tag "search", nil, id: "search-tracker" %>
-             <%= submit_tag "search", :name => nil, id: "search-trackers" %> </h3>
+             <%= submit_tag "search", :name => nil, id: "search-trackers" %> </h3><br>
+             <%= link_to "Get the Bookmarklet", bookmarklet_path, class: "btn btn-lg btn-outline-primary btn-outline-inverted" %>
         </div>
     </div>
     <!-- /.row -->
