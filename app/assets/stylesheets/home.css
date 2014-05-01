@@ -1,3 +1,10 @@
 /*
  *= require_tree ../../../vendor/assets/stylesheets/home/.
  */
+
+ /* overrides */
+
+/* this is the retailer section */
+#grey {
+  padding-bottom: 50px;
+}
