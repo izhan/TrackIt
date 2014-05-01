@@ -25,7 +25,7 @@
 <div id="main-wrapper">
   <%= render 'layouts/header' %>
 
-  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <% unless controller.controller_name == "static_pages" && (controller.action_name == "home" ||  controller.action_name == "dashboard") %>
     <div class="container">
   <% end %>
 
@@ -40,7 +40,7 @@
     <% end %>
     <%= yield %>
 
-  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <% unless controller.controller_name == "static_pages" && (controller.action_name == "home" || controller.action_name == "dashboard") %>
     </div>
   <% end %>
 </div>

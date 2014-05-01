@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-md-6 hero-feature">
     <div class="thumbnail">
-      <img src="<%= tracker.product.thumbnail || "http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg" %>" alt="">
+      <%= image_tag "#{tracker.product.thumbnail || 'http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg'}", class: "thumbnail-image" %>
         <div class="caption">
             <div class = "media-wrapper-heading media-heading"><%=tracker.name %></div>
             <div class ="media-price">
