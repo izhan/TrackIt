@@ -6,12 +6,20 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    params[:controller], media: "all" %>
   <%= javascript_include_tag params[:controller] %>
-  <%= yield :header %>
+
+  <% if controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <%= javascript_include_tag 'home' %>
+  <%= stylesheet_link_tag 'home' %>
+  <% end %>
+
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <meta name="google-site-verification" content="gNoYxkAvNEu18sUpJ3z-YlGDUGGAPEoBJzbIK_gmawg" />
 </head>
-<body>
+
+<% if controller.controller_name == "static_pages" && controller.action_name == "home" %>
+<body data-no-turbolink>
+<% end %>
   
   
 <div id="main-wrapper">
