@@ -85,6 +85,7 @@ a:after {
 .navbar {
 	font-size: 14px;
 	background: #ffffff;
+  margin-bottom: 0;
 }
 
 .navbar-fixed-top {
@@ -321,8 +322,32 @@ p.capitalize:first-letter {
 
 /* ================== MAIN WRAP SECTIONS ================== */
 
+.darkOverlay
+{
+    background-color: black;
+    filter:alpha(opacity=20); /* IE */
+    opacity: 0.2; /* Safari, Opera */
+    -moz-opacity:0.20; /* FireFox */
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+#headerwrap > .container {
+  z-index: 21;
+  position: relative;
+}
+
 #headerwrap {
-	background: url(../img/bg01.jpg) no-repeat center top;
+  position: relative;
+	background: url("http://2.bp.blogspot.com/-6y2FcjNzqxw/T9XjV6VTI0I/AAAAAAAACd8/nbqAnV0MTOU/s1600/1327224835_shopping+(1).jpg") no-repeat center top;
 	margin-top: 0px;
 	padding-top: 50px;
 	background-attachment: relative;
