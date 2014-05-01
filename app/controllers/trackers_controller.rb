@@ -10,7 +10,6 @@ class TrackersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
     # redirect to scraper if we don't have an api for it
     temp_host = get_host(clean_url(tracker_params[:url]))
     if BLACKLIST.include? temp_host
@@ -21,7 +20,7 @@ class TrackersController < ApplicationController
     end
 
     temp_api = categorize_api(temp_host)
-    if temp_api == "scrape"
+    if temp_api == "scrape" && !tracker_params[:xpath] && !tracker_params[:input_price]
       redirect_to results_path url: tracker_params[:url]
       return
     end
