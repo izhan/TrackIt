@@ -1,28 +1,30 @@
-<h1>Create new product tracker</h1>
-<div class="row">
-  <div class="dashboard-form col-md-8 col-md-offset-2">
-    <h2 class="form-header">Paste product URL:</h2>
-    <%= bootstrap_form_for(@tracker) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <%= f.text_field :url, autofocus: true, hide_label: true %>
-      <div class="form-submit">
-        <%= f.submit "start tracking", class: "btn btn-outline-default btn-outline-inverted center" %>
-      </div>
+<div class="container">
+  <h1>Create new product tracker</h1>
+  <div class="row">
+    <div class="dashboard-form col-md-8 col-md-offset-2">
+      <h2 class="form-header">Paste product URL:</h2>
+      <%= bootstrap_form_for(@tracker) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.text_field :url, autofocus: true, hide_label: true %>
+        <div class="form-submit">
+          <%= f.submit "start tracking", class: "btn btn-outline-default btn-outline-inverted center" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br><br>
+  <%= link_to "Bookmarklet", bookmarklet_path, class: "btn btn-lg btn-outline-primary btn-outline-inverted" %>
+  <h1>Your currently tracked products: </h1>
+  <p>
+    <%= text_field_tag "search", nil, id: "search-tracker" %>
+    <%= submit_tag "search", :name => nil, id: "search-trackers" %>
+  </p>
+  <div class="dashboard-results">
+    <% if @tracker_list.any? %>
+      <ul class="trackers">
+        <% # should be smart enough to automatically render the correct template --> _tracker.html.erb %>
+        <%= render @tracker_list %>
+      </ul>
     <% end %>
   </div>
-</div>
-<br><br>
-<%= link_to "Bookmarklet", bookmarklet_path, class: "btn btn-lg btn-outline-primary btn-outline-inverted" %>
-<h1>Your currently tracked products: </h1>
-<p>
-  <%= text_field_tag "search", nil, id: "search-tracker" %>
-  <%= submit_tag "search", :name => nil, id: "search-trackers" %>
-</p>
-<div class="dashboard-results">
-  <% if @tracker_list.any? %>
-    <ul class="trackers">
-      <% # should be smart enough to automatically render the correct template --> _tracker.html.erb %>
-      <%= render @tracker_list %>
-    </ul>
-  <% end %>
 </div>

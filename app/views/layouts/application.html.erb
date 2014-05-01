@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    params[:controller], media: "all" %>
   <%= javascript_include_tag params[:controller] %>
+  <%= yield :header %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <meta name="google-site-verification" content="gNoYxkAvNEu18sUpJ3z-YlGDUGGAPEoBJzbIK_gmawg" />
@@ -15,7 +16,11 @@
   
 <div id="main-wrapper">
   <%= render 'layouts/header' %>
-  <div class="container">
+
+  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+    <div class="container">
+  <% end %>
+
     <% flash.each do |key, value| %>
       <% if key.to_s == "notice" %>
         <div class="alert alert-<%= key %> alert-success"><%= value %></div>
@@ -25,8 +30,11 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
     <% end %>
-  <%= yield %>
-  </div>
+    <%= yield %>
+
+  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+    </div>
+  <% end %>
 </div>
   <%= render 'layouts/footer' %>
 
