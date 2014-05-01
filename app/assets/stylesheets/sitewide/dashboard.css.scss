@@ -1,11 +1,13 @@
 @import "variables";
 .trackers {
-  li {
     display: inline-block;
 
     margin-top: 40px;
     margin-bottom: 20px;
     list-style-type: none;
+    .thumbnail {
+
+    }
     .thumbnail-wrapper {
       height: 100px;
       width: 100px;
@@ -13,6 +15,38 @@
       background-repeat: no-repeat;
       background-size: contain;
     }
+    .media-heading {
+      line-height: 20px;
+      height: 40px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow:hidden;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      }
+    .media-heading:hover {
+      overflow:visible;
+      white-space:normal;
+      background: #f8f8f8;
+      position:relative;
+      z-index: 1;
+      transition:height 0.15s;
+      height: auto;
+      width: 100%;
+      clear: left;
+      }
+    .media-price {
+      .price-rise {
+          color: red;
+        }
+        .price-drop {
+          color: green;
+        }
+      }
+      .media-buttons {
+        padding: 10px;
+      }
     .media {
       padding: 10px;
       background: $gray-blue;
@@ -40,7 +74,7 @@
         z-index: 1;
         transition:height 0.15s;
         height: auto;
-        width: 90%;
+        width: 100%;
         clear: left;
       }
       .media-price {
@@ -55,7 +89,6 @@
         padding: 10px;
       }
     }
-  }
 }
 
 .hero-spacer {
