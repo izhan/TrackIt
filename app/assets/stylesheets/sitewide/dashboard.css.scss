@@ -56,12 +56,4 @@
       }
     }
   }
-  ul {
-    -moz-column-gap: 20px;
-    -webkit-column-gap: 20px;
-    column-count: 4;
-    column-gap: 20px;
-    display: table;
-  }
 }
-ul > li { display: table-cell; vertical-align: bottom; }
