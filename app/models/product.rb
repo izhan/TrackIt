@@ -104,7 +104,6 @@ def process_url
       asin = find_amazon_id(self.url)
       if asin
         amzn_request = Amazon::Ecs.item_lookup(asin, :response_group => 'Images,ItemAttributes,Offers')
-
         if amzn_request.is_valid_request? && !amzn_request.has_error?
           result = amzn_request.first_item
           self.name = result.get('ItemAttributes/Title')
