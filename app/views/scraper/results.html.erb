@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <style>
+  .scraper-immune a, .scraper-immune span, .scraper-immune div {
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  }
   .chicken {
-    background-color: red!important;
+    background-color: #efefef!important;
     cursor: pointer;
   }
   .sandwich, .chicken.sandwich {
@@ -22,40 +25,114 @@
     position: fixed;
   }
   body {
-    padding-top: 80px!important;
+    padding-top: 51px!important; /* +1 because of border */
   }
   #scraper-toolbar {
+    text-align: left;
     position: fixed;
     z-index: 9998;
-    background: #eee;
     left: 0;
     right: 0;
-    height: 80px;
-    margin-top: -80px;
-    text-align: center;
+    height: 51px;
+    margin-top: -51px;
     font-size: 24px;
-    padding-top: 15px;
     box-sizing: border-box;
+    background: #FCFEFF;
+    border-bottom: 1px solid #efefef;
   }
   #scraper-selection {
+    display: none;
+  }
+  #scraper-middle {
+    display: block;
+    text-align: center;
+    padding: 5px 100px 0 100px;
+  }
+  #scraper-prompt, #scraper-selection {
+    font-size: 0.70em;
+    text-align: center;
+  }
+  #scraper-prompt {
     display: inline-block;
-    width: 300px;
-    text-align: left;
-    margin-left: 20px;
+  }
+  .scraper-title {
+    padding-left: 20px;
+    margin-right: 40px;
+    float: left;
+  }
+  .scraper-title a {
+    color: #777;
+    font-size: 0.875em;
+    text-decoration: none;
+  }
+  .scraper-title a:hover {
+    color: #5e5e5e;
+  }
+  .scraper-left {
+    line-height: 50px;
+    height: 50px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .scraper-right {
+    line-height: 50px;
+    height: 50px;
+    float: right;
+    clear: right;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #scraper-buttons {
+    padding-right: 20px;
+  }
+  #scraper-buttons form {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .scraper-button {
+    color: #777;
+    text-decoration: none;
+    font-size: .7em;
+    border: none;
+    cursor: pointer;
+    background: none;
+    display: inline-block;
+    height: 50px;
+    vertical-align: top;
+  }
+  .scraper-button:hover {
+    color: #5e5e5e;
+  }
+  input.scraper-button {
+    display: none;
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #efefef;
+    padding-right: 20px;
   }
 </style>
 <div id="scraper-toolbar" class="scraper-immune">
   <!-- must be harded coded for now because of modifications to base -->
-  <%= link_to "Go back", "#{root_url}dashboard" %> 
-  <div id="scraper-selection">
-    Selected price: <span id="scraper-current-price"></span>
+  <div class="scraper-title scraper-left">
+    <%= link_to "Thriftster", "#{root_url}dashboard" %>
   </div>
-  <%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
-    <%= f.hidden_field :xpath %>
-    <%= f.hidden_field :input_price %>
-    <%= f.hidden_field :url, value: params[:url] %>
-    <%= f.submit "SUBMIT" %>
-  <% end %>
+  <div id="scraper-buttons" class="scraper-right">
+    <%= form_for(@tracker, url: "#{root_url}trackers", html: {class: "scraper-immune"}) do |f| %>
+      <%= f.hidden_field :xpath %>
+      <%= f.hidden_field :input_price %>
+      <%= f.hidden_field :url, value: params[:url] %>
+      <%= f.submit "Submit", class: "scraper-button" %>
+    <% end %>
+    <%= link_to "Go back", "#{root_url}dashboard", class: "scraper-button scraper-back" %> 
+  </div>
+  <div id="scraper-middle">
+    <div id="scraper-prompt">
+      Please help us track your product.&nbsp;&nbsp;&nbsp;Click on the price of your product.
+    </div>
+    <div id="scraper-selection">
+      Selected price: <span id="scraper-current-price"></span>
+    </div>
+  </div>
 </div>
 <div id="scraper-loading-div" class="scraper-immune">Loading...please wait</div>
 
@@ -119,6 +196,7 @@ jq111(document).ready(function(){
 
   // use mouseover because fires more when child goes to parent
   jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("mouseover", function(event){
+    console.log("YOLO");
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
@@ -178,6 +256,12 @@ jq111(document).ready(function(){
         jq111('#tracker_xpath').val(createXPathFromElement(this));
         console.log(createXPathFromElement(this));
         jq111('#tracker_input_price').val(clean_price.replace(".", ""));
+
+        // remove explanatory text and add in selected price
+        jq111('#scraper-selection').css('display', 'inline-block');
+        jq111('#scraper-prompt').hide();
+        jq111('input.scraper-button').css('display', 'inline-block');
+
         jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');
         event.stopPropagation()
