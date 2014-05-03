@@ -1,38 +1,30 @@
-<!-- Featured Icons -->  
-<div id="white">
-  <div class="container">
-    <div class="row mt">
-      <div class="col-lg-4 col-lg-offset-4 centered">
-        <h3>How it works...</h3>
-        <hr>
-      </div>
-    </div>
-    <div class="row mt">
-      <div class="col-lg-4">
-        <p class="capitalize">1</p>
-        <h4>Click and drag</h4>
-        <p>Just click and drag the button below into your bookmarks or favorites bar.</p>
-        <a href= "javascript:(function(){location.href='<%= root_url %>dashboard'+'?'+'tracker_url='+document.URL;})();"><button>Thriftster</button></a>
-      </div>
-      <div class="col-lg-4">
-        <p class="capitalize">2</p>
-        <h4>Shop</h4>
-        <p>When you come across a product you want on your favorite retail site, just click the bookmarklet to start tracking it.</p>
-      </div>
-      <div class="col-lg-4">
-        <p class="capitalize">3</p>
-        <h4>That's it!</h4>
-        <p>We'll send you an email when the products you want go on sale.</p>
-      </div>      
-    </div><!-- /row -->
-  </div><!-- /container -->
-</div><!-- /white -->
-
-
 <div class = "container">
   <div class = "row centered">
-    <div class= "col-s-4">
-
+    <div class= "col-sm-4 col-sm-offset-4 centered">
+      <h1>Bookmarklet for your Browser</h1>
+      <hr>
+      <div style="text-align:center">
+        <a class="btn btn-primary" href="javascript:(function(){location.href='<%= root_url %>dashboard'+'?'+'tracker_url='+document.URL;})();">Thriftster Bookmarklet</a>
+      </div>
+      <hr>
+      <h3>1</h3>
+      <p style="text-align:left">
+        Just drag and drop the button above into your bookmarks or favorites bar.
+      </p>
+      <hr>
+      <h3>2</h3>
+      <p style="text-align:left">
+      When you come across a product you want on your favorite retail site, just click the bookmarklet to start tracking it.</p>
+      <hr>
+      <h3>3</h3>
+      <p style="text-align:left">
+        We'll send you an email when the products you want go on sale!
+      </p>
+      <hr>
+      <div style="text-align:center">
+        <a class="btn btn-primary" href="/">Back</a>
+      </div>
+      <hr>
     </div>
   </div>
 </div>
