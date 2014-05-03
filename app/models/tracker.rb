@@ -15,12 +15,12 @@ class Tracker < ActiveRecord::Base
 
   validates_associated :product
   validates_presence_of :product
-  validates :url, presence: true
+  #validates :url, presence: true
   #validates_format_of :url, :with => VALID_URL_REGEX, message: "Invalid Product URL"
 
   before_create :add_params
 
-  before_validation :get_product
+  before_validation :get_product, on: :create #, :update
 
   after_destroy :destroy_single_product
 
@@ -43,6 +43,7 @@ class Tracker < ActiveRecord::Base
     end
 
     def get_product
+      puts "GET PRODUCT HIT"
       # TODO clean this up
       begin
         temp_url = clean_url(self.url)

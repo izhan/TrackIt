@@ -1,0 +1,28 @@
+<div class="col-md-offset-4 col-md-4">
+  <% if params[:first_time] %>
+  <h1>Almost there!</h1>
+  <% else %>
+  <h1>Update your alert</h1>
+  <% end %>
+
+  <div class="edit-tracker-form">
+    <div class="thumbnail-wrapper">
+      <%= image_tag "#{@tracker.product.thumbnail || 'http://upload.wikimedia.org/wikipedia/commons/0/0f/Cat-eo4jhx8y-100503-500-408_reasonably_small.jpg'}", class: "thumbnail-image" %>
+    </div>
+    <div class="current-price">
+      Current Price: $<%= to_dollars(@tracker.product.current_price) %>
+    </div>
+    <%= bootstrap_form_for(@tracker) do |f| %>
+      <%= f.text_field :name %>
+      <%= f.select(:alert_price, options_for_select([['For Any Price Drop', @tracker.original_price], ["When Price Drops 25%", @tracker.original_price*3/4], ["When Price Drops 50%", @tracker.original_price/2]], @tracker.alert_price), label: "Notify me" ) %>
+
+      <% if params[:first_time] %>
+      <%= f.submit "Add Alert!", class: "btn btn-primary btn-block" %>
+      <% else %>
+      <%= f.submit "Update my Alert!", class: "btn btn-primary btn-block" %>
+      <br>
+      <%= link_to "Back", root_url, class: "btn btn-default btn-block"  %> 
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -9,6 +9,30 @@ class TrackersController < ApplicationController
 
   before_action :authenticate_user!
 
+  # current user assigned by current_user method
+  def edit
+    @tracker = Tracker.find(params[:id])
+  end
+
+  def update
+    @tracker = Tracker.find(params[:id])
+    puts "YOLO"
+    puts params[:alert_price]
+    puts params[:name]
+    puts tracker_params
+    puts tracker_params.inspect
+    if @tracker.update_attributes(tracker_params)
+      if params[:first_time]
+        flash[:success] = "Alert Added!"
+      else
+        flash[:success] = "Alert Updated!"
+      end
+      redirect_to dashboard_url
+    else
+      render 'edit'
+    end
+  end
+
   def create
     # redirect to scraper if we don't have an api for it
     temp_host = get_host(clean_url(tracker_params[:url]))
@@ -27,8 +51,7 @@ class TrackersController < ApplicationController
 
     @tracker = current_user.trackers.new(tracker_params)
     if @tracker.save
-      flash[:success] = "Tracker added!"
-      redirect_to root_url
+      redirect_to edit_tracker_path(@tracker, first_time: true)
     else
       # TODO could be more customizable messages
       flash[:danger] = "Invalid URL"
@@ -46,6 +69,6 @@ class TrackersController < ApplicationController
   private
 
     def tracker_params
-      params.require(:tracker).permit(:url, :xpath, :input_price) # TODO security flaw?
+      params.require(:tracker).permit(:url, :xpath, :input_price, :name, :alert_price) # TODO security flaw?
     end
 end

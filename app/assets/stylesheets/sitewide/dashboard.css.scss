@@ -101,3 +101,20 @@ margin-top: 50px;
 .hero-feature {
 margin-bottom: 30px;/* spaces out the feature boxes once they start to stack responsively */
 }
+
+.edit-tracker-form {
+  margin-bottom: 20px;
+  .thumbnail-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+    img {
+      height: 150px;
+    }
+  }
+  .current-price {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+

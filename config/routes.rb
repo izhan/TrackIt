@@ -7,7 +7,7 @@ TrackIt::Application.routes.draw do
 
   devise_for :users, :skip => [:sessions]
 
-  resources :trackers, only: [:create, :destroy]
+  resources :trackers, only: [:create, :destroy, :edit, :update]
 
   devise_scope :user do
     get 'signin' => 'devise/sessions#new', as: :new_user_session
