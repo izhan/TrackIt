@@ -1,9 +1,14 @@
-<h2>Resend confirmation instructions</h2>
+<div class="full-page-form col-md-offset-4 col-md-4">
+  <h1 class="form-header">Resend confirmation instructions</h1>
+  <div class="form">
 
-<%= bootstrap_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.email_field :email, autofocus: true %>
-  <%= f.submit "Resend confirmation instructions" %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <%= bootstrap_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.email_field :email, hide_label: true, autofocus: true, placeholder: "Email" %>
+      <%= f.submit "Resend confirmation instructions", class: "btn btn-primary btn-block"  %>
+    <% end %>
+  </div>
+  <div class="form-footer">
+    Or <%= render "devise/shared/links" %>
+  </div>
+</div>
