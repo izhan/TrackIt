@@ -8,3 +8,5 @@
 #grey {
   padding-bottom: 50px;
 }
+
+img.desaturate { filter: grayscale(100%); }
