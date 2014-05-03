@@ -43,7 +43,6 @@ class Tracker < ActiveRecord::Base
     end
 
     def get_product
-      puts "GET PRODUCT HIT"
       # TODO clean this up
       begin
         temp_url = clean_url(self.url)

@@ -59,7 +59,6 @@ describe Tracker do
           click_button "start tracking" 
         end
         it do
-          should have_content "Cuisinart - Custom Classic Toaster Oven Broiler - Stainless Steel"
           should have_content "79.99"
         end
       end
@@ -67,6 +66,7 @@ describe Tracker do
       describe "for same url" do
         before do
           click_button "start tracking"
+          visit dashboard_path
           fill_in "Url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
         end
         it "should not create new products or trackers" do

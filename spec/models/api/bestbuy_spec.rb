@@ -36,14 +36,14 @@ describe "for best buy api", api: true, bestbuy: true do
   describe "edge cases" do
     describe "strange url with semicolon" do
       before do
-        @product = Product.create(url: "http://www.bestbuy.com/site/iphone-174-5-with-16gb-memory-mobile-phone/6699371.p;jsessionid=06971AD8EB18471BA8384C0969E3ACD6.bbolsp-app01-112?id=1218789786160")
+        @product = Product.create(url: "http://www.bestbuy.com/site/roku-streaming-stick-hdmi-version/4591008.p;jsessionid=06971AD8EB18471BA8384C0969E3ACD6.bbolsp-app01-112?id=1218789786160")
       end
 
       it "should be created" do
-        @product.url.should ==  "bestbuy.com/site/iphone-174-5-with-16gb-memory-mobile-phone/6699371.p;jsessionid=06971ad8eb18471ba8384c0969e3acd6.bbolsp-app01-112"
+        @product.url.should ==  "bestbuy.com/site/roku-streaming-stick-hdmi-version/4591008.p;jsessionid=06971ad8eb18471ba8384c0969e3acd6.bbolsp-app01-112"
         @product.api.should ==  "bestbuy"
-        @product.current_price.should ==  69999
-        @product.name.should ==  "Apple® - iPhone® 5 with 16GB Memory Mobile Phone - White & Silver (AT&T)"
+        @product.current_price.should ==  4999
+        @product.name.should ==  "Roku - Streaming Stick HDMI Version"
       end
     end
   end
