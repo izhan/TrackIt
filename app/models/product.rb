@@ -66,7 +66,7 @@ def process_url
         logger.debug "ERROR UH OH"
         self.current_price = 100000
         self.name = "Temporary Error Scraping Holder"
-        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
+        self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
       end
     end
 
@@ -123,7 +123,7 @@ def process_url
       if !self.name
         self.name = self.url
         self.current_price = 100
-        self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
+        self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
       end
     end
 
@@ -155,7 +155,7 @@ def process_url
           if xpath_price == self.input_price
             self.current_price = xpath_price
             self.name = "Scraped: " + self.url
-            self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
+            self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
           else
             logger.debug "prices didn't match"
             logger.debug "expected: " + self.input_price
@@ -165,7 +165,7 @@ def process_url
         else
           self.current_price = xpath_price
           self.name = "Scraped: " + self.url
-          self.thumbnail = "http://upload.wikimedia.org/wikipedia/commons/f/f3/No_image_placeholder.gif"
+          self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
         end
       rescue => e
         logger.error "nokogiri scraping failed"
