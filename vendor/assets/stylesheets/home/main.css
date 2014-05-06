@@ -326,8 +326,8 @@ p.capitalize:first-letter {
 {
     background-color: black;
     filter:alpha(opacity=20); /* IE */
-    opacity: 0.2; /* Safari, Opera */
-    -moz-opacity:0.20; /* FireFox */
+    opacity: 0.4; /* Safari, Opera */
+    -moz-opacity:0.40; /* FireFox */
     z-index: 20;
     height: 100%;
     width: 100%;
