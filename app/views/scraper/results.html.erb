@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <style>
-  .scraper-immune a, .scraper-immune span, .scraper-immune div {
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  .scraper-immune a, .scraper-immune span, .scraper-immune div, .scraper-immune input {
+    font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
   }
   .chicken {
     background-color: #efefef!important;
@@ -9,6 +9,7 @@
   }
   .sandwich, .chicken.sandwich {
     background-color: yellow!important;
+    box-shadow: 0 1px 1px rgba(0,0,0,.50)!important;
   }
   #scraper-loading-div {
     text-align: center;
@@ -36,9 +37,11 @@
     height: 51px;
     margin-top: -51px;
     font-size: 24px;
-    box-sizing: border-box;
-    background: #FCFEFF;
-    border-bottom: 1px solid #efefef;
+    /* box-sizing: border-box; */
+    background: #FAFCFD;
+    /* border-bottom: 1px solid #ccc; */
+    border-top: 5px solid #74c9be;
+    box-shadow: 0 2px 2px rgba(0,0,0,.25);
   }
   #scraper-selection {
     display: none;
@@ -46,7 +49,7 @@
   #scraper-middle {
     display: block;
     text-align: center;
-    padding: 5px 100px 0 100px;
+    padding: 8px 100px 0 100px;
   }
   #scraper-prompt, #scraper-selection {
     font-size: 0.70em;
@@ -110,7 +113,21 @@
     border-right: 1px solid #efefef;
     padding-right: 20px;
   }
+  .yellow-square {
+    background: #ffe700;
+    font-size: 14px;
+    margin-left: 18px;
+    margin-right: 8px;
+  }
+  .yellow-one {
+    padding: 4px 10px;
+  }
+  .yellow-two {
+    padding: 4px 8px;
+  }
 </style>
+<link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+
 <div id="scraper-toolbar" class="scraper-immune">
   <!-- must be harded coded for now because of modifications to base -->
   <div class="scraper-title scraper-left">
@@ -121,16 +138,16 @@
       <%= f.hidden_field :xpath %>
       <%= f.hidden_field :input_price %>
       <%= f.hidden_field :url, value: params[:url] %>
-      <%= f.submit "Submit", class: "scraper-button" %>
+      <%= f.submit "Create My Alert", class: "scraper-button" %>
     <% end %>
     <%= link_to "Go back", "#{root_url}dashboard", class: "scraper-button scraper-back" %> 
   </div>
   <div id="scraper-middle">
     <div id="scraper-prompt">
-      Please help us track your product.&nbsp;&nbsp;&nbsp;Click on the price of your product.
+      <span class="yellow-square yellow-one">1</span>Find and click on the price of your product.<span class="yellow-square yellow-two">2</span>Press the submit button once you have selected the correct price.
     </div>
     <div id="scraper-selection">
-      Selected price: <span id="scraper-current-price"></span>
+      Selected price: $<span id="scraper-current-price"></span>
     </div>
   </div>
 </div>

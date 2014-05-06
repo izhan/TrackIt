@@ -154,7 +154,7 @@ def process_url
         if self.input_price 
           if xpath_price == self.input_price
             self.current_price = xpath_price
-            self.name = "Scraped: " + self.url
+            self.name = self.url
             self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
           else
             logger.debug "prices didn't match"
@@ -164,7 +164,7 @@ def process_url
           end
         else
           self.current_price = xpath_price
-          self.name = "Scraped: " + self.url
+          self.name = self.url
           self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
         end
       rescue => e
