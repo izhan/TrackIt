@@ -83,7 +83,7 @@ def process_url
             errors.add(:base, "Best Buy URL Invalid.  Please try again.")
           else
             self.thumbnail = bestbuy_json["products"][0]["largeImage"] || bestbuy_json["products"][0]["image"] 
-            self.name = bestbuy_json["products"][0]["name"]
+            self.name = self.name || bestbuy_json["products"][0]["name"]
             # TODO should get rid of this in favor of decimal column
             self.current_price = Integer(bestbuy_json["products"][0]["salePrice"].to_s.sub(".", "")) || Integer(bestbuy_json["products"][0]["regularPrice"].to_s.sub(".", ""))
           end
@@ -106,7 +106,7 @@ def process_url
         amzn_request = Amazon::Ecs.item_lookup(asin, :response_group => 'Images,ItemAttributes,Offers')
         if amzn_request.is_valid_request? && !amzn_request.has_error?
           result = amzn_request.first_item
-          self.name = result.get('ItemAttributes/Title')
+          self.name = self.name || result.get('ItemAttributes/Title')
           self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
           # sometimes, it defaults to too low price
           self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || 1
@@ -121,7 +121,7 @@ def process_url
 
     def handle_example
       if !self.name
-        self.name = self.url
+        self.name = self.name || self.url
         self.current_price = 100
         self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
       end
@@ -154,7 +154,7 @@ def process_url
         if self.input_price 
           if xpath_price == self.input_price
             self.current_price = xpath_price
-            self.name = self.url
+            self.name = self.name || @page.title || self.url
             self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
           else
             logger.debug "prices didn't match"
@@ -164,7 +164,7 @@ def process_url
           end
         else
           self.current_price = xpath_price
-          self.name = self.url
+          self.name = self.name || @page.title || self.url
           self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
         end
       rescue => e
