@@ -1,4 +1,6 @@
 class ScraperController < ApplicationController
+  before_action :authenticate_user!
+  
   include ScraperHelper
   
   def results
