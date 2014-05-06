@@ -118,3 +118,31 @@ margin-bottom: 30px;/* spaces out the feature boxes once they start to stack res
   }
 }
 
+#white {
+  margin-top: 0px;
+  background-color: #ffffff;
+  min-height: 300px;
+  width: 100%;
+}
+
+/* margin top & Bottom */
+.mt {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+p.capitalize {
+  display:block;
+  text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ruda', sans-serif;
+    font-weight: 900;
+    color: #333;
+}
+
+.centered {
+    text-align: center;
+}
+
+

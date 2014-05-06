@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TrackIt COS 333 Project Timeline</title>
+  <meta name="viewport" content="width=device-width" />
+  <style type="text/css">
+    /************Reset**************/
+    * {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box; 
+    }
+    html, body, div, object, iframe, fieldset {
+      margin: 0;
+      padding: 0;
+      border: 0; 
+    }
+    ol, ul {
+      list-style: none;
+      margin: 0;
+      padding: 0; 
+    }
+    header, footer, nav, section, article, hgroup, figure {
+      display: block; 
+    }
+    /************End Reset**************/
+    /************Global**************/
+    body {
+      background: #fff;
+      color: #222222;
+      font: 120%/1.4 "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+      padding: 1em;
+      -webkit-text-size-adjust: 100%; 
+    }
+    @media all and (min-width: 40em) {
+      body {
+        padding-left: 2em; 
+      } 
+    }
+    a {
+      color: gray;
+      text-decoration: none; 
+    }
+    a:hover, a:focus {
+      color: #222222;
+      text-decoration: underline; 
+    }
+    p {
+      margin: 0 0 1em; 
+    }
+    img, object, video {
+      max-width: 100%;
+      border: 0; 
+    }
+    a img {
+      border: 0;
+      outline: 0; 
+    }
+    h1 {
+      font-size: 2em;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8em; 
+    }
+    h2 {
+      text-transform: lowercase;
+      font-size: 3em;
+      line-height: 1.1;
+      margin: 0 0 0.4em; 
+    }
+    h3 {
+      font-size: 1.8em;
+      line-height: 1.1;
+      margin: 0 0 0.2em;
+      text-transform: lowercase; 
+    }
+    /* Timeline Container */
+    .timeline {
+      border-left: 5px solid #dddddd;
+      padding-bottom: 3em;
+      position: relative; 
+    }
+    .timeline:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -1.47em;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      background: #dddddd;
+      border: 5px solid #dddddd;
+    }
+    /* Individual Timeline Item */
+    .tl-node {
+      padding-left: 1em;
+      margin-bottom: 3em;
+      position: relative; 
+    }
+    .tl-node a {
+      font-size: 16px;
+      display: block; 
+    }
+    .tl-node:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -0.95em;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      background: #fff;
+      border: 5px solid #dddddd; 
+    }
+    /* Time stamp */
+    .tl-stamp {
+      font-size: 0.7em;
+      color: gray; 
+    }
+    /* others */
+    .title, .names {
+      text-align: center;
+    }
+    .names {
+      color: #666;
+      font-size:20px;
+      margin-bottom: 30px;
+    }
+    .tl-content {
+      font-size: 16px;
+      padding-top: 5px;
+    }
+    .status {
+      color: green;
+    }
+    .status-box {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .status-box h4 {
+      margin: 5px;
+    }
+    .status-box a {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">TrackIt COS 333 Project Timeline</h1>
+  <div class="names">Haley Beck (hebeck@) and Irvin Zhan (izhan@)</div>
+  <div class="status-box">
+    <a href="http://fathomless-stream-5982.herokuapp.com/">Live Website Here</a>
+    <h4>Status: <span class="status">Alpha Testing</h4>
+  </div>
+  <ol class="timeline">
+    <li class="tl-node">
+      <div class="tl-stamp">March 7th, 2014</div>
+      <div class="tl-content">First meeting with Professor Kerninghan.</div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">March 15th, 2014</div>
+      <div class="tl-content">
+        Today, we set up this timeline HTML, which you currently see! We also completed our design document, which listed the intended features for our site and other specifications.  After some discussion, we had decided to use a Ruby/Rails stack hosted on Heroku.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">March 21st, 2014</div>
+      <div class="tl-content">
+        Setup Github for version control using a private repository, and made sure both collaborators had proper access privileges to it.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">March 22nd, 2014</div>
+      <div class="tl-content">
+        Created a Rails app from scratch and added static page controllers and views to host a simple hello world page. Deployed it to Heroku.
+      </div>
+      <a href="http://fathomless-stream-5982.herokuapp.com/">Heroku Website Here</a>
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">March 27th, 2014</div>
+      <div class="tl-content">
+        First Meeting with our TA, Raghav! Discussed progress and a few changes to our plan:
+        <br><br>
+        1. Use cookies so users don't have to login every time they visit the page (since our site doesn't have sensitive information and users don't visit frequently)
+        <br><br>
+        2. Instead of only using sites with avaliable APIs, consider web scraping to generalize (depending on how much time we have).  to implement this, we can create a bookmark tool using JavaScript to parse webpage and pass the data to endpoints defined by our app. 
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">March 30th, 2014</div>
+      <div class="tl-content">
+        Created a user database and implemented account creation using the Ruby gem "Devise". In addition to the default parameters (email, password), we added an additional strong parameter "name," which we will use when we notify users of changes.  Along with this, we added features such as account settings, password recovery and email confirmation, as well as cookies for session persistence.  Users are now able to login and logout.
+        <br><br>
+        We also setup Rail's testing suite, RSpec, along with tools that help with the TDD process such as Spork and Guard.  We created comprehensive RSpec tests that test the user model and integration tests on user creation with valid/invalid input.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 2nd, 2014</div>
+      <div class="tl-content">
+        Incorporated Bootstrap 3 in our project.  Added navigation bar header to landing page and buttons for signing in, signing out, and signing out. Started styling. Need to improve resizing functionality.
+        <br><br>
+        Added basic dashboard functionality that interacted with Best Buy API.  Users are able to search for Best Buy products by SKU Product ID or url.  Comprehensive RSpec tests with invalid/valid urls and SKU ids were also added. 
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 3rd, 2014</div>
+      <div class="tl-content">
+        Met with Raghav again to discuss our progress.  We decided on things to do for next week and how to approach web scraping and using APIs.  We also discussed how to model the products and its relationship to our user model.
+        <br><br>
+        We also updated the look of timeline.html (which you see here)!
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 5th-6th, 2014</div>
+      <div class="tl-content">
+        Implemented two models, Trackers and Products, which connect the user to our api and scraping tools.  Our system now parses urls and intelligently detects whether the item information is already available in the database or if an api is available to gather data.  Moved most of the logic for finding the current price of a Best Buy item to the model.  Built comprehensive unit and integration tests for this addition (200+ lines of RSpec!)
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 10th, 2014</div>
+      <div class="tl-content">
+        Another progress meeting with Raghav. We discussed the timeline for the rest of our project--implementing a few more APIs in the next week or two so that we having a working product before we dive into the generalized web scraping. We also decided our immediate tasks for next week and Raghav suggested that we think about setting a limit on how often we email users.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 11th, 2014</div>
+      <div class="tl-content">
+        Implemented tracker deletion.  Automatically checks for and deletes any 'rogue' products that no longer have any trackers.  Cleaned up a lot of the testing codes.  Added a throttle to the Best Buy API calls so that our rate limit of 6 requests/second were not exceeded for RSpec tests.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 12th-13th, 2014</div>
+      <div class="tl-content">
+        Added logic to parse all types of amazon.com and amzn.com urls and extract the ASIN number.  Ruby code now signs and sends a request to Amazon's servers using our public + secret keys.  Users are able to track Amazon items using just a url.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 14th-15th, 2014</div>
+      <div class="tl-content">
+        Added several user funtionalities to the dashboard page: <br><br>
+        1. Users can now delete a tracker from the dashboard. <br><br>
+        2. Display thumbnail of product in the list of tracked items on the dashboard. <br><br>
+        3. Added purchase button next to product that opens product's url in new tab. <br><br>
+        3. Added a search bar to the dashboard so users can find items they are tracking. Initially, only included current price in the Tracker model but we decided to also store original price so we could calculate savings.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 16th, 2014</div>
+      <div class="tl-content">
+       Added helper functions to update prices in Product model.  Rake task now available for updating database. Users are now alerted by email when the price of a product they are tracking decreases. Also added throttle for Best Buy and Amazon calls for rake tasks and RSpec tests.  Additionally, formatted all emails using a MailChimp HTML template so they look nice.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 18th, 2014</div>
+      <div class="tl-content">
+       Implemented basic scraping interface within our own application.  Uses Nokogiri to scrape website's static JS + CSS files, and process it so we can serve it back up to the visitor.  Successfully embeds simple static websites within our site.  However, major issues in production since Chrome and Firefox identifies us as a phishing website (we are not!)
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 19th, 2014</div>
+      <div class="tl-content">
+       Major improvements with the scraping tool.  Added better handling for more dynamic websites and overlay javascript to display all functionality on the screen.  Begin building basic javascript algorithms for extracting smart XPaths for each website and detecting HTML text nodes that resemble prices.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 22th, 2014</div>
+      <div class="tl-content">
+       Adds toolbar to the scraper to help users identify the price selected.  Scraping is fully functional; rescrapes a website and extracts prices every hour to update websites we do not have APIs for.  Production successfully sends out emails for price drops automatically now.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 24th, 2014</div>
+      <div class="tl-content">
+        Adding javascript bookmark that allows users to add products from any website. Met with Raghav to discuss plans for frontend changes for next week.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 26th, 2014</div>
+      <div class="tl-content">
+        Finally picked a domain, <a href="http://www.thriftster.me">www.thriftster.me</a>!  Additionally, added a blacklist for non-shopping websites with sensitive information (such as banking websites) that our scraper refuses to scrape.  Chrome + Firefox no longer labels us as a phishing website!
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 29th, 2014</div>
+      <div class="tl-content">
+        Lot's of improvements to the front-end: <br><br>
+        1. Redesigned the landing page with bootstrap to include animations and a clean format. Added a list of featured retailers that are compatible with our site. Also added more details about our service.
+        <br><br>
+        2. Redesigned the trackers of the dashboard page to allow for more content density by condensing the tracker list into columns. Also made the tracker displays more visually appealing by truncating long names and allowing the overflow to show when users hover over the name.
+        <br><br>
+        3. Added a favicon. 
+        <br><br>
+        4. The bookmarklet is now more user-friendly by adding a button link in the nav-bar.  Also added instructions/pictures of how to add the bookmarklet to your browser.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">April 30th, 2014</div>
+      <div class="tl-content">
+        Links with APIs are now moneitized; we get a small referral bonus if someone visits the retailer site from our links.  Visitors now redirected to scraper automatically if we do not have an available API for it.  Toolbar for scraper has been redesigned.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">May 1st, 2014</div>
+      <div class="tl-content">
+        Last meeting with Raghav to discuss more front-end improvements and a plan for our demo. Less than one week to go!
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">May 3rd, 2014</div>
+      <div class="tl-content">
+        Implemented List.js frontend script to handle searching and sorting products in the dashboard by name, original price, and current price.
+        <br><br>
+        Added more instructions on the bookmarklet page that shows only when users click on the question to keep the page from being too cluttered while offering users more help if needed.
+      </div>
+    </li>
+    <li class="tl-node">
+      <div class="tl-stamp">May 5th, 2014</div>
+      <div class="tl-content">
+Per Raghav's suggestion, we made it easiser to tell the scraper toolbar from the website we rendered. We added the teal colorblock to the toolbar, which is consistent with the navbar on all of our pages. We added yellow numbers that draw the eye and guide users through the directions. Also added a more prominent shadow to separate the toolbar from the rendered scrapee site.      </div>
+    </li>
+        <li class="tl-node">
+      <div class="tl-stamp">May 6th, 2014</div>
+      <div class="tl-content">
+Last step before we do some serious user testing...created a google form popup in the bottom corner of the website (shows up on all pages) to allow users to provide feedback:<br>
+(1) What pages/features of this site are difficult to use? <br>
+(2) What features would you like to see added? <br>
+(3) Additional suggestions/comments/questions? <br>     </div>
+    </li>
+  </ol>
+</body>
+</html>
