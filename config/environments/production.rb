@@ -91,6 +91,6 @@ TrackIt::Application.configure do
   }
 
   ActionMailer::Base.delivery_method = :smtp
-  Rails.application.routes.default_url_options[:host] = "fathomless-stream-5982.herokuapp.com/"
+  Rails.application.routes.default_url_options[:host] = "thriftster.me/"
 
 end
