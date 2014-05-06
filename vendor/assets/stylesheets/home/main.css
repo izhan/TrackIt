@@ -14,19 +14,19 @@
 
 body {
     background-color: #f2f2f2;
-    font-family: 'Ruda', sans-serif;
+    font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     color: #555;
 
-    -webkit-font-smoothing: antialiased;
+    /* -webkit-font-smoothing: antialiased; */
     -webkit-overflow-scrolling: touch;
     
 }
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Ruda', sans-serif;
+    font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight: 900;
     color: #333;
 }
