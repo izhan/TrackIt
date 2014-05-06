@@ -7,7 +7,7 @@
   <%= stylesheet_link_tag    params[:controller], media: "all" %>
   <%= javascript_include_tag params[:controller] %>
 
-  <% if controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <% if custom_css_page? %>
   <%= javascript_include_tag 'home' %>
   <%= stylesheet_link_tag 'home' %>
   <% end %>
@@ -17,7 +17,7 @@
   <meta name="google-site-verification" content="gNoYxkAvNEu18sUpJ3z-YlGDUGGAPEoBJzbIK_gmawg" />
 </head>
 
-<% if controller.controller_name == "static_pages" && controller.action_name == "home" %>
+<% if custom_css_page? %>
 <body data-no-turbolink>
 <% end %>
   
@@ -25,7 +25,7 @@
 <div id="main-wrapper">
   <%= render 'layouts/header' %>
 
-  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <% unless custom_css_page? %>
     <div class="container">
   <% end %>
 
@@ -40,7 +40,7 @@
     <% end %>
     <%= yield %>
 
-  <% unless controller.controller_name == "static_pages" && controller.action_name == "home" %>
+  <% unless custom_css_page? %>
     </div>
   <% end %>
 </div>

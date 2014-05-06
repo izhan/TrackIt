@@ -21,6 +21,7 @@ TrackIt::Application.routes.draw do
   get 'results', to: 'scraper#results'
   get 'bookmarklet', to: 'static_pages#bookmarklet'
   get 'addalert', to: 'static_pages#add_alert'
+  get 'help', to: 'static_pages#help'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

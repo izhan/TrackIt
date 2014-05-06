@@ -7,12 +7,11 @@
 
 /* begin outline buttons */
 .btn-outline, .btn-outline-default, .btn-outline-primary .btn-outline-red {
-  background-color: transparent;
-  border-radius: 0;
-  border: 2px solid;
 }
 
 .btn-outline, .btn-outline-default {
+  background-color: transparent;
+  border: 1px solid;
   color: $white;
   border-color: $white;
   &:hover, &:focus {
@@ -20,7 +19,8 @@
     border-color: darken($white, 5%);
   }
 }
-.btn-outline, .btn-outline-red {
+.btn-outline-red {
+  background-color: transparent;
   border: 1px solid;
   padding: 2px 9px 2px 9px;
   color: $primary-red;
@@ -32,6 +32,8 @@
 }
 
 .btn-outline-primary {
+  background-color: transparent;
+  border: 1px solid;
   color: $dark-blue;
   border-color: $dark-blue;
   &:hover, &:focus {
