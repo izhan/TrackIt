@@ -1,8 +1,3 @@
-BLACKLIST = [
-  "chase.com",
-  "bankofamerica.com"
-]
-
 class TrackersController < ApplicationController
   include ProductTrackerHelper
   include ApiHelper
@@ -29,6 +24,7 @@ class TrackersController < ApplicationController
     end
   end
 
+  # TODO DONT FORGET THERES ANOTHER ONE
   def create
     # redirect to scraper if we don't have an api for it
     temp_host = get_host(clean_url(tracker_params[:url]))
