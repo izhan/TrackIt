@@ -18,18 +18,26 @@
          <%= submit_tag "search", :name => nil, id: "search-trackers" %> </h3><br>
     </div>
 </div>
-<!-- /.row -->
-<div class="row text-center">
-  <div class="dashboard-results">
-    <% if @tracker_list.any? %>
-      <ul class="trackers">
-        <% # should be smart enough to automatically render the correct template --> _tracker.html.erb %>
-        <%= render @tracker_list %>
-      </ul>
-    <% end %>
-  </div>
 
+<div id="tracker-results">
+  <input class="search" placeholder="Search" />
+  <button class="sort" data-sort="product-name">
+    Sort by name
+  </button>
+  <button class="sort" data-sort="price-orig">
+    Sort by original price
+  </button>
+  <button class="sort" data-sort="price-current">
+    Sort by current price
+  </button>
+  <ul class="list trackers">
+    <% if @tracker_list.any? %>
+        <%= render @tracker_list %>
+    <% end %>
+  </ul>
 </div>
+<!-- /.row -->
+
 <!-- /.row -->
 
 <hr>

@@ -1,21 +1,23 @@
-<div class="col-lg-3 col-md-6 hero-feature">
-    <div class="thumbnail">
-      <%= image_tag "#{tracker.product.thumbnail || 'http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png'}", class: "thumbnail-image" %>
-        <div class="caption">
-            <div class = "media-wrapper-heading media-heading"><%=tracker.name %></div>
-            <div class ="media-price">
-              <span class="<%= price_class(tracker) %>">Current: $<%= to_dollars(tracker.product.current_price) %></span>
+<li>    
+    <div class="col-lg-3 col-md-6 hero-feature">
+        <div class="thumbnail">
+          <%= image_tag "#{tracker.product.thumbnail || 'http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png'}", class: "thumbnail-image" %>
+            <div class="caption">
+                <div class = "media-wrapper-heading media-heading product-name"><%=tracker.name %></div>
+                <div class ="media-price price-current">
+                  <span class="<%= price_class(tracker) %>">Current: $<%= to_dollars(tracker.product.current_price) %></span>
+                </div>
+                <div class="media-price price-orig">
+                 <span>Original: $<%= to_dollars(tracker.original_price) %></span>
+                </div>
+                <br>
+                <p>
+                    <%= link_to "purchase", tracker_link(tracker), :target=> "_blank", class: "btn btn-default"%>
+                    <%= link_to "remove", tracker, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-default"%>
+                    <%= link_to "edit", edit_tracker_path(tracker), class: "btn btn-default"%>
+                </p>
             </div>
-            <div class="media-price">
-             <span>Original: $<%= to_dollars(tracker.original_price) %></span>
-            </div>
-            <br>
-            <p>
-                <%= link_to "purchase", tracker_link(tracker), :target=> "_blank", class: "btn btn-default"%>
-                <%= link_to "remove", tracker, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-default"%>
-                <%= link_to "edit", edit_tracker_path(tracker), class: "btn btn-default"%>
-            </p>
         </div>
     </div>
-</div>
+</li>
 
