@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <style>
+  #scraper-toolbar, #scraper-toolbar * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-box-sizing: initial!important;
+    -moz-box-sizing: initial!important;
+    box-sizing: initial!important;
+  }
   .scraper-immune a, .scraper-immune span, .scraper-immune div, .scraper-immune input {
-    font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
+    font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif!important;
+    color: #333;
   }
   .chicken {
     background-color: #efefef!important;
@@ -37,9 +49,7 @@
     height: 51px;
     margin-top: -51px;
     font-size: 24px;
-    /* box-sizing: border-box; */
     background: #FAFCFD;
-    /* border-bottom: 1px solid #ccc; */
     border-top: 5px solid #74c9be;
     box-shadow: 0 2px 2px rgba(0,0,0,.25);
   }
@@ -49,7 +59,7 @@
   #scraper-middle {
     display: block;
     text-align: center;
-    padding: 8px 100px 0 100px;
+    padding: 5px 100px 0 100px;
   }
   #scraper-prompt, #scraper-selection {
     font-size: 0.70em;
@@ -58,26 +68,26 @@
   #scraper-prompt {
     display: inline-block;
   }
-  .scraper-title {
+  #scraper-toolbar .scraper-title {
     padding-left: 20px;
     margin-right: 40px;
     float: left;
   }
-  .scraper-title a {
-    color: #777;
+  #scraper-toolbar .scraper-title a {
+    color: #454545;
     font-size: 0.875em;
     text-decoration: none;
   }
-  .scraper-title a:hover {
-    color: #5e5e5e;
+  #scraper-toolbar .scraper-title a:hover {
+    color: #777;
   }
-  .scraper-left {
+  #scraper-toolbar .scraper-left {
     line-height: 50px;
     height: 50px;
     vertical-align: middle;
     display: inline-block;
   }
-  .scraper-right {
+  #scraper-toolbar .scraper-right {
     line-height: 50px;
     height: 50px;
     float: right;
@@ -92,7 +102,7 @@
     display: inline-block;
     margin-right: 10px;
   }
-  .scraper-button {
+  #scraper-buttons .scraper-button {
     color: #777;
     text-decoration: none;
     font-size: .7em;
@@ -101,28 +111,38 @@
     background: none;
     display: inline-block;
     height: 50px;
-    vertical-align: top;
+    vertical-align: middle;
+    line-height: 50px;
   }
-  .scraper-button:hover {
+  #scraper-buttons .scraper-button:hover {
     color: #5e5e5e;
   }
-  input.scraper-button {
-    display: none;
+  #scraper-buttons .scraper-submit-wrapper {
     padding: 0;
     margin: 0;
     border-right: 1px solid #efefef;
-    padding-right: 20px;
+    padding-right: 15px;
+    display: none;
+    height: 50px;
   }
-  .yellow-square {
+  #scraper-buttons input.scraper-button {
+    border: 1px solid #ccc;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+  }
+  #scraper-toolbar .yellow-square {
     background: #ffe700;
     font-size: 14px;
     margin-left: 18px;
     margin-right: 8px;
   }
-  .yellow-one {
+  #scraper-toolbar .yellow-one {
     padding: 4px 10px;
   }
-  .yellow-two {
+  #scraper-toolbar .yellow-two {
     padding: 4px 8px;
   }
 </style>
@@ -138,16 +158,15 @@
       <%= f.hidden_field :xpath %>
       <%= f.hidden_field :input_price %>
       <%= f.hidden_field :url, value: params[:url] %>
-      <%= f.submit "Create My Alert", class: "scraper-button" %>
-    <% end %>
-    <%= link_to "Go back", "#{root_url}dashboard", class: "scraper-button scraper-back" %> 
+      <div class="scraper-submit-wrapper"><%= f.submit "Create My Alert", class: "scraper-button" %></div>
+    <% end %><%= link_to "Go back", "#{root_url}dashboard", class: "scraper-button scraper-back" %> 
   </div>
   <div id="scraper-middle">
     <div id="scraper-prompt">
-      <span class="yellow-square yellow-one">1</span>Find and click on the price of your product.<span class="yellow-square yellow-two">2</span>Press the submit button once you have selected the correct price.
+      <span class="yellow-square yellow-one">1</span>Find and click on the price of your product.
     </div>
     <div id="scraper-selection">
-      Selected price: $<span id="scraper-current-price"></span>
+      <span class="yellow-square yellow-two">2</span>Click the 'Create My Alert' button on the right once you have selected the correct price
     </div>
   </div>
 </div>
@@ -279,7 +298,7 @@ jq111(document).ready(function(){
         // remove explanatory text and add in selected price
         jq111('#scraper-selection').css('display', 'inline-block');
         jq111('#scraper-prompt').hide();
-        jq111('input.scraper-button').css('display', 'inline-block');
+        jq111('.scraper-submit-wrapper').css('display', 'inline-block');
 
         jq111('#scraper-current-price').text(clean_price);
         jq111(this).addClass('chicken sandwich');
