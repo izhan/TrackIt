@@ -11,33 +11,27 @@
       <% end %>
 </div>
 <hr>
-<div class="row">
-    <div class="col-lg-12">
-        <h3>Your Tracked Items 
-          <%= text_field_tag "search", nil, id: "search-tracker" %>
-         <%= submit_tag "search", :name => nil, id: "search-trackers" %> </h3><br>
-    </div>
-</div>
-
+<div class="row col-xs-12">
+  <h3>Your Tracked Items </h3>
 <div id="tracker-results">
-  <input class="search" placeholder="Search" />
-  <button class="sort" data-sort="product-name">
-    Sort by name
-  </button>
-  <button class="sort" data-sort="price-orig">
-    Sort by original price
-  </button>
-  <button class="sort" data-sort="price-current">
-    Sort by current price
-  </button>
+  <input class="search form-control" style="display:inline-block; width:150px; vertical-align: middle;" placeholder="Search products"></input>
+    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="product-name">
+      Sort by product name
+    </a>
+    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="price-orig">
+      Sort by original price
+    </a>
+    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="price-current">
+      Sort by current price
+    </a>
   <ul class="list trackers">
     <% if @tracker_list.any? %>
         <%= render @tracker_list %>
     <% end %>
   </ul>
 </div>
+</div>
 <!-- /.row -->
-
 <!-- /.row -->
 
 <hr>
