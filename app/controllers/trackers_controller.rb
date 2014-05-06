@@ -16,13 +16,9 @@ class TrackersController < ApplicationController
 
   def update
     @tracker = Tracker.find(params[:id])
-    puts "YOLO"
-    puts params[:alert_price]
-    puts params[:name]
-    puts tracker_params
-    puts tracker_params.inspect
+    puts params.inspect
     if @tracker.update_attributes(tracker_params)
-      if params[:first_time]
+      if params[:commit] == "Add Alert!"
         flash[:success] = "Alert Added!"
       else
         flash[:success] = "Alert Updated!"
@@ -54,7 +50,7 @@ class TrackersController < ApplicationController
       redirect_to edit_tracker_path(@tracker, first_time: true)
     else
       # TODO could be more customizable messages
-      flash[:danger] = "Invalid URL"
+      flash[:danger] = "Sorry, we are unable to support this website at the time."
       redirect_to root_url
     end
   end

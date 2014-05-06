@@ -184,7 +184,10 @@ function createXPathFromElement(elm) {
       }; 
       // also adding in index for good measure
       // TODO this will probably not be always right because lack of parenthesis
-      segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]' + '[' + i + ']'); 
+      if (elm.getAttribute('class'))
+        segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]' + '[' + i + ']'); 
+      else
+        segs.unshift(elm.localName.toLowerCase() + '[' + i + ']'); 
     } 
     else { 
       for (var i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 
@@ -213,7 +216,6 @@ jq111(document).ready(function(){
 
   // use mouseover because fires more when child goes to parent
   jq111('*:not(html, body, script, style, .scraper-immune, .scraper-immune *)').on("mouseover", function(event){
-    console.log("YOLO");
     event.preventDefault();
     jq111(potato).removeClass('chicken');
     var text = jq111(this).text();
