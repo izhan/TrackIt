@@ -38,6 +38,9 @@ p {
     margin-bottom: 25px;
 }
 
+.text-field{
+	height:100px;
+}
 .centered {
     text-align: center;
 }
