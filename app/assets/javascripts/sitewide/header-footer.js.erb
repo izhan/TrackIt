@@ -1,9 +1,24 @@
+// for feedback form
+var submitted=false;
+function feedbackFormSubmitted() {
+  $('.form').slideToggle();
+  $('#feedback-button').text("Thank you!");
+  
+  setTimeout(function(){
+    $('#feedback-button').animate({opacity:0})
+    .queue(function(){
+      $('#feedback-button').text("Tell us what you think.").dequeue()
+    }).animate({opacity:1});  
+  }, 2000);
+}
+
 $( document ).ready(function() {
-  setTimeout( function(){
+  setTimeout(function(){
     $('#feedback-form').slideDown(750);
   }, 250);
   
   $("#feedback-button").click(function(){
     $('.form').slideToggle();       
   });
+  
 });
