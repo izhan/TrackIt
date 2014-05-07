@@ -28,7 +28,7 @@
       <div class="pull-right">
 
       <%= link_to "Get bookmarklet", bookmarklet_path, class: "btn btn-primary navbar-btn" %>
-      <%= link_to "Help", help_path, class: "btn btn-default navbar-btn" %>
+      <%= link_to "Help", help_path, class: "btn btn-default navbar-btn", data: { :"no-turbolink" => "" } %>
       <% unless signed_in? %>
         <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn" %>
         <%= link_to "Sign up", signup_path, class: "btn btn-default navbar-btn" %>

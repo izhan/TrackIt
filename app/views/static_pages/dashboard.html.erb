@@ -1,12 +1,13 @@
-<div class="jumbotron hero-spacer">
-    <h1>Welcome back!</h1>
-    <p style="text-align:center">Paste the URL of the product you want to track below and we'll notify you when it goes on sale.</p>
-    <h2 class="form-header">Product URL:</h2>
+<div class="jumbotron hero-spacer dashboard-form">
+    <h1>Add a Price Alert</h1>
+    <p style="text-align:center">Paste the URL of the product you want to track below and we'll notify you when it goes on sale.  Please be sure to use the url of the specific item page.
+    </p>
       <%= bootstrap_form_for(@tracker) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.text_field :url, autofocus: true, hide_label: true %>
         <div class="form-submit">
-          <%= f.submit "start tracking", class: "btn btn-outline-primary btn-outline-inverted center" %>
+          <%= f.submit "Start Tracking", class: "btn btn-outline-primary btn-outline-inverted center" %>
+          <%= link_to "Need help?", help_path, class: "btn btn-outline-red btn-outline-inverted center", data: { :"no-turbolink" => "" } %>
         </div>
       <% end %>
 </div>
