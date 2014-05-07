@@ -22,11 +22,14 @@ class ScraperController < ApplicationController
         )
         @page = Nokogiri::HTML(website_file)
         @page.encoding = 'UTF-8'
+
         root_url = Addressable::URI.parse(sanitized_url).scheme + "://" + Addressable::URI.parse(sanitized_url).host
         # base href tag needed for relative links to work
         base = Nokogiri::XML::Node.new "base", @page
         base['href'] = website_file.base_uri.to_s # not guaranteed to be same as the url param because of url redirection
         @page.at_css('head').children.first.add_previous_sibling(base)
+
+        @page.title = "Thriftster | " + @page.title
         # TODO maybe this isnt needed...
         # @page.search('body').add_class("scraper-result-body")
 
@@ -53,7 +56,7 @@ class ScraperController < ApplicationController
         # @page = clean_page(@page)
 
         #@page.xpath('//*[@id="priceblock-wrapper-wrapper"]/div/div/div[2]')
-        
+
         # recreate the webpage EXACTLY
         render :layout => false
 
