@@ -1,6 +1,6 @@
 class AlertMailer < ActionMailer::Base
   helper StaticPagesHelper
-  default from: "do_not_reply@thriftster.com"
+  default from: "Thriftster Alerts <alerts@thriftster.com>"
 
   def alert_email(user, tracker)
     @user = user
