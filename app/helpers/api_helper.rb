@@ -1,4 +1,13 @@
 module ApiHelper
+  # blacklist of websites
+  BLACKLIST = [
+    "chase.com",
+    "bankofamerica.com",
+    "thriftster.me", # infinite redirections
+    "localhost:3000",
+    "localhost"
+  ]
+
   # finds sku number
   BEST_BUY_REGEX = /(\d)+\.p/
   # @note gp/product/glance must go before gp/product

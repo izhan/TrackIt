@@ -2,16 +2,11 @@ require 'open-uri'
 require 'open_uri_redirections'
 require 'json'
 
-# TODO moduralize this
-BLACKLIST = [
-  "chase.com",
-  "bankofamerica.com"
-]
-
 class StaticPagesController < ApplicationController
   include ProductTrackerHelper
   include ApiHelper
   include DashboardHelper
+  include ScraperHelper
   before_action :authenticate_user!, only: [:dashboard, :add_alert]
 
   def home

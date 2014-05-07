@@ -1,25 +1,28 @@
 class ScraperController < ApplicationController
-  before_action :authenticate_user!
-  
   include ScraperHelper
-  
+  include ApiHelper
+  include ProductTrackerHelper
+
+  before_action :authenticate_user!
+
   def results
     url = params[:url]
-    if url
+
+    # must make sure that blacklist is not hit as well or else redirection loop
+    temp_host = get_host(clean_url(url)) || ""
+
+    if url && !BLACKLIST.include?(temp_host)
       @tracker = Tracker.new
       begin
         sanitized_url = add_http_and_clean(url)
         # TODO, add more headers?
         website_file = open(sanitized_url, 
-          :allow_redirections => :all
+          :allow_redirections => :safe
           # "User-Agent" => request.headers['HTTP_USER_AGENT'] # maybe shouldn't use this so we dont have to store user agent
         )
-
         @page = Nokogiri::HTML(website_file)
         @page.encoding = 'UTF-8'
-
         root_url = Addressable::URI.parse(sanitized_url).scheme + "://" + Addressable::URI.parse(sanitized_url).host
-
         # base href tag needed for relative links to work
         base = Nokogiri::XML::Node.new "base", @page
         base['href'] = website_file.base_uri.to_s # not guaranteed to be same as the url param because of url redirection
@@ -50,7 +53,7 @@ class ScraperController < ApplicationController
         # @page = clean_page(@page)
 
         #@page.xpath('//*[@id="priceblock-wrapper-wrapper"]/div/div/div[2]')
-
+        
         # recreate the webpage EXACTLY
         render :layout => false
 
