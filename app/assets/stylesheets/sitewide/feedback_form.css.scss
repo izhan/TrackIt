@@ -1,5 +1,9 @@
  @import "variables";
 
+#ss-submit-disabled {
+  display: none;
+}
+
 /* don't want this to show up in mobile */
 @media (max-width: 576px) {
   #feedback-form {
