@@ -20,6 +20,7 @@ TrackIt::Application.routes.draw do
   get 'dashboard', to: 'static_pages#dashboard'
   get 'results', to: 'scraper#results'
   get 'bookmarklet', to: 'static_pages#bookmarklet'
+  get 'help', to: 'static_pages#help'
   get 'addalert', to: 'static_pages#add_alert'
   get 'help', to: 'static_pages#help'
 

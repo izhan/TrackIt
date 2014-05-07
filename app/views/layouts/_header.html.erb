@@ -26,6 +26,7 @@
         <!-- Is this still needed? -->
       </ul>
       <div class="pull-right">
+      <%= link_to "Directions", help_path, class: "btn btn-primary navbar-btn" %>
       <%= link_to "Get bookmarklet", bookmarklet_path, class: "btn btn-primary navbar-btn" %>
       <% unless signed_in? %>
         <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn" %>
