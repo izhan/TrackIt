@@ -22,7 +22,7 @@ describe Tracker do
       end
 
       it "should not change tracker count" do
-        expect { click_button "start tracking" }.to_not change(Tracker, :count).by(1)
+        expect { click_button "Start Tracking" }.to_not change(Tracker, :count).by(1)
       end
     end
 
@@ -32,13 +32,13 @@ describe Tracker do
       end
 
       it "should not change tracker count" do
-        expect { click_button "start tracking" }.to_not change(Tracker, :count).by(1)
+        expect { click_button "Start Tracking" }.to_not change(Tracker, :count).by(1)
       end
       it "should not change user's tracker's count" do
-        expect { click_button "start tracking" }.to_not change(@user1.trackers, :count).by(1)
+        expect { click_button "Start Tracking" }.to_not change(@user1.trackers, :count).by(1)
       end
       it "should not change product count" do
-        expect { click_button "start tracking" }.to_not change(Product, :count).by(1)
+        expect { click_button "Start Tracking" }.to_not change(Product, :count).by(1)
       end
     end
 
@@ -48,15 +48,15 @@ describe Tracker do
       end
 
       it "should create a new product" do
-        expect { click_button "start tracking" }.to change(Product, :count).by(1)
+        expect { click_button "Start Tracking" }.to change(Product, :count).by(1)
       end
       it "should create a new product" do
-        expect { click_button "start tracking" }.to change(Tracker, :count).by(1)
+        expect { click_button "Start Tracking" }.to change(Tracker, :count).by(1)
       end
 
       describe "display the product's info after creation" do
         before do
-          click_button "start tracking" 
+          click_button "Start Tracking" 
         end
         it do
           should have_content "79.99"
@@ -65,12 +65,12 @@ describe Tracker do
 
       describe "for same url" do
         before do
-          click_button "start tracking"
+          click_button "Start Tracking"
           visit dashboard_path
           fill_in "Url", with: "http://www.bestbuy.com/site/custom-classic-toaster-oven-broiler/4957484.p?id=1218583583923&skuId=4957484&st=categoryid$abcat0912022&cp=1&lp=2"
         end
         it "should not create new products or trackers" do
-          expect { click_button "start tracking" }.not_to change(Product, :count)
+          expect { click_button "Start Tracking" }.not_to change(Product, :count)
         end
       end
 
@@ -80,7 +80,7 @@ describe Tracker do
           @product.save
         end
         it "should not create new product" do
-          expect { click_button "start tracking" }.not_to change(Product, :count)
+          expect { click_button "Start Tracking" }.not_to change(Product, :count)
         end
       end
     end

@@ -79,7 +79,6 @@ describe "for amazon api", amazon: true do
       it "should create correct item" do
         @product.url.should == "amazon.com/dp/b004j3v90y"
         @product.api.should == "amazon"
-        @product.current_price.should == 59900
         @product.name.should == "Canon EOS Rebel T3i 18 MP CMOS Digital SLR Camera and DIGIC 4 Imaging with EF-S 18-55mm f/3.5-5.6 IS Lens"
       end
     end
