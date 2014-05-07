@@ -47,28 +47,31 @@ private
 BEST_BUY_API_KEY = "xwfq3c3bekh3u2mnz3yu532f"
 
 def process_url
+  original_url = self.url
   self.url = clean_url(self.url)
   host = get_host(self.url)
 
   self.api = categorize_api(host)
 
+  # gotta make sure that handle_scrape gets original url
   if self.api == "scrape"
+    self.url = original_url
     handle_scrape()
-      # handle known urls here
-    elsif self.api == "bestbuy"
-      handle_bestbuy()
-    elsif self.api == "amazon"
-      handle_amazon()
-    elsif self.api == "example"
-      handle_example()
-    else
-        # shouldn't get here
-        logger.debug "ERROR UH OH"
-        self.current_price = 100000
-        self.name = "Temporary Error Scraping Holder"
-        self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
-      end
-    end
+    # handle known urls here
+  elsif self.api == "bestbuy"
+    handle_bestbuy()
+  elsif self.api == "amazon"
+    handle_amazon()
+  elsif self.api == "example"
+    handle_example()
+  else
+      # shouldn't get here
+      logger.debug "ERROR UH OH"
+      self.current_price = 100000
+      self.name = "Temporary Error Scraping Holder"
+      self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
+  end
+end
 
     # sets name, current price and thumbnail img link after call to best buy api
     def handle_bestbuy
