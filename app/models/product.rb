@@ -157,9 +157,10 @@ def process_url
             self.name = self.name || @page.title || self.url
             self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
           else
-            logger.debug "prices didn't match"
-            logger.debug "expected: " + self.input_price
-            logger.debug "got: " + xpath_price
+            logger.error "YOLO ERROR"
+            logger.error "prices didn't match for url: #{self.url}"
+            logger.error "expected: " + self.input_price
+            logger.error "got: " + xpath_price
             errors.add(:base, "Sorry, we could not complete your request.  Please try again.")
           end
         else
@@ -168,7 +169,8 @@ def process_url
           self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
         end
       rescue => e
-        logger.error "nokogiri scraping failed"
+        logger.error "YOLO ERROR"
+        logger.error "nokogiri scraping failed with url: #{self.url}"
         logger.error e.message
         e.backtrace.each { |line| logger.error line }
         errors.add(:base, "Sorry, we could not complete your request.  Please try again.")

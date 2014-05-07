@@ -14,7 +14,7 @@
     </div>
     <%= bootstrap_form_for(@tracker) do |f| %>
       <%= f.text_field :name %>
-      <%= f.select(:alert_price, options_for_select([['For Any Price Drop', @tracker.original_price], ["When Price Drops 25%", @tracker.original_price*3/4], ["When Price Drops 50%", @tracker.original_price/2]], @tracker.alert_price), label: "Notify me" ) %>
+      <%= f.select(:alert_price, options_for_select([['For Any Price Drop', @tracker.original_price], ["When Price Drops 25% ($#{to_dollars(@tracker.original_price*3/4)})", @tracker.original_price*3/4], ["When Price Drops 50% ($#{to_dollars(@tracker.original_price/2)})", @tracker.original_price/2]], @tracker.alert_price), label: "Notify me" ) %>
 
       <% if params[:first_time] %>
       <%= f.submit "Add Alert!", class: "btn btn-primary btn-block" %>

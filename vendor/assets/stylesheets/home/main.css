@@ -41,6 +41,9 @@ p {
 .text-field{
 	height:100px;
 }
+.gif-imgs {
+  width: 100%;
+}
 .centered {
     text-align: center;
 }
