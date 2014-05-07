@@ -1,36 +1,40 @@
 <div class="jumbotron hero-spacer dashboard-form">
-    <h1>Add a Price Alert</h1>
-    <p style="text-align:center">Paste the URL of the product you want to track below and we'll notify you when it goes on sale.  Please be sure to use the url of the specific item page.
-    </p>
-      <%= bootstrap_form_for(@tracker) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <%= f.text_field :url, autofocus: true, hide_label: true %>
-        <div class="form-submit">
-          <%= f.submit "Start Tracking", class: "btn btn-outline-primary btn-outline-inverted center" %>
-          <%= link_to "Need help?", help_path, class: "btn btn-outline-red btn-outline-inverted center", data: { :"no-turbolink" => "" } %>
-        </div>
-      <% end %>
+  <h1>Add a Price Alert</h1>
+  <p style="text-align:center">Paste the URL of the product you want to track below and we'll notify you when it goes on sale.  Please be sure to use the url of the specific item page.
+  </p>
+  <%= bootstrap_form_for(@tracker) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.text_field :url, autofocus: true, hide_label: true %>
+  <div class="form-submit">
+    <%= f.submit "Start Tracking", class: "btn btn-outline-primary btn-outline-inverted center" %>
+    <%= link_to "Confused?", help_path, class: "btn btn-outline-red btn-outline-inverted center", data: { :"no-turbolink" => "" } %>
+  </div>
+  <% end %>
 </div>
 <hr>
-<div class="row col-xs-12">
-  <h3>Your Tracked Items </h3>
-<div id="tracker-results">
-  <input class="search form-control" style="display:inline-block; width:150px; vertical-align: middle;" placeholder="Search products"></input>
-    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="product-name">
+<div class="row">
+  <h2>Your Tracked Items </h2>
+  <div class="col-md-offset-3 col-md-6 center search-trackers">
+    <input class="search form-control" placeholder="Search Your Alerts"></input>
+    <a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="product-name">
       Sort by product name
-    </a>
-    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="price-orig">
+    </a><!--
+    --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-orig">
       Sort by original price
-    </a>
-    <a class="sort btn btn-outline-primary btn-outline-inverted center" style="vertical-align: middle;" data-sort="price-current">
+    </a><!--
+    --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-current">
       Sort by current price
     </a>
-  <ul class="list trackers">
-    <% if @tracker_list.any? %>
-        <%= render @tracker_list %>
-    <% end %>
-  </ul>
+  </div>
 </div>
+<div class="row col-xs-12">
+  <div id="tracker-results">
+    <ul class="list trackers">
+      <% if @tracker_list.any? %>
+      <%= render @tracker_list %>
+      <% end %>
+    </ul>
+  </div>
 </div>
 <!-- /.row -->
 <!-- /.row -->

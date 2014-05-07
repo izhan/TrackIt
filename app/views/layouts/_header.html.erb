@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Thriftster", root_path, class: "navbar-brand", data: { :"no-turbolink" => "" } %>
+      <a class="navbar-brand" data-no-turbolink="" href="<%= root_url %>">Thriftster<sub class="private-beta">Private BETA</sub></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
@@ -27,7 +27,7 @@
       </ul>
       <div class="pull-right">
 
-      <%= link_to "Get bookmarklet", bookmarklet_path, class: "btn btn-primary navbar-btn" %>
+      <%= link_to "Get the Bookmarklet", bookmarklet_path, class: "btn btn-primary navbar-btn" %>
       <% if signed_in? %>
         <%= link_to "Need Help?", help_path, class: "btn btn-default navbar-btn", data: { :"no-turbolink" => "" } %>
       <% else %>

@@ -34,14 +34,6 @@ class Tracker < ActiveRecord::Base
       self.alert_price = product.current_price
     end
 
-    def self.search(search)
-      if search
-        where('name LIKE ?', "%#{search}%")
-      else
-        scoped
-      end
-    end
-
     def get_product
       # TODO clean this up
       begin
