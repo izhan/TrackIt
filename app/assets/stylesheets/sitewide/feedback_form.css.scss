@@ -1,5 +1,12 @@
  @import "variables";
 
+/* don't want this to show up in mobile */
+@media (max-width: 576px) {
+  #feedback-form {
+    display: none!important;
+  }
+}
+
 /* http://www.paulund.co.uk/how-to-build-a-slideout-feedback-form-in-jquery */
 #feedback-form {
   position: fixed;
