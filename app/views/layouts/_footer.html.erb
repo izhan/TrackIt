@@ -5,9 +5,12 @@
     </p>
   </div>
 </div>
+
+<% if signed_in? %>
 <div id="feedback-form">
   <a id="feedback-button">Tell us what you think.</a>
   <div class="form">
     <%= render "layouts/feedback_form" %>
   </div>
 </div>
+<% end %>
