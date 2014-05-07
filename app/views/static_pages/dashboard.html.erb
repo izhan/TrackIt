@@ -12,23 +12,23 @@
   <% end %>
 </div>
 <hr>
-<div class="row">
-  <h2>Your Tracked Items </h2>
-  <div class="col-md-offset-3 col-md-6 center search-trackers">
-    <input class="search form-control" placeholder="Search Your Alerts"></input>
-    <a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="product-name">
-      Sort by product name
-    </a><!--
-    --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-orig">
-      Sort by original price
-    </a><!--
-    --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-current">
-      Sort by current price
-    </a>
+<div id="tracker-results">
+  <div class="row">
+    <h2>Your Tracked Items </h2>
+    <div class="col-md-offset-3 col-md-6 center search-trackers">
+      <input class="search form-control" placeholder="Search Your Alerts"></input>
+      <a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="product-name">
+        Sort by product name
+      </a><!--
+      --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-orig">
+        Sort by original price
+      </a><!--
+      --><a class="sort btn btn-outline-primary btn-outline-inverted center" data-sort="price-current">
+        Sort by current price
+      </a>
+    </div>
   </div>
-</div>
-<div class="row col-xs-12">
-  <div id="tracker-results">
+  <div class="row col-xs-12">
     <ul class="list trackers">
       <% if @tracker_list.any? %>
       <%= render @tracker_list %>
