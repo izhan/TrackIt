@@ -10,15 +10,15 @@ style="display:none;" onload="if(submitted)
 {feedbackFormSubmitted();}"></iframe>
 <form action="https://docs.google.com/a/princeton.edu/forms/d/1wk6hP5wbe9TbIV7lLKjiddU8NoRwGhfMxykg44bQdvk/formResponse" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">
   <ol role="list" class="ss-question-list" style="padding-left: 0">
-    <div class="ss-form-question errorbox-good" role="listitem">
+    <div class="ss-form-question errorbox-good" role="listitem" style="display:none;">
       <div dir="ltr" class="ss-item  ss-text">
         <div class="ss-form-entry">
           <label class="ss-q-item-label" for="entry_615349471">
-            <div class="ss-q-title">Name (not required)
+            <div class="ss-q-title">Name
             </div>
             <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
           </label>
-          <input type="text" name="entry.615349471" value="" class="ss-q-short" id="entry_615349471" dir="auto" aria-label="Name  " title="">
+          <input type="text" name="entry.615349471" value='<%= "#{full_name(current_user)} (#{current_user.email})" %>' class="ss-q-short" id="entry_615349471" dir="auto" aria-label="Name  " title="">
         </div>
       </div>
     </div> 
