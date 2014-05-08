@@ -61,9 +61,11 @@ class ScraperController < ApplicationController
         render :layout => false
 
       rescue => e
+        logger.error "unable to load scraper for url: #{url}"
         logger.error e.message
         e.backtrace.each { |line| logger.error line }
-        flash[:danger] = "Sorry, please try again"
+        # investigate the real reason for this...
+        flash[:danger] = "Sorry, we are unable to track that product at the time due to the company privacy policies."
         redirect_to dashboard_path
       end
     else

@@ -38,7 +38,8 @@ class StaticPagesController < ApplicationController
         redirect_to edit_tracker_path(@tracker, first_time: true)
       else
         # TODO could be more customizable messages
-        flash[:danger] = "Sorry, we are unable to support this website at the time."
+        logger.error "creation failed for bookmarklet with url: #{params[:url]}"
+        flash[:danger] = "Sorry, we are unable to support this website at this time."
         redirect_to root_url
       end
     else

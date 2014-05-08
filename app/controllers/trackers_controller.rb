@@ -45,6 +45,7 @@ class TrackersController < ApplicationController
     if @tracker.save
       redirect_to edit_tracker_path(@tracker, first_time: true)
     else
+      logger.error "xpath creation in tracker contoller failed for url: #{tracker_params[:url]}"
       # TODO could be more customizable messages
       flash[:danger] = "Sorry, we are unable to support this website at the time."
       redirect_to root_url
