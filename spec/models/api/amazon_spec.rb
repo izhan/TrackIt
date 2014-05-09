@@ -129,4 +129,5 @@ describe "for amazon api", amazon: true do
   ## TODO , VERY low price??
   ## TODO creating duplicates?
   # TODO for products with no offers
+  # TODO amazon.co.uk links
 end
