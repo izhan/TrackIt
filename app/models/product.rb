@@ -158,7 +158,11 @@ end
           if xpath_price == self.input_price
             self.current_price = xpath_price
             self.name = self.name || @page.title || self.url
-            self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
+            if @page.xpath("//meta[@property='og:image']/@content").first
+              self.thumbnail = @page.xpath("//meta[@property='og:image']/@content").first.value 
+            else
+              self.thumbnail = "http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png"
+            end
           else
             logger.error "YOLO ERROR"
             logger.error "prices didn't match for url: #{self.url}"
