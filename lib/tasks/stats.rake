@@ -16,7 +16,7 @@ def print_stats
   puts "Total Trackers: #{total_trackers}"
   puts "Total Products: #{total_products}"
   puts "========================================================================="
-  puts "Average Number of Trackers per User: #{1.0 * total_trackers/total_users}"
+  puts "Average Number of Trackers per User: #{sprintf('%.2f', 1.0 * total_trackers/total_users)}"
 
   number_of_savings = 0
   amount_in_savings = 0
@@ -30,7 +30,7 @@ def print_stats
   end
 
   puts "Total Number of Price Drops: #{number_of_savings}"
-  puts "Total Amount in Savings: #{to_dollars(amount_in_savings)}"
+  puts "Total Amount in Savings: $#{to_dollars(amount_in_savings)}"
 end
 
 def to_dollars(cents)
