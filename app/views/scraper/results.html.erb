@@ -72,7 +72,6 @@
   }
   #scraper-toolbar .scraper-title {
     padding-left: 20px;
-    margin-right: 40px;
     float: left;
   }
   #scraper-toolbar .scraper-title a {
@@ -252,7 +251,7 @@
       <span class="yellow-square yellow-one">1</span>Find and click on the price of your product.
     </div>
     <div id="scraper-selection">
-      <span class="yellow-square yellow-two">2</span>Click the 'Create My Alert' button on the right once you have selected the correct price
+      <span class="yellow-square yellow-two">2</span>Click the button on the right once you have selected the correct price
     </div>
   </div>
 </div>
@@ -382,7 +381,7 @@ jq111(document).ready(function(){
         jq111('#tracker_input_price').val(clean_price.replace(".", ""));
 
         // remove explanatory text and add in selected price
-        jq111('#scraper-selection').css('display', 'inline-block');
+        jq111('#scraper-selection').css('display', 'inline');
         jq111('#scraper-prompt').hide();
         jq111('.scraper-submit-wrapper').css('display', 'inline-block');
 
