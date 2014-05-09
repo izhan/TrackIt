@@ -1,7 +1,10 @@
 <li>    
     <div class="col-lg-3 col-md-4 col-sm-6 hero-feature">
         <div class="thumbnail">
-          <%= image_tag "#{tracker.product.thumbnail || 'http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png'}", class: "thumbnail-image" %>
+         <% if tracker.product.current_price == 1 || tracker.product.current_price == 0 %>
+         <div class="dark-overlay">We are working to update this price.  Please check back later.</div>
+         <% end %>
+         <%= image_tag "#{tracker.product.thumbnail || 'http://img1.wikia.nocookie.net/__cb20130527163652/simpsons/images/6/60/No_Image_Available.png'}", class: "thumbnail-image" %>
             <div class="caption">
                 <div class = "media-wrapper-heading media-heading product-name"><%=tracker.name %></div>
                 <div class ="media-price price-current">

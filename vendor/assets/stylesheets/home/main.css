@@ -328,7 +328,7 @@ p.capitalize:first-letter {
 
 /* ================== MAIN WRAP SECTIONS ================== */
 
-.darkOverlay
+.dark-overlay
 {
     background-color: black;
     filter:alpha(opacity=20); /* IE */
