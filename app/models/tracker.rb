@@ -46,10 +46,14 @@ class Tracker < ActiveRecord::Base
       rescue
         # TODO any error handling here?
       end
-      if Product.where(url: clean_url(self.url)).blank?
-        some_product = Product.create(url: self.url, xpath: self.xpath, input_price: self.input_price)
-      else
+
+      # TODO gotta get rid of the http://www for scraped websites
+      if !Product.where(url: clean_url(self.url)).blank?
         some_product = Product.where(url: clean_url(self.url)).first
+      elsif !Product.where(url: self.url).blank?
+        some_product = Product.where(url: self.url).first
+      else
+        some_product = Product.create(url: self.url, xpath: self.xpath, input_price: self.input_price)
       end
       self.product = some_product
     end

@@ -36,7 +36,7 @@ class TrackersController < ApplicationController
     end
 
     temp_api = categorize_api(temp_host)
-    if temp_api == "scrape" && !tracker_params[:xpath] && !tracker_params[:input_price]
+    if temp_api == "scrape" && !tracker_params[:xpath] && !tracker_params[:input_price] && Product.where(url: tracker_params[:url]).blank?
       redirect_to results_path url: tracker_params[:url]
       return
     end
