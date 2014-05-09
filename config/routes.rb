@@ -23,6 +23,7 @@ TrackIt::Application.routes.draw do
   get 'help', to: 'static_pages#help'
   get 'addalert', to: 'static_pages#add_alert'
   get 'help', to: 'static_pages#help'
+  get 'letter', to: 'static_pages#letter'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

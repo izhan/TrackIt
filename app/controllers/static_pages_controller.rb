@@ -54,6 +54,9 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
+  def letter
+  end
+
   def dashboard
     @tracker = Tracker.new
     @tracker_list = current_user.trackers
