@@ -56,7 +56,11 @@ module ProductTrackerHelper
     if tracker.product.api == "amazon"
       return "http://" + tracker.product.url + "/?tag=" + AMAZON_ASSOCIATE_ID
     else
-      return "http://" + tracker.product.url
+      if tracker.product.url.start_with?('http://', 'https://')
+        return tracker.product.url
+      else
+        return "http://" + tracker.product.url
+      end
     end
   end
 end

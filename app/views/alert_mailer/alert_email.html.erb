@@ -474,7 +474,7 @@
       Your savings: $<%= to_dollars(@tracker.original_price - @tracker.product.current_price) %><br>
     </p>
     <p>
-      To view the page, click <a href="http://<%= @tracker.product.url %>">here</a>.
+      To view the page, click <a href="<%= tracker_link(@tracker.product.url) %>">here</a>.
     </p>
 
 
