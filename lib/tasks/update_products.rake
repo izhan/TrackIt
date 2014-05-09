@@ -29,6 +29,7 @@ def update_api
 
     p.update_details
 
+    # TODO check that it is sending at right time...
     if p.changed?
       success << p.url
       p.save
