@@ -112,7 +112,7 @@ end
           self.name = self.name || result.get('ItemAttributes/Title')
           self.thumbnail = result.get('LargeImage/URL') || result.get('MediumImage/URL')
           # sometimes, it defaults to too low price
-          self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || 1 # TODO this ain't working...
+          self.current_price = result.get('OfferSummary/LowestNewPrice/Amount') || result.get('Offers/Offer/OfferListing/Price/Amount') || 1 # TODO this ain't working...
           self.url = standarize_amazon_url(self.url)
         else
           errors.add(:base, "Amazon URL Invalid.  Please try again.")

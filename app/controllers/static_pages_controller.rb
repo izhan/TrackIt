@@ -35,6 +35,11 @@ class StaticPagesController < ApplicationController
 
       @tracker = current_user.trackers.new(url: params[:url])
       if @tracker.save
+        if @tracker.product.current_price == 1 || @tracker.product.current_price == 0
+          flash[:danger] = "Sorry, we are unable to track your product at this time due to company policies."
+          redirect_to dashboard_url
+          return
+        end
         redirect_to edit_tracker_path(@tracker, first_time: true)
       else
         # TODO could be more customizable messages

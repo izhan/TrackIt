@@ -19,7 +19,7 @@ describe "for best buy api", api: true, bestbuy: true do
       @product.url.should ==  "bestbuy.com/site/playstation-3-gaming-console/5276086.p"
       @product.api.should ==  "bestbuy"
       #@product.current_price.should ==  6499
-      @product.name.should ==  "Sony - PlayStation 3 Gaming Console"
+      @product.name.should ==  "Sony - PlayStation 3 250GB with Last of Us"
     end
 
     # describe "when modified" do

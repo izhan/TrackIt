@@ -1,5 +1,10 @@
 @import "variables";
 
+// should be above overlay
+.remove-button {
+  z-index: 21;
+  position: relative;
+}
 /* marks as invalid */
 .dark-overlay
 {

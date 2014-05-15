@@ -121,7 +121,7 @@ describe "for amazon api", amazon: true do
     it "should create correct item" do
       @product.url.should == "amazon.com/dp/b00006htz0"
       @product.api.should == "amazon"
-      @product.current_price.should == 1
+      @product.current_price.should == 299
       @product.name.should == "Belkin 8-by-9-Inch Mouse Pad (Black)"
     end
   end
