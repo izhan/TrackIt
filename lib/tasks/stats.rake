@@ -9,9 +9,9 @@ namespace :db do
 end
 
 def print_stats
-  total_users = User.all.size
-  total_trackers = Tracker.all.size
-  total_products = Product.all.size
+  total_users = User.count
+  total_trackers = Tracker.count
+  total_products = Product.count
   puts "Total Users: #{total_users}"
   puts "Total Trackers: #{total_trackers}"
   puts "Total Products: #{total_products}"
