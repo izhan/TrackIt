@@ -33,7 +33,7 @@ text-align: center;">Please read <%= link_to "a letter from the developers", let
 
   <div class="row mt centered">
     <div class="col-lg-4 col-md-4 col-xs-12 desc">
-      <a class="b-link-fade b-animate-go" href="#"><img width="100%" src="https://dl.dropbox.com/s/rlfoclaumbz7lzo/bookmark.png" alt="" />
+      <a class="b-link-fade b-animate-go" href="#"><%= image_tag "howitworks-01.png", width: "100%" %>
         <div class="b-wrapper">
           <h4 class="b-from-left b-animate b-delay03">Get</h4>
           <p class="b-from-right b-animate b-delay03">the bookmarklet.</p>
@@ -45,7 +45,7 @@ text-align: center;">Please read <%= link_to "a letter from the developers", let
     </div><!-- col-lg-4 -->
 
     <div class="col-lg-4 col-md-4 col-xs-12 desc">
-      <a class="b-link-fade b-animate-go" href="#"><img width="100%" src="https://dl.dropbox.com/s/ipypuasw6ihmect/shop.png" alt="" />
+      <a class="b-link-fade b-animate-go" href="#"><%= image_tag "howitworks-02.png", width: "100%" %>
         <div class="b-wrapper">
           <h4 class="b-from-left b-animate b-delay03">Shop</h4>
           <p class="b-from-right b-animate b-delay03">your favorite sites.</p>
@@ -70,10 +70,6 @@ text-align: center;">Please read <%= link_to "a letter from the developers", let
 
   </div><!-- /row -->
 </div>
-
-<!-- Call to Action Bar --> 
-<div id="cta-bar">
-</div><!-- /cta-bar -->
 
 <!-- Brands + Clients -->  
 <div id="grey">
@@ -106,10 +102,10 @@ text-align: center;">Please read <%= link_to "a letter from the developers", let
         <img class="img-responsive" src="http://img3.wikia.nocookie.net/__cb20100920050450/logopedia/images/4/4d/Macy%27s.png" alt="">
       </div>
       <div class="col-sm-3 pt">
-        <img class="img-responsive" src="http://givebackbox.com/secure/wp-content/uploads/2013/12/574px-newegg_logosvg_.png" alt="">
+        <img class="img-responsive" src="http://www.maximumpc.com/files/newegg_411.png" alt="">
       </div>
       <div class="col-sm-3 pt">
-        <img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/e/e5/HM-Logo.png" alt="">
+        <%= image_tag "hmlogo.png", class: "img-responsive" %>
       </div>      
       <div class="col-sm-3 pt">
         <h3>...and hundreds more</h3>
